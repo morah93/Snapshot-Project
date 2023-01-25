@@ -6,8 +6,15 @@ from app.s3_helpers import (
 
 image_routes = Blueprint("images", __name__)
 
+@image_routes.route('/')
+def load_images():
+    images = Image.query.all()
+    return {'images': [image.to_dict() for image in images]}
+    # return {
+    #     'id':8
+    # }
 
-@image_routes.route("", methods=["POST"])
+@image_routes.route("/", methods=["POST"])
 @login_required
 def upload_image():
     if "image" not in request.files:
@@ -34,3 +41,13 @@ def upload_image():
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}
+
+# @image_routes.route('/<int:id>', methods=["PUT"])
+# @login_required
+# def edit_song(id):
+#     song = Song.query.get(id)
+#     new_title = request.json['title']
+#     if song:
+#         song.title = new_title
+#         db.session.commit()
+#         return song.to_dict()
