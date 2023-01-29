@@ -7,15 +7,24 @@ from app.s3_helpers import (
 
 image_routes = Blueprint("images", __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
-@image_routes.route("/", methods=["POST"])
+@image_routes.route("", methods=["POST"])
 @login_required
 def upload_image():
     if "image" not in request.files:
         return {"errors": "image required"}, 400
 
     image = request.files["image"]
-    data = request.form.to_dict()
+    # data = request.form.to_dict()
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
@@ -23,6 +32,10 @@ def upload_image():
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
+
+    if upload:
+        print(upload)
+
 
     if "url" not in upload:
         # if the dictionary doesn't have a url key
@@ -32,20 +45,28 @@ def upload_image():
 
     url = upload["url"]
     # flask_login allows us to get the current user from the request
-    new_image = Image(
-        # user=current_user,
-        # url=url,
-        title=data['title'],
-        description=data['description'],
-        img_url=data['img_url']
+
+    form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_image = Image(
+            user=current_user,
+            # url=url,
+            title=form.data['title'],
+            description=form.data['description'],
+            url=form.data['url']
         )
+    # else:
+    #     return render_template('image_form',form=form)
 
-    db.session.add(new_image)
-    db.session.commit()
-    return new_image.to_dict()
+        db.session.add(new_image)
+        db.session.commit()
+        return new_image.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-# Get all image
+
+# Get all images
 @image_routes.route('/')
 def load_images():
     images = Image.query.all()
@@ -57,10 +78,10 @@ def load_one_image(id):
     image = Image.query.get(id)
     if not image:
         return {"errors":"image not found"}, 404
-    return  image.to_dict()
+    return ({image.id: image.to_dict()})
     # return {image.id: image.to_dict()}
 
-@image_routes.route('/<int:id>', methods=["PUT"])
+@image_routes.route('/<int:id>/edit', methods=["GET","PUT"])
 @login_required
 def edit_image(id):
     image = Image.query.get(id)
@@ -79,6 +100,7 @@ def edit_image(id):
         db.session.commit()
         return image.to_dict()
 
+
 @image_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_image(id):
@@ -86,6 +108,7 @@ def delete_image(id):
     db.session.delete(image)
     db.session.commit()
     return{'message': 'Photo Deleted'}
+
 
 @image_routes.route('/user/<int:id>')
 def user_images(id):

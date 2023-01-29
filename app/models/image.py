@@ -11,9 +11,9 @@ class Image(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-  title = db.Column(db.String)
+  # title = db.Column(db.String)
   url = db.Column(db.String, nullable=False)
-  description = db.Column(db.String)
+  # description = db.Column(db.String)
   # tags = db.Column(db.String)
 
 
@@ -25,8 +25,8 @@ class Image(db.Model):
     return {
       'id': self.id,
       'user_id': self.users.id,
-      'title': self.title,
+      # 'title': self.title,
       'url': self.url,
-      'description': self.description,
+      # 'description': self.description,
       # 'tags': self.tags,
     }
