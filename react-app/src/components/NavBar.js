@@ -10,11 +10,11 @@ import logo from "../static/app-icon.png";
 // import title from "../static/snapshot-title.png";
 const NavBar = () => {
 	const user = useSelector((state) => state.session.user);
-	const images = useSelector((state) => state.images.allImages);
-	const imgArr = Object.values(images)
+	// const images = useSelector((state) => state.images.allImages);
+	// const imgArr = Object.values(images)
 	// const randomImages = imgArr.sort((a, b) => 0.5 - Math.random());
 	// const navImage = randomImages[0].url
-	console.log('imagesinnav*******', imgArr)
+	// console.log('imagesinnav*******', imgArr)
 	const history = useHistory();
 	const dispatch = useDispatch();
 

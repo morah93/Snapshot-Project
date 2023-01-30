@@ -82,6 +82,7 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 
 export const editImageThunk = (payload, imageId) => async (dispatch) => {
 	// const { imageId, title, description } = image;
+	console.log('imageId in thunk', imageId)
 	const response = await fetch(`/api/images/${imageId}`, {
 		method: "PUT",
 		headers: {
@@ -89,11 +90,39 @@ export const editImageThunk = (payload, imageId) => async (dispatch) => {
 		},
 		body: JSON.stringify({payload}),
 	});
+
+
+// 	if(response.ok){
+// 		const projectsList = await response.json()
+// 		// console.log('projectlist', projectsList)
+// 		dispatch(getAll(projectsList))
+// }
+
+
+// if (response.ok) {
+// 	const data = await response.json();
+// 	dispatch(setUser(data))
+// 	return null;
+// } else if (response.status < 500) {
+// 	const data = await response.json();
+// 	if (data.errors) {
+// 		return data.errors;
+// 	}
+// } else {
+// 	return ['An error occurred. Please try again.']
+// }
+
+
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));
+		console.log('updatedImage-in-thunk', updatedImage)
 		return editImage;
+	} else {
+		const updatedImage = await response.json();
+		console.log('error in thunk', updatedImage)
 	}
+	if(response.status>=400) throw response
 };
 
 export const deleteImageThunk = (imageId) => async (dispatch) => {

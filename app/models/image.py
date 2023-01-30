@@ -11,7 +11,7 @@ class Image(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-  title = db.Column(db.String)
+  title = db.Column(db.String, nullable=False)
   url = db.Column(db.String, nullable=False)
   description = db.Column(db.String)
   # tags = db.Column(db.String)

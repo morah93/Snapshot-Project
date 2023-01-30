@@ -1,6 +1,6 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from app.models import db, Image
-from app.forms import EditImageForm
+from app.forms import ImageForm
 from flask_login import  current_user, login_required
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -105,30 +105,47 @@ def post_new_image(user_id):
     db.session.commit()
     return new_image.to_dict()
 
-@image_routes.route('/<int:id>', methods=["GET","PUT"])
-@login_required
+@image_routes.route('/<int:id>', methods=["PUT"])
+# @login_required
 def edit_image(id):
-    image = Image.query.get(id)
+    # image = Image.query.get(id)
     # new_title = request.json['title']
     # new_description = request.json['description']
-    form = EditImageForm()
+    print('printing in backend edit route')
 
+    form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    image.title = title
 
-    image.description = description
-    
+    # print('data------in backend route', data)
+    image = Image.query.get(id)
+
+    print('image------in backend route', image)
     if form.validate_on_submit():
-        title = form.data['new_title']
-        description = form.data['description']
-    if not image:
-        return {
-            "message": "Image not found",
-            "statusCode": 404,
-        }, 404
+        data = form.data
 
+    if image:
+        image.title = data['title']
+        image.description = data['description']
+        db.session.commit()
+    else:
+      return "error in img_route"
 
-    data = request.get_json()
+    return jsonify(image.to_dict())
+
+    # if form.validate_on_submit():
+    #     title = form.data['new_title']
+    #     description = form.data['description']
+    # if not image:
+    #     return {
+    #         "message": "Image not found",
+    #         "statusCode": 404,
+    #     }, 404
+    # return image.to_dict()
+    # image.title = title
+
+    # image.description = description
+
+    # data = request.get_json()
 
     # print('~~~~does it get here~~~ this is data:', data)
 
@@ -141,8 +158,7 @@ def edit_image(id):
 
         # image.title = title
         # image.description = description
-    db.session.commit()
-    return image.to_dict()
+    # db.session.commit()
 
 
 @image_routes.route('/<int:id>', methods=['DELETE'])

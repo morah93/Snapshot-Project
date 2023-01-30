@@ -55,17 +55,33 @@ const DisplayOneImage = () => {
 			// 	image.description=description,
 			// )
 
-		const updatedData = (title, description)
+			const updatedData = (title, description)
 
+			// const data = response.json()
+
+			// if(formType==='Edit Project') {
+			// 	dispatch(fetchUpdateProject(tempProject))
 
 				dispatch(editImageThunk(updatedData, imageId))
-					.then(() => {
+					.then((updatedData) => {
 						history.push(`/images/${imageId}`)
 						alert('success')
 					})
-					.catch(() => {
-				alert('Failed')
-			})
+					// .then((project) => {
+					// 	history.push(`/projects/${project.id}`)
+					// //  console.log('returned project', project)
+					// 	dispatch( fetchOneProject(project.id)).then(setShowModal(false))
+					// })
+					// .catch(async (err)=>{
+					// 	const errObj=await err.json();
+					// 	console.log('what is errObj.message', errObj.errors)
+					// 	errors.push(errObj.errors)
+					// 	setValidationErrors(errors)
+
+					// });
+			// 		.catch(() => {
+			// 	alert('Failed')
+			// })
 
 				// dispatch(getImageByIdThunk(id))
 
