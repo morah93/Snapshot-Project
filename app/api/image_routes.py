@@ -123,6 +123,7 @@ def edit_image(id):
     if form.validate_on_submit():
         data = form.data
 
+    print('data------in backend route', data)
     if image:
         image.title = data['title']
         image.description = data['description']

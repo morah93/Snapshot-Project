@@ -82,7 +82,7 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 
 export const editImageThunk = (payload, imageId) => async (dispatch) => {
 	// const { imageId, title, description } = image;
-	console.log('imageId in thunk', imageId)
+	console.log('payload in thunk-------', payload)
 	const response = await fetch(`/api/images/${imageId}`, {
 		method: "PUT",
 		headers: {

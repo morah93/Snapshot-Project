@@ -53,14 +53,10 @@ const HomePage = () => {
         </div>
       } */}
       <div className="images-div">
-        <div style={{alignText:'center'}}>Home Page</div>
-        <div>
-          <img
-            className="topImg"
-					// style={{ zIndex: 0 }}
-					src='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'
-				/>
-        </div>
+        <div>Home Page</div>
+          <div>
+            <img src={''}></img>
+          </div>
 
         <div className="display-image-main">
         {displayImages?.map((image, i) => {
