@@ -60,6 +60,8 @@ const EditImageDetails = () => {
     }
   }
 
+  
+
   return (
     <>
       <div className='background-for-signup-and-login'>

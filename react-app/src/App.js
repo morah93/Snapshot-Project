@@ -70,12 +70,12 @@ function App() {
 				</Route>
 
 				<Route
-					path='/images/upload'
+					path='/upload-image'
 					exact={true}
 				>
 					<UploadImage />
 				</Route>
-				
+
 				<Route
 					path='/images/:imageId'
 					exact={true}

@@ -52,7 +52,7 @@ const HomePage = () => {
         ))}
         </div>
       } */}
-      <div className="images-div">
+      <div className="images-div" style={{width:500, height:500}}>
       <div>Home Page</div>
         {displayImages?.map((image, i) => {
           return (
@@ -61,6 +61,7 @@ const HomePage = () => {
                 <div className="img-div">
                   <img
                     src={image.url}
+                    style={{width:500, height:500}}
                     className={`display-img${i}`}
                     alt={image.id}
                   />

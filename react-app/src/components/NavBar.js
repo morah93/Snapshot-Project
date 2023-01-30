@@ -1,14 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import DemoButton from "./DemoButton";
 import "./homepage.css";
+import { loadImagesThunk } from "../store/image";
 import logo from "../static/app-icon.png";
+
 // import title from "../static/snapshot-title.png";
 const NavBar = () => {
 	const user = useSelector((state) => state.session.user);
+	const images = useSelector((state) => state.images.allImages);
+	const imgArr = Object.values(images)
+	// const randomImages = imgArr.sort((a, b) => 0.5 - Math.random());
+	// const navImage = randomImages[0].url
+	console.log('imagesinnav*******', imgArr)
 	const history = useHistory();
+	const dispatch = useDispatch();
+
 
 	const handleImgClick = (e) => {
 		e.preventDefault();
@@ -17,8 +26,12 @@ const NavBar = () => {
 
 	const handleUploadClick = (e) => {
 		e.preventDefault();
-		history.push("/images/upload");
+		history.push("/upload-image");
 	};
+
+	useEffect(() => {
+    dispatch(loadImagesThunk())
+  }, [dispatch]);
 
 	return (
 		<>
@@ -27,7 +40,7 @@ const NavBar = () => {
 					className='nav-background'
 
 					// style={{ zIndex: 0 }}
-					// src='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'
+					src='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'
 				/>
 					<div className='logo-container'>
 						<div className='logo'>

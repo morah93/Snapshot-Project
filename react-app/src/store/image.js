@@ -13,9 +13,9 @@ const loadImages = (images) => ({
 	type: LOAD_IMAGES,
 	images,
 });
-const loadOneImage = (image) => ({
+const loadOneImage = (singleImage) => ({
 	type: LOAD_ONE_IMAGE,
-	image,
+	singleImage,
 });
 // const loadMyImages = (data) => ({
 // 	type: LOAD_MY_IMAGES,
@@ -66,7 +66,7 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 // };
 
 export const addImageThunk = (newImage) => async (dispatch) => {
-	const response = await fetch(`/api/images/upload`, {
+	const response = await fetch(`/api/upload-images`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -150,10 +150,17 @@ const imageReducer = (state = initialState, action) => {
 			//   myImages: { ...state.myImages },
 			// };
 
-			const newState = {
-				...state,
-				singleImage: { ...action.singleImage }
-		}
+		// 	newState = {
+		// 		...state,
+		// 		singleImage: { ...action.singleImage }
+		// }
+		// 	return newState;
+		// }
+			newState = {
+				allImages: { ...state.allImages },
+				singleImage: action.image,
+				// myPlaylists: { ...state.myPlaylists },
+			}
 			return newState;
 		}
 
@@ -206,10 +213,10 @@ const imageReducer = (state = initialState, action) => {
 			const newState = {
 				allImages: { ...state.allImages },
 				singleImage: {},
-				myImages: { ...state.myImages },
+				// myImages: { ...state.myImages },
 			};
 			delete newState.allImages[action.imageId];
-			delete newState.myImages[action.imageId];
+			// delete newState.myImages[action.imageId];
 			return newState;
 		}
 
