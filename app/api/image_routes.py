@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.models import db, Image
-# from app.forms import ImageForm
+from app.forms import EditImageForm
 from flask_login import  current_user, login_required
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -105,19 +105,22 @@ def post_new_image(user_id):
     db.session.commit()
     return new_image.to_dict()
 
-@image_routes.route('/<int:id>', methods=["PUT"])
+@image_routes.route('/<int:id>', methods=["GET","PUT"])
 @login_required
 def edit_image(id):
     image = Image.query.get(id)
     # new_title = request.json['title']
     # new_description = request.json['description']
-    # form = ImageForm()
+    form = EditImageForm()
 
-    # form['csrf_token'].data = request.cookies['csrf_token']
+    form['csrf_token'].data = request.cookies['csrf_token']
+    image.title = title
 
-    # if form.validate_on_submit():
-    #     title = form.data['new_title']
-    #     description = form.data['description']
+    image.description = description
+    
+    if form.validate_on_submit():
+        title = form.data['new_title']
+        description = form.data['description']
     if not image:
         return {
             "message": "Image not found",
@@ -129,19 +132,17 @@ def edit_image(id):
 
     # print('~~~~does it get here~~~ this is data:', data)
 
-    image.title = data['title']
     # print('~~~this is image.title:', image.title)
-    image.description = data['description']
-    if data['image_url'] == 'please':
-        image.url = image.url
-    else:
-        image.url = data['url']
+    # if data['image_url'] == 'please':
+    #     image.url = image.url
+    # else:
+    #     image.url = data['url']
 
 
         # image.title = title
         # image.description = description
-        db.session.commit()
-        return image.to_dict()
+    db.session.commit()
+    return image.to_dict()
 
 
 @image_routes.route('/<int:id>', methods=['DELETE'])

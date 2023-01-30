@@ -11,15 +11,15 @@ const EditImageDetails = () => {
   const user = useSelector(state => state.session.user)
   const image = useSelector(state => state?.images?.singleImages)
   const { id } = useParams();
-  const [title, setTitle] = useState("please enter title");
-  const [description, setDescription] = useState("please enter discription");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [errors, setErrors] = useState()
   const [url, setUrl] = useState()
   const formData = new FormData();
 
   useEffect(async () => {
     await dispatch(loadOneImageThunk(id));
-    const res = await fetch(`/api/images/${id}/edit`)
+    const res = await fetch(`/api/images/${id}`)
     const data = res.json()
     setTitle(data[id]?.title)
     setDescription(data[id]?.description)
@@ -33,7 +33,7 @@ const EditImageDetails = () => {
     if (image) {
         setTitle(image.title);
         setDescription(image.description);
-        setUrl(image.url)
+        // setUrl(image.url)
     }
   }, [image])
 
@@ -55,12 +55,12 @@ const EditImageDetails = () => {
     const editedData = await dispatch(editImageThunk(updatedData))
 
     if (editedData) {
-      history.push(`/photos/${id}`)
+      history.push(`/images/${id}`)
       // dispatch(getImageByIdThunk(id))
     }
   }
 
-  
+
 
   return (
     <>
@@ -79,7 +79,7 @@ const EditImageDetails = () => {
                             <label>Title</label>
                             <input
                                 className='sign-up-form-inputs-only'
-                                placeholder="Not Required"
+                                placeholder="Please enter title"
                                 type="text"
                                 onChange={updateTitle}
                                 value={title}
@@ -90,7 +90,7 @@ const EditImageDetails = () => {
                             <label>Description</label>
                             <input
                                 className='sign-up-form-inputs-only'
-                                placeholder="Not Required"
+                                placeholder="Please enter description"
                                 type="text"
                                 onChange={updateDescription}
                                 value={description}

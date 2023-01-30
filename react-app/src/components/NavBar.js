@@ -35,13 +35,7 @@ const NavBar = () => {
 
 	return (
 		<>
-			<div>
-				<img
-					className='nav-background'
-
-					// style={{ zIndex: 0 }}
-					src='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'
-				/>
+			<div className="nav-background">
 					<div className='logo-container'>
 						<div className='logo'>
 							<img src={logo} onClick={handleImgClick} className='logo' />

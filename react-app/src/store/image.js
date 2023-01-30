@@ -25,9 +25,9 @@ const addImage = (newImage) => ({
 	type: ADD_IMAGE,
 	newImage,
 });
-const editImage = (image) => ({
+const editImage = (singleImage) => ({
 	type: EDIT_IMAGE,
-	image,
+	singleImage,
 });
 const deleteImage = (imageId) => ({
 	type: DELETE_IMAGE,
@@ -80,19 +80,19 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 	}
 };
 
-export const editImageThunk = (image) => async (dispatch) => {
-	const { imageId, title, description } = image;
-	const response = await fetch(`/api/images/${image.id}`, {
+export const editImageThunk = (payload, imageId) => async (dispatch) => {
+	// const { imageId, title, description } = image;
+	const response = await fetch(`/api/images/${imageId}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ imageId, title, description }),
+		body: JSON.stringify({payload}),
 	});
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));
-		return updatedImage;
+		return editImage;
 	}
 };
 
@@ -198,15 +198,21 @@ const imageReducer = (state = initialState, action) => {
 		}
 
 		case EDIT_IMAGE: {
-			const newState = {
-				allImages: { ...state.allImages },
-				singleImage: { ...state.singleImage },
-				myImages: { ...state.myImages },
-			};
-			newState.allImages[action.image.id] = action.image;
-			newState.myImages[action.image.id] = action.image;
-			newState.singleImage = action.image;
-			return newState;
+			// const newState = {
+			// 	allImages: { ...state.allImages },
+			// 	singleImage: { ...state.singleImage },
+			// 	myImages: { ...state.myImages },
+			// };
+			// newState.allImages[action.image.id] = action.image;
+			// newState.myImages[action.image.id] = action.image;
+			// newState.singleImage = action.image;
+			// return newState;
+
+			newState = {
+				...state,
+				singleImage: { ...action.singleImage }
+		}
+			return newState
 		}
 
 		case DELETE_IMAGE: {

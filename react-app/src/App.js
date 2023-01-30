@@ -85,7 +85,7 @@ function App() {
 
 
 				<Route
-					path='/images/:imageId/edit'
+					path='/images/:imageId'
 					exact={true}
 				>
 					<EditImageDetails />

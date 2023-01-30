@@ -52,16 +52,47 @@ const HomePage = () => {
         ))}
         </div>
       } */}
-      <div className="images-div" style={{width:500, height:500}}>
-      <div>Home Page</div>
+      <div className="images-div">
+        <div style={{alignText:'center'}}>Home Page</div>
+        <div>
+          <img
+            className="topImg"
+					// style={{ zIndex: 0 }}
+					src='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'
+				/>
+        </div>
+
+        <div className="display-image-main">
         {displayImages?.map((image, i) => {
+          return (
+            <div className={`display-image-outer img${i}`}>
+              <NavLink to={`/images/${image.id}`}>
+                <div className="display-img-outer">
+                  <img
+                    src={image.url}
+                    className={`display-image-img img${i}`}
+                    alt={image.id}
+                  />
+                </div>
+                {/* <div className="display-product-price">
+                  ${parseFloat(product.price).toFixed(2)}
+                </div> */}
+              </NavLink>
+            </div>
+          );
+        })}
+      </div>
+
+
+
+        {/* {displayImages?.map((image, i) => {
           return (
             <div className={`display-image-outer img${i}`}>
               <NavLink to={`/images/${image.id}`}>
                 <div className="img-div">
                   <img
                     src={image.url}
-                    style={{width:500, height:500}}
+                    style={{width:400, height:300}}
                     className={`display-img${i}`}
                     alt={image.id}
                   />
@@ -69,7 +100,7 @@ const HomePage = () => {
               </NavLink>
             </div>
           );
-        })}
+        })} */}
       </div>
 
       {/* <div className="display-product-main">
