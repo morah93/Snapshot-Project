@@ -17,7 +17,7 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{field} : {error}')
     return errorMessages
 
-@image_routes.route("", methods=["POST"])
+@image_routes.route("/", methods=["POST"])
 # @login_required
 def upload_image():
     # if "image" not in request.files:
@@ -50,58 +50,33 @@ def upload_image():
 
         # flask_login allows us to get the current user from the request
 
-        # form = ImageForm()
-        # form['csrf_token'].data = request.cookies['csrf_token']
-        # if form.validate_on_submit():
-        #     new_image = Image(
-        #         user=current_user,
-        #         # url=url,
-        #         title=form.data['title'],
-        #         description=form.data['description'],
-        #         url=form.data['url']
-        #     )
-        # else:
-        #     return render_template('image_form',form=form)
-    data = request.get_json()
-    print('Dta//////////', data)
-    new_image = Image(
-        title = data['title'],
-        description = data['description'],
-        url = url,
-        user_id = current_user.id
+    form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        new_image = Image(
+            user_id=current_user.id,
+            url=url,
+            title=form.data['title'],
+            description=form.data['description'],
         )
+        
     print('newImage------------Backend', new_image)
     db.session.add(new_image)
     db.session.commit()
     return new_image.to_dict()
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-# @image_routes.route("")
-# def get_all_images():
-#     images = Image.query.order_by(Image.id.desc()).all()
-#     return {"images": [image.to_dict() for image in images]}
 
-#THIS ROUTE IS NOT BEING USED----------------
-# @image_routes.route('/', methods=["POST"])
-# # @login_required
-# def post_new_image(user_id):
-#     data = request.get_json()
-#     new_image = Image(
-#         title = data['title'],
-#         description = data['description'],
-#         url = data['url'],
-#         user_id = user_id
-#     )
 
-#     db.session.add(new_image)
-#     db.session.commit()
-#     return new_image.to_dict()
 
 # Get all images
 @image_routes.route('/')
 def load_images():
     images = Image.query.all()
     return {'images': [image.to_dict() for image in images]}
+    #{image.id: image.to_dict() for image in images}
+
 
 # get one image
 @image_routes.route('/<int:id>', methods=['GET'])

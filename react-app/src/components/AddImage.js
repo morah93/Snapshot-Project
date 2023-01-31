@@ -60,11 +60,6 @@ const UploadImage = () => {
 		} else {
 			setImageLoading(true);
 
-			// Display the key/value pairs
-			// for (const pair of formData.entries()) {
-			//   console.log(`${pair[0]}, ${pair[1]}`);
-			// }
-
 			// aws uploads can be a bit slow—displaying
 			// some sort of loading message is a good idea
 			setImageLoading(true);
@@ -75,58 +70,6 @@ const UploadImage = () => {
 				history.push("/images");
 			}
 
-
-			// await fetch("api/images", {
-			// 	method: "POST",
-			// 	body: formData,
-			// })
-				// //incoming
-				// .then(async (url) => {
-				// 	let imgUrl = await url.text();
-				// 	if (imgUrl.includes("not permitted")) {
-				// 		setErrors(["Only png/jpg/jpeg/gif allowed"]);
-				// 		return;
-				// 	}
-					// const newImage = {
-					// 	title,
-					// 	description,
-					// 	url: imgUrl,
-					// };
-					// res is used incase you want to check for if res.ok
-				// 	const res = await csrfFetch(`/api/images`, {
-				// 		method: "POST",
-				// 		headers: {
-				// 			"Content-Type": "application/json",
-				// 		},
-				// 		body: JSON.stringify(formData),
-				// 	});
-				// 	if (res.ok) {
-				// 		setImageLoading(false);
-				// 	}
-				// 	history.push("/images");
-				// })
-				// .catch(() => {
-				// 	alert("failed!");
-				// });
-
-			// if (response.ok) {
-			// 	await response.json();
-			// 	// console.log('data-------', data)
-			// 	setImageLoading(false);
-			// 	alert("Image Successfully Uploaded");
-			// 	history.push("/images");
-			// } else {
-			// 	// const data = await response.json();
-			//   // if(data){
-			//   //      setErrors(data)
-			//   //    }
-			// 	setImageLoading(false);
-
-			// 	// a real app would probably use more advanced
-			// 	// error handling
-			// 	// const data = response.json();
-			// 	// if (data && data.errors) setErrors(data.errors);
-			// 	console.log("error");
 		}
 	};
 
@@ -135,24 +78,9 @@ const UploadImage = () => {
 		setImage(file);
 	};
 
-	const updateTitle = (e) => {
-		setTitle(e.target.value);
-	};
-
-	const updateDescription = (e) => {
-		setDescription(e.target.value);
-	};
 
 	return (
-		// <form onSubmit={handleSubmit}>
-		//     <input
-		//       type="file"
-		//       accept="image/*"
-		//       onChange={updateImage}
-		//     />
-		//     <button type="submit">Submit</button>
-		//     {(imageLoading)&& <p>Loading...</p>}
-		// </form>
+
 		<div
 			className='uploadPage'
 			style={{ paddingTop: 350 }}

@@ -66,16 +66,14 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 // };
 
 export const addImageThunk = (newImage) => async (dispatch) => {
-	console.log('newImage////////', JSON.stringify(newImage))
-	const response = await fetch(`/api/upload-images`, {
+	// console.log('newImage////////', JSON.stringify(newImage))
+	const response = await fetch(`/api/images/`, {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(newImage),
+		body: newImage,
 	});
 	if (response.ok) {
 		const addedImage = await response.json();
+		console.log('addedImage////////', addedImage)
 		dispatch(addImage(addedImage));
 		return addedImage;
 	}
@@ -133,34 +131,7 @@ const imageReducer = (state = initialState, action) => {
 		}
 
 		case LOAD_ONE_IMAGE: {
-			// const newState = { ...state }
-			// newState.singleImage = {}
-			// const image = action.images.singleImage
-			// newState.singleImage = image
-			// return newState;
 
-			// const newState = {
-			// 	...state,
-			// 	allImages: {},
-			// 	singleImage: { ...state.singleImage },
-
-			// };
-			// 	newState = action.image
-			// const newState = { ...state, singleImage: { ...action.image } };
-			// return newState;
-
-			// const newState = {
-			//   allImages: { ...state.allImages },
-			//   singleImage: action.singleImage,
-			//   myImages: { ...state.myImages },
-			// };
-
-		// 	newState = {
-		// 		...state,
-		// 		singleImage: { ...action.singleImage }
-		// }
-		// 	return newState;
-		// }
 			newState = {
 				allImages: { ...state.allImages },
 				singleImage: action.image,
@@ -169,50 +140,24 @@ const imageReducer = (state = initialState, action) => {
 			return newState;
 		}
 
-		// case LOAD_MY_IMAGES: {
-		// 	const newState = {
-		// 		...state,
-		// 		allImages: { ...state.allImages },
-		// 		singleImage: { ...state.singleImage },
-		// 		myImages: {},
-		// 	};
-
-		// 	Object.values(action.data.images).forEach((image) => {
-		// 		newState.myImages[image.id] = image;
-		// 	});
-		// 	return newState;
-		// }
-
 		case ADD_IMAGE: {
 			const newState = {
 				allImages: { ...state.allImages },
 				singleImage: state.singleImage,
 				// myImages: { ...state.myImages },
 			};
-			// updates the image in the allImages store
-			newState.allImages[action.image.id] = action.image;
-			// newState.myImages[action.image.id] = action.image;
-			// if there are keys and values in single image
-			// we want to overwrite that image if it's in the single image State
+
+			newState.allImages[action.newImage.id] = action.newImage;
+
 			if (Object.values(newState.singleImage).length) {
-				if (newState.singleImage.id === action.image.id) {
-					newState.singleImage = action.image;
+				if (newState.singleImage.id === action.newImage.id) {
+					newState.singleImage = action.newImage;
 				}
 			}
 			return newState;
 		}
 
 		case EDIT_IMAGE: {
-			// const newState = {
-			// 	allImages: { ...state.allImages },
-			// 	singleImage: { ...state.singleImage },
-			// 	myImages: { ...state.myImages },
-			// };
-			// newState.allImages[action.image.id] = action.image;
-			// newState.myImages[action.image.id] = action.image;
-			// newState.singleImage = action.image;
-			// return newState;
-
 			newState = {
 				...state,
 				singleImage: { ...action.singleImage }

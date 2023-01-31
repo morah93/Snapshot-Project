@@ -8,4 +8,4 @@ class ImageForm(FlaskForm):
   title = StringField('Title')
   description = StringField('Description')
   # url = StringField('url')
-  submit = SubmitField('Submit')
+  # submit = SubmitField('Submit')

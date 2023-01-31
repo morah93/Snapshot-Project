@@ -11,9 +11,9 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.session.user);
-  console.log('user----------------', user)
+  // console.log('user----------------', user)
   const images = useSelector((state) => state.images?.allImages);
-  console.log('allImages----------------', images)
+  // console.log('allImages----------------', images)
   const imgArr = Object.values(images);
   const randomImages = imgArr.sort(() => 0.5 - Math.random());
   const displayImages = randomImages.slice(0);
@@ -55,7 +55,7 @@ const HomePage = () => {
       <div className="images-div">
         <div>Home Page</div>
           <div>
-            <img src={''}></img>
+            <img className='topImg'src={'https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg'}></img>
           </div>
 
         <div className="display-image-main">
