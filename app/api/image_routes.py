@@ -34,11 +34,8 @@ def upload_image():
     image.filename = get_unique_filename(image.filename)
 
     upload = upload_file_to_s3(image)
-
     # if upload:
     #     print(upload)
-
-
     if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
@@ -46,27 +43,31 @@ def upload_image():
         return upload, 400
 
     url = upload["url"]
-
+    # print('url////////', url)
         # flask_login allows us to get the current user from the request
-
-        # form = ImageForm()
-        # form['csrf_token'].data = request.cookies['csrf_token']
-        # if form.validate_on_submit():
-        #     new_image = Image(
-        #         user=current_user,
-        #         # url=url,
-        #         title=form.data['title'],
-        #         description=form.data['description'],
-        #         url=form.data['url']
-        #     )
-        # else:
-        #     return render_template('image_form',form=form)
-    new_image = Image(
-        url=url
+    form = ImageForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_image = Image(
+            user_id=current_user,
+            url=url,
+            title=form.data['title'],
+            description=form.data['description'],
+            # url=form.data['url']
         )
+        # new_image['url']=url
     db.session.add(new_image)
     db.session.commit()
-    return {'url': url}
+    # print('url//////////', url)
+    return new_image.to_dict(), 201
+
+
+
+
+
+# new_image = Image(
+#         url=url
+#         )
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # @image_routes.route("")
@@ -74,6 +75,47 @@ def upload_image():
 #     images = Image.query.order_by(Image.id.desc()).all()
 #     return {"images": [image.to_dict() for image in images]}
 
+# @image_routes.route('/', methods=["POST"])
+# # @login_required
+# def post_new_image():
+#     data = request.get_json()
+#     print('data-----------------', data)
+#     new_image = Image(
+#         # title = data['title'],
+#         # description = data['description'],
+#         image_url = data['image_url'],
+#         # user_id = user_id
+#     )
+
+#     db.session.add(new_image)
+#     db.session.commit()
+#     return new_image.to_dict()
+
+
+
+# @image_routes.route('/', methods=["POST"])
+# @login_required
+# def post_new_image(user_id):
+#     form = ImageForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     if  form.validate_on_submit():
+#         data = form.data
+#         # print('????form------in backend route', form['title'])
+#         print('image in backend route')
+#         title = data['title']
+#         description = data['description']
+#         db.session.commit()
+
+#         # new_image = Image(
+#         #     title = title
+#         #     description = description
+#         #     url = awsUrl,
+#         #     user_id = user_id
+#         # )
+
+#     db.session.add()
+#     db.session.commit()
+    # return new_image.to_dict()
 
 # Get all images
 @image_routes.route('/')
@@ -90,21 +132,7 @@ def load_one_image(id):
     return ({image.id: image.to_dict()})
     # return {image.id: image.to_dict()}
 
-@image_routes.route('/', methods=["POST"])
-# @login_required
-def post_new_image(user_id):
-    data = request.get_json()
-    new_image = Image(
-        title = data['title'],
-        description = data['description'],
-        url = data['url'],
-        user_id = user_id
-    )
-
-    db.session.add(new_image)
-    db.session.commit()
-    return new_image.to_dict()
-
+#Edit image
 @image_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def edit_image(id):
@@ -119,12 +147,10 @@ def edit_image(id):
     # print('data------in backend route', data)
     image = Image.query.get(id)
 
-    print('image------in backend route', image)
-    if form.validate_on_submit():
+    if  form.validate_on_submit() and image:
         data = form.data
-
-    print('data------in backend route', data)
-    if image:
+        # print('????form------in backend route', form['title'])
+        print('image in backend route')
         image.title = data['title']
         image.description = data['description']
         db.session.commit()
@@ -133,33 +159,7 @@ def edit_image(id):
 
     return jsonify(image.to_dict())
 
-    # if form.validate_on_submit():
-    #     title = form.data['new_title']
-    #     description = form.data['description']
-    # if not image:
-    #     return {
-    #         "message": "Image not found",
-    #         "statusCode": 404,
-    #     }, 404
-    # return image.to_dict()
-    # image.title = title
 
-    # image.description = description
-
-    # data = request.get_json()
-
-    # print('~~~~does it get here~~~ this is data:', data)
-
-    # print('~~~this is image.title:', image.title)
-    # if data['image_url'] == 'please':
-    #     image.url = image.url
-    # else:
-    #     image.url = data['url']
-
-
-        # image.title = title
-        # image.description = description
-    # db.session.commit()
 
 
 @image_routes.route('/<int:id>', methods=['DELETE'])

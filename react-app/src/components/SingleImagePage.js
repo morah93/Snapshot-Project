@@ -80,24 +80,12 @@ const DisplayOneImage = () => {
 			url: image.url
 		};
 
-		console.log('newImage------', newImage)
+		// console.log('newImage------', newImage)
 		dispatch(editImageThunk(newImage, imageId))
 			.then(() => {
-				history.push(`/images/${imageId}`);
 				alert("success");
+				history.push(`/images`);
 			})
-			// .then((project) => {
-			// 	history.push(`/projects/${project.id}`)
-			// //  console.log('returned project', project)
-			// 	dispatch( fetchOneProject(project.id)).then(setShowModal(false))
-			// })
-			// .catch(async (err)=>{
-			// 	const errObj=await err.json();
-			// 	console.log('what is errObj.message', errObj.errors)
-			// 	errors.push(errObj.errors)
-			// 	setValidationErrors(errors)
-
-			// });
 			.catch(() => {
 				alert("Failed");
 			});
@@ -148,7 +136,7 @@ const DisplayOneImage = () => {
 						<div className='display-img-outer'>
 							<img
 								src={image?.url}
-								style={{ width: 500, height: 500 }}
+								style={{ width: 700, height: 700 }}
 								// className={`display- img${i}`}
 								alt={image?.id}
 							/>

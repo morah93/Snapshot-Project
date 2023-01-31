@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { csrfFetch } from "../store/csrf";
+import { addImageThunk } from "../store/image";
 
 const UploadImage = () => {
 	const history = useHistory(); // so that we can redirect after the image upload is successful
@@ -12,7 +13,7 @@ const UploadImage = () => {
 	const [description, setDescription] = useState("");
 	const [errors, setErrors] = useState([]);
 	// const [validationErrors, setValidationErrors] = useState([]);
-	const [disable, setDisable] = useState(true)
+	const [disable, setDisable] = useState(true);
 	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
@@ -26,17 +27,21 @@ const UploadImage = () => {
 				errors.push(
 					"File Type Not Supported. Please upload a png, jpg, or jpeg"
 				);
-				setTitle(image.name.split('.')[0]);
+				setTitle(image.name.split(".")[0]);
 				//   setTitle(image.name.split('.')[0])
-			} else setTitle("")
-			if (!image) errors.push('Please upload image to continue')
-	      if (errors.length > 0) setDisable(true)
-	      if (errors.length === 0) setDisable(false)
-	      setErrors(errors)
-			}
+			} else setTitle("");
+			if (!image) errors.push("Please upload image to continue");
+			if (errors.length > 0) setDisable(true);
+			if (!errors.length) setDisable(false);
+			setErrors(errors);
+		}
 		// if (!image) errors.push("Please upload an image");
 		// setValidationErrors(errors);
 	}, [image, disable]);
+
+	useEffect(() => {
+		dispatch(addImageThunk());
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -46,7 +51,6 @@ const UploadImage = () => {
 		formData.append("image", image);
 		formData.append("title", title);
 		formData.append("description", description);
-
 
 		// if (!title || title.length < 1 || title.length > 20) errors.push("*Must have a title that is less than 20 characters.");
 		// if (!description || description.length < 1 || description.length > 500) errors.push("*Must have a description that is less than 500 characters.");
@@ -66,40 +70,60 @@ const UploadImage = () => {
 
 			// aws uploads can be a bit slow—displaying
 			// some sort of loading message is a good idea
-			setImageLoading(true);
+			// setImageLoading(true);
 
-			await fetch("api/images", {
+			// await fetch("api/images", {
+			// 	method: "POST",
+			// 	body: formData,
+			// })
+
+			const res = await csrfFetch(`/api/images`, {
 				method: "POST",
-				body: formData,
-			})
+				// headers: {
+				// 	"Content-Type": "application/json",
+				// },
+				body: JSON.stringify(formData),
+			});
+
+			dispatch(addImageThunk(res))
+				.then(() => {
+					setImageLoading(false);
+					history.push("/images");
+				})
+				.catch(() => {
+					alert("failed!");
+				});
+
 				//incoming
-				.then(async (url) => {
-					let imgUrl = await url.text();
-					if (imgUrl.includes("not permitted")) {
-						setErrors(["Only png/jpg/jpeg/gif allowed"]);
-						return;
-					}
+				// .then(async (url) => {
+				// 	let imgUrl = await url.text();
+				// 	if (imgUrl.includes("not permitted")) {
+				// 		setErrors(["Only png/jpg/jpeg/gif allowed"]);
+				// 		return;
+				// 	}
 					// const newImage = {
 					// 	title,
 					// 	description,
 					// 	url: imgUrl,
 					// };
 					// res is used incase you want to check for if res.ok
-					const res = await csrfFetch(`/api/images`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(formData),
-					});
-					if (res.ok) {
-						setImageLoading(false);
-					}
-					history.push("/images");
-				})
-				.catch(() => {
-					alert("failed!");
-				});
+					// const res = await csrfFetch(`/api/images`, {
+					// 	method: "POST",
+					// 	// headers: {
+					// 	// 	"Content-Type": "application/json",
+					// 	// },
+					// 	body: JSON.stringify(formData),
+					// });
+
+					// dispatch(addImageThunk(res))
+					// 	.then(() => {
+					// 		setImageLoading(false);
+					// 		history.push("/images");
+					// 	})
+					// 	.catch(() => {
+					// 		alert("failed!");
+					// 	});
+				// });
 
 			// if (response.ok) {
 			// 	await response.json();
@@ -127,13 +151,13 @@ const UploadImage = () => {
 		setImage(file);
 	};
 
-	// const updateTitle = (e) => {
-	// 	setTitle(e.target.value);
-	// };
+	const updateTitle = (e) => {
+		setTitle(e.target.value);
+	};
 
-	// const updateDescription = (e) => {
-	// 	setDescription(e.target.value);
-	// };
+	const updateDescription = (e) => {
+		setDescription(e.target.value);
+	};
 
 	return (
 		// <form onSubmit={handleSubmit}>
