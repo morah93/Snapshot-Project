@@ -22,6 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 def upload_image():
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
+    print('**************In backend', request.files)
     if(request.files):
         image = request.files["image"]
     else:
@@ -61,12 +62,18 @@ def upload_image():
         #     )
         # else:
         #     return render_template('image_form',form=form)
+    data = request.get_json()
+    print('Dta//////////', data)
     new_image = Image(
-        url=url
+        title = data['title'],
+        description = data['description'],
+        url = url,
+        user_id = current_user.id
         )
+    print('newImage------------Backend', new_image)
     db.session.add(new_image)
     db.session.commit()
-    return {'url': url}
+    return new_image.to_dict()
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # @image_routes.route("")
@@ -74,6 +81,21 @@ def upload_image():
 #     images = Image.query.order_by(Image.id.desc()).all()
 #     return {"images": [image.to_dict() for image in images]}
 
+#THIS ROUTE IS NOT BEING USED----------------
+# @image_routes.route('/', methods=["POST"])
+# # @login_required
+# def post_new_image(user_id):
+#     data = request.get_json()
+#     new_image = Image(
+#         title = data['title'],
+#         description = data['description'],
+#         url = data['url'],
+#         user_id = user_id
+#     )
+
+#     db.session.add(new_image)
+#     db.session.commit()
+#     return new_image.to_dict()
 
 # Get all images
 @image_routes.route('/')
@@ -90,20 +112,6 @@ def load_one_image(id):
     return ({image.id: image.to_dict()})
     # return {image.id: image.to_dict()}
 
-@image_routes.route('/', methods=["POST"])
-# @login_required
-def post_new_image(user_id):
-    data = request.get_json()
-    new_image = Image(
-        title = data['title'],
-        description = data['description'],
-        url = data['url'],
-        user_id = user_id
-    )
-
-    db.session.add(new_image)
-    db.session.commit()
-    return new_image.to_dict()
 
 @image_routes.route('/<int:id>', methods=["PUT"])
 # @login_required

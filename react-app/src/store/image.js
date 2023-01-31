@@ -66,6 +66,7 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 // };
 
 export const addImageThunk = (newImage) => async (dispatch) => {
+	console.log('newImage////////', JSON.stringify(newImage))
 	const response = await fetch(`/api/upload-images`, {
 		method: "POST",
 		headers: {
@@ -75,7 +76,7 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const addedImage = await response.json();
-		dispatch(addImage(newImage));
+		dispatch(addImage(addedImage));
 		return addedImage;
 	}
 };
