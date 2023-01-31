@@ -7,5 +7,5 @@ from app.models import Image
 class ImageForm(FlaskForm):
   title = StringField('Title')
   description = StringField('Description')
-  url = StringField('url')
+  # url = StringField('url')
   submit = SubmitField('Submit')

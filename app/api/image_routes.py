@@ -108,9 +108,6 @@ def post_new_image(user_id):
 @image_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def edit_image(id):
-    # image = Image.query.get(id)
-    # new_title = request.json['title']
-    # new_description = request.json['description']
     print('printing in backend edit route')
 
     form = ImageForm()
@@ -119,12 +116,9 @@ def edit_image(id):
     # print('data------in backend route', data)
     image = Image.query.get(id)
 
-    print('image------in backend route', image)
-    if form.validate_on_submit():
+    # print('image------in backend route', image)
+    if form.validate_on_submit() and image:
         data = form.data
-
-    print('data------in backend route', data)
-    if image:
         image.title = data['title']
         image.description = data['description']
         db.session.commit()
@@ -133,33 +127,7 @@ def edit_image(id):
 
     return jsonify(image.to_dict())
 
-    # if form.validate_on_submit():
-    #     title = form.data['new_title']
-    #     description = form.data['description']
-    # if not image:
-    #     return {
-    #         "message": "Image not found",
-    #         "statusCode": 404,
-    #     }, 404
-    # return image.to_dict()
-    # image.title = title
 
-    # image.description = description
-
-    # data = request.get_json()
-
-    # print('~~~~does it get here~~~ this is data:', data)
-
-    # print('~~~this is image.title:', image.title)
-    # if data['image_url'] == 'please':
-    #     image.url = image.url
-    # else:
-    #     image.url = data['url']
-
-
-        # image.title = title
-        # image.description = description
-    # db.session.commit()
 
 
 @image_routes.route('/<int:id>', methods=['DELETE'])
