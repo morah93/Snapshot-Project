@@ -14,11 +14,13 @@ class Image(db.Model):
   title = db.Column(db.String)
   url = db.Column(db.String, nullable=False)
   description = db.Column(db.String)
+  album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')))
   # tags = db.Column(db.String)
 
 
   #Relationship
   users = db.relationship('User', back_populates='images')
+  albums = db.relationship('Album', back_populates='images')
 
 
   def to_dict(self):
@@ -28,5 +30,6 @@ class Image(db.Model):
       'title': self.title,
       'url': self.url,
       'description': self.description,
+      'album_id': self.album_id
       # 'tags': self.tags,
     }

@@ -7,6 +7,7 @@ def seed_images():
     url='http://res.cloudinary.com/simpleview/image/upload/v1586366096/clients/traversecity/Frankfort_Lighthouse_2851be9b-d042-40fb-939f-c8391ae99073.jpg',
     title='light house',
     description='Beautiful scene of a lighthouse',
+    album_id=1,
     # tags=['lighthouse', 'water']
   )
   image2 = Image(
@@ -14,6 +15,7 @@ def seed_images():
     url='https://i.natgeofe.com/k/49f3dd21-d3b5-476e-a85e-4c5b34651cd1/Denali-mountain_3x2.jpg',
     title='snow mountain',
     description='Mountain top covered by clouds',
+    album_id=2
     # tags=['mountain', 'cloud', ['plants']]
   )
   image3 = Image(
@@ -21,6 +23,7 @@ def seed_images():
     url='https://images.pexels.com/photos/701353/pexels-photo-701353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     title='rainbow between mountains',
     description='Rainbow between tree covered mountain range',
+    album_id=3
     # tags=['trees', 'mountains', 'rainbow']
   )
 

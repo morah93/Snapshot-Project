@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { csrfFetch } from "../store/csrf";
-import { addImageThunk } from "../store/image";
+import { csrfFetch } from "../../store/csrf";
+import { addImageThunk } from "../../store/image";
 
 const UploadImage = () => {
 	const history = useHistory(); // so that we can redirect after the image upload is successful

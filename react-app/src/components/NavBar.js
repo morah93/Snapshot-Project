@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
-import DemoButton from "./DemoButton";
+import DemoButton from './auth/DemoButton'
+import { logout } from '../store/session';
 import "./homepage.css";
 import { loadImagesThunk } from "../store/image";
 import logo from "../static/app-icon.png";
@@ -10,19 +11,21 @@ import logo from "../static/app-icon.png";
 // import title from "../static/snapshot-title.png";
 const NavBar = () => {
 	const user = useSelector((state) => state.session.user);
-	// const images = useSelector((state) => state.images.allImages);
-	// const imgArr = Object.values(images)
-	// const randomImages = imgArr.sort((a, b) => 0.5 - Math.random());
-	// const navImage = randomImages[0].url
-	// console.log('imagesinnav*******', imgArr)
 	const history = useHistory();
 	const dispatch = useDispatch();
-
 
 	const handleImgClick = (e) => {
 		e.preventDefault();
 		history.push("/images");
 	};
+
+	const onLogout = async (e) => {
+		e.preventDefault();
+    await dispatch(logout());
+    history.push('/images')
+  };
+
+
 
 	const handleUploadClick = (e) => {
 		e.preventDefault();
@@ -30,26 +33,33 @@ const NavBar = () => {
 	};
 
 	useEffect(() => {
-    dispatch(loadImagesThunk())
-  }, [dispatch]);
+		dispatch(loadImagesThunk());
+	}, [dispatch]);
 
 	return (
 		<>
-			<div className="nav-background">
-					<div className='logo-container'>
-						<div className='logo'>
-							<img src={logo} onClick={handleImgClick} className='logo' />
-						</div>
+			<div className='nav-background'>
 						{/* <div className='title'>
 							<img src={title} className='title'/>
 						</div> */}
-					</div>
 				<div className='nav'>
+						<div className='logo'>
+							<img
+								src={logo}
+								onClick={handleImgClick}
+								className='logo'
+							/>
+						</div>
+					{user && (
+						<div className='welcomeDiv'>
+							<strong>Welcome: {user.username}</strong>
+						</div>
+					)}
 					{user === null && (
 						<>
-							<p>
+							<div className="demobtn">
 								<DemoButton />
-							</p>
+							</div>
 							<p>
 								<NavLink
 									to='/sign-up'
@@ -73,9 +83,15 @@ const NavBar = () => {
 						</>
 					)}
 					{user !== null && (
-					<button onClick={handleUploadClick}>Upload Image</button>
+						<button onClick={handleUploadClick}>Upload Image</button>
 					)}
-					<p>{user !== null && <LogoutButton />}</p>
+
+					{user && (
+						<button onClick={onLogout}>Logout</button>
+						)}
+
+
+					{/* <p>{user !== null && <LogoutButton /> }</p> */}
 				</div>
 			</div>
 		</>

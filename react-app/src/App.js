@@ -7,12 +7,14 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import UploadImage from "./components/AddImage";
+import UploadImage from "./components/images/AddImage";
 import { authenticate } from "./store/session";
-import HomePage from "./components/HomePage";
-import DisplayOneImage from "./components/SingleImagePage";
-import EditImageDetails from "./components/EditImagePage";
-
+import HomePage from "./components/images/HomePage";
+import DisplayOneImage from "./components/images/SingleImagePage";
+import UserAlbums from "./components/albums/AlbumPage";
+import SingleAlbum from "./components/albums/SingleAlbumDetails";
+import CreateAlbumForm from "./components/albums/CreateAlbum";
+// import AddImageToAlbumButton from "./components/albums/addImageToAlbumButton";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -70,6 +72,25 @@ function App() {
 				</Route>
 
 				<Route
+					path='/albums'
+					exact={true}
+				>
+					<UserAlbums />
+				</Route>
+
+				<Route path={'/albums/new-album'}>
+          <CreateAlbumForm />
+        </Route>
+
+
+				<Route
+					path='/albums/:albumId'
+					exact={true}
+				>
+					<SingleAlbum />
+				</Route>
+
+				<Route
 					path='/upload-image'
 					exact={true}
 				>
@@ -84,12 +105,12 @@ function App() {
 				</Route>
 
 
-				<Route
+				{/* <Route
 					path='/images/:imageId'
 					exact={true}
 				>
 					<EditImageDetails />
-				</Route>
+				</Route> */}
 
 			</Switch>
 		</BrowserRouter>

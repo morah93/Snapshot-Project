@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
+import AddImageToAlbumButton from '../albums/addImageToAlbumButton'
 import {
 	loadOneImageThunk,
 	deleteImageThunk,
 	loadImagesThunk,
 	editImageThunk,
-} from "../store/image";
-import SingleImageCards from "./SingleImageCard";
+} from "../../store/image";
+// import SingleImageCards from "./SingleImageCard";
 
 const DisplayOneImage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { imageId } = useParams();
 	const [title, setTitle] = useState("");
+	const [photo, setPhoto] = useState("");
 	const [description, setDescription] = useState("");
-	const [url, setUrl] = useState();
+	const [url, setUrl] = useState("");
 	const user = useSelector((state) => state.session.user);
-	// console.log("user----------------", user);
+	console.log("user----------------", user);
+	const images = useSelector((state) => state.images?.allImages);
 	const image = useSelector((state) => state.images?.allImages)[imageId];
 	// console.log(image, "image--------");
 	// const imgUserId = useSelector(state => state.images?.singleImage.user_id)
@@ -26,6 +29,7 @@ const DisplayOneImage = () => {
 	let ErrorMessage = [];
 
 	useEffect(() => {
+		// dispatch()
 		dispatch(loadImagesThunk());
 		dispatch(loadOneImageThunk(imageId));
 	}, [dispatch, imageId]);
@@ -112,27 +116,8 @@ const DisplayOneImage = () => {
 	return (
 		<>
 			<div className='singleImageContainer'>
-				{/* {image && (
-					<div className='showroom-image-div'>
-						<img
-							className='showroom-image'
-							src={image?.url}
-						/>
-					</div>
-				)} */}
 				<div>
-					{/* {user && image && user.id === image.user_id  ( */}
 					<div className=''>
-						{/* {Object.values(image) && ( */}
-						{/* <SingleImageCards
-              // key={id}
-              // title={title}
-              // description={description}
-              // url={url}
-              // id={id}
-              image={image}
-            /> */}
-						{/* )} */}
 						<div className='display-img-outer'>
 							<img
 								src={image?.url}
@@ -143,59 +128,69 @@ const DisplayOneImage = () => {
 						</div>
 						<div>{image?.title}</div>
 						<div>{image?.description}</div>
-						{/* //incoming */}
 						{user && image && user.id === image.user_id && (
-							<div className='update-image-form-container'>
-								<div className='sign-up-form'>
-									<div className='confirm-delete-message'>
-										<span>
-											What would you like to edit about this images details?
-										</span>
-									</div>
-									<form onSubmit={onSubmit}>
-										<div className='all-sign-up-form-inputs-labels'>
-											<label>Title</label>
-											<input
-												className='sign-up-form-inputs-only'
-												placeholder='Please enter title'
-												type='text'
-												onChange={updateTitle}
-												value={title}
-											/>
-										</div>
-
-										<div className='all-sign-up-form-inputs-labels'>
-											<label>Description</label>
-											<input
-												className='sign-up-form-inputs-only'
-												placeholder='Please enter description'
-												type='text'
-												onChange={updateDescription}
-												value={description}
-											/>
-										</div>
-										<div className='delete-cancel-button-div'>
-											<button
-												className='sign-up-submit-button'
-												type='submit'
-											>
-												Save Changes
-											</button>
-											{/* <button className='sign-up-submit-button' onClick={event => cancelButton(event, id)}>Cancel</button> */}
-										</div>
-									</form>
+							<div className='update-image-form'>
+								<div className='confirm-delete-message'>
+									<span>
+										What would you like to edit about this images details?
+									</span>
 								</div>
+								<form onSubmit={onSubmit}>
+									<div className='all-sign-up-form-inputs-labels'>
+										<label>Title</label>
+										<input
+											className='sign-up-form-inputs-only'
+											placeholder='Please enter title'
+											type='text'
+											onChange={updateTitle}
+											value={title}
+										/>
+									</div>
+
+									<div className='all-sign-up-form-inputs-labels'>
+										<label>Description</label>
+										<input
+											className='sign-up-form-inputs-only'
+											placeholder='Please enter description'
+											type='text'
+											onChange={updateDescription}
+											value={description}
+										/>
+									</div>
+									<div className='delete-cancel-button-div'>
+										<button
+											className='sign-up-submit-button'
+											type='submit'
+										>
+											Save Changes
+										</button>
+										{/* <button className='sign-up-submit-button' onClick={event => cancelButton(event, id)}>Cancel</button> */}
+									</div>
+								</form>
 							</div>
 						)}
-						{/* //incoming end */}
-						{/* {user && image && user.id === image.user_id && (
-						<button
-							className='edit-btn'
-							onClick={editButton}
-						>
-							Edit Image
-						</button>
-					)} */}
+
+
+
+						{/* <div className="add-image-to-album">
+            	<select
+              	className="image-input-option"
+              	value={photo}
+              	onChange={(e) => setPhoto(e.target.value)}
+           		>
+              	{user.albums.map((album) => (
+                	<option key={album} value={album}>
+                  {album.title}
+                	</option>
+              	))}
+            	</select>
+          	</div> */}
+
+						<div>
+								{user.id && (
+                  <AddImageToAlbumButton buttonClicked={false} image={image} />
+                )}
+              </div>
 					</div>
 					{user && image && user.id === image.user_id && (
 						<button
