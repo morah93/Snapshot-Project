@@ -9,7 +9,7 @@ const DemoButton = () => {
   const demoLogin = async (e) => {
     e.preventDefault();
     await dispatch(login("demo@aa.io", "password"));
-    history.push('/images')
+    history.push('/')
   };
 
   return (

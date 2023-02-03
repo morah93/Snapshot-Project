@@ -88,7 +88,7 @@ const DisplayOneImage = () => {
 		dispatch(editImageThunk(newImage, imageId))
 			.then(() => {
 				alert("success");
-				history.push(`/images`);
+				history.push(`/`);
 			})
 			.catch(() => {
 				alert("Failed");

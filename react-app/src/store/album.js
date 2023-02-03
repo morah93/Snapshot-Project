@@ -108,7 +108,7 @@ export const oneAlbumThunk = (album_id) => async (dispatch) => {
 
 //CREATE ALBUM
 export const createAlbumThunk = (newAlbum) => async (dispatch) => {
-	// console.log("inthunknewalbum///////", newAlbum);
+	console.log("inThunkNewAlbum///////", newAlbum);
 	const response = await fetch(`/api/albums/`, {
 		method: "POST",
 		headers: {
@@ -216,14 +216,18 @@ const albumReducer = (state = initialState, action) => {
 			// 	return newState;
 			// }
 			// break;
-			const newState = { ...state };
-			// console.log("newStatelllllllllllll", newState);
-			// console.log("payloadlllllllllllll", action.payload);
-			newState[action.payload.id] = action.payload;
+			const newState = { ...state, myAlbums: [...state.myAlbums] };
+			console.log("newStatelllllllllllll", newState);
+			console.log("payloadlllllllllllll", action.payload);
+
+			newState.myAlbums.push(action.payload);
+			// newState.myAlbums.push([action.payload.id] = action.payload);
 			return newState;
 		}
 
 		case EDIT_ALBUM:
+			//FIX THIS MESSSSS
+			//Not dynamically refreshing
 			newState = { ...state, singleAlbum: {} }
 			console.log('action.payload', action.payload)
 			action.singleAlbum = action.payload

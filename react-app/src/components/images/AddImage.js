@@ -12,7 +12,7 @@ const UploadImage = () => {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [errors, setErrors] = useState([]);
-	// const [validationErrors, setValidationErrors] = useState([]);
+	const [validationErrors, setValidationErrors] = useState([]);
 	const [disable, setDisable] = useState(true)
 	const user = useSelector((state) => state.session.user);
 
@@ -29,14 +29,15 @@ const UploadImage = () => {
 				);
 				setTitle(image.name.split('.')[0]);
 				//   setTitle(image.name.split('.')[0])
-			} else setTitle("")
+			}
+			// else setTitle("")
 			if (!image) errors.push('Please upload image to continue')
 	      if (errors.length > 0) setDisable(true)
 	      if (errors.length === 0) setDisable(false)
 	      setErrors(errors)
 			}
-		// if (!image) errors.push("Please upload an image");
-		// setValidationErrors(errors);
+		if (!image) errors.push("Please upload an image");
+		setValidationErrors(errors);
 	}, [image, disable]);
 
 	const handleSubmit = async (e) => {
@@ -98,7 +99,7 @@ const UploadImage = () => {
 					<label>Title</label>
 					<input
 						className='title-input'
-						placeholder='Not Required'
+						placeholder='Required'
 						type='text'
 						onChange={(e) => setTitle(e.target.value)}
 						value={title}
@@ -108,7 +109,7 @@ const UploadImage = () => {
 					<label>Description</label>
 					<input
 						className='description-inputs'
-						placeholder='Not Required'
+						placeholder='Required'
 						type='text'
 						onChange={(e) => setDescription(e.target.value)}
 						value={description}

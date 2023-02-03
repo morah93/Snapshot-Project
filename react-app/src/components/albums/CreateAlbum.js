@@ -145,7 +145,7 @@ const CreateAlbum = () => {
   const albums = useSelector((state) => state.albums.myAlbums);
 	const user = useSelector((state) => state.session.user);
 	const [userAlbumNumber, setUserAlbumNumber] = useState(1);
-	const [title, setTitle] = useState("My Album #");
+	const [title, setTitle] = useState("My Album");
 	// const [images, setImages] = useState([])
   const [description, setDescription] = useState("Please add description");
   const [url, setUrl] = useState("https://images.pexels.com/photos/48207/sunset-sky-sun-cloud-48207.jpeg");
@@ -171,10 +171,10 @@ const CreateAlbum = () => {
 
 		console.log('newAlbum[[[[[[[[[[[[[', newAlbum)
 		return dispatch(createAlbumThunk(newAlbum))
-			.then((album) => {
-      // const { id } = newAlbum;
-      history.push(`/albums`);
-    });
+			// .then((album) => {
+      // // const { id } = newAlbum;
+      // history.push(`/albums`);
+      // });
   };
 
   return (

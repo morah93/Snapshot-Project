@@ -16,7 +16,7 @@ const NavBar = () => {
 
 	const handleImgClick = (e) => {
 		e.preventDefault();
-		history.push("/images");
+		history.push("/");
 	};
 
 	const onLogout = async (e) => {
