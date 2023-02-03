@@ -40,11 +40,11 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/images' />;
+    return <Redirect to='/' />;
   }
 
   return (
-    <div className='signupForm' style={{paddingTop:500}}>
+    <div className='signupForm'>
     <form onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (

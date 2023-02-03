@@ -35,6 +35,14 @@ function App() {
 		<BrowserRouter>
 			<NavBar />
 			<Switch>
+
+				<Route
+					path='/'
+					exact={true}
+				>
+					<HomePage />
+				</Route>
+
 				<Route
 					path='/login'
 					exact={true}
@@ -63,12 +71,6 @@ function App() {
 					<User />
 				</ProtectedRoute>
 
-				<Route
-					path='/images'
-					exact={true}
-				>
-					<HomePage />
-				</Route>
 
 				<ProtectedRoute
 					path='/albums'

@@ -55,6 +55,16 @@
 	top: 100px;
 }
 
+
+/* ----------------- Login ------------------- */
+
+
+/* ----------------- Sign Up ------------------- */
+.signupForm{
+	margin-top: 450px;
+}
+
+/* ------------------ HomePage ---------------------- */
 .homepageContainer{
 	display: flex;
 }
@@ -141,6 +151,7 @@
 .img5,
 .img7 {
 	height: 186px;
+	object-fit: cover;
 }
 
 .img1,
@@ -148,6 +159,7 @@
 .img4,
 .img6 {
 	height: 286px;
+	object-fit: cover;
 }
 
 .img0 {
