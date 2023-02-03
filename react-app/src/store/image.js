@@ -149,11 +149,16 @@ const imageReducer = (state = initialState, action) => {
 
 			newState.allImages[action.newImage.id] = action.newImage;
 
-			if (Object.values(newState.singleImage).length) {
+			if (newState.singleImage.length) {
 				if (newState.singleImage.id === action.newImage.id) {
 					newState.singleImage = action.newImage;
 				}
 			}
+			// if (Object.values(newState.singleImage).length) {
+			// 	if (newState.singleImage.id === action.newImage.id) {
+			// 		newState.singleImage = action.newImage;
+			// 	}
+			// }
 			return newState;
 		}
 

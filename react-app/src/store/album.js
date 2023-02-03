@@ -255,13 +255,14 @@ const albumReducer = (state = initialState, action) => {
 				myAlbums: { ...state.myAlbums },
 			};
 			// updates the playlist in the allPlaylist store
-			newState.allAlbums[action.album.id] = action.album;
-			newState.myAlbums[action.album.id] = action.album;
+			newState.allAlbums[action.singleAlbum.id] = action.singleAlbum;
+			newState.myAlbums[action.singleAlbum.id] = action.singleAlbum;
+			console.log('action.album.id', action.singleAlbum.id)
 			// if there are keys and values in single playlist
 			// we want to overwrite that playlist if it's in the single playlist State
 			if (Object.values(newState.singleAlbum).length) {
-				if (newState.singleAlbum.id === action.album.id) {
-					newState.singleAlbum = action.album;
+				if (newState.singleAlbum.id === action.singleAlbum.id) {
+					newState.singleAlbum = action.singleAlbum;
 				}
 			}
 			return newState;

@@ -59,7 +59,7 @@ const HomePage = () => {
       } */}
 				<div className='images-div'>
 					{/* <div>Home Page</div> */}
-          <div>
+          <div className="topImgDiv">
 						<img
 							className='topImg'
 							src={displayImages[0]?.url}

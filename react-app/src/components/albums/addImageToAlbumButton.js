@@ -34,16 +34,17 @@ const AddImageToAlbumButton = ({ image, buttonClicked }) => {
     setAlbumOption(option.value);
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-    history.push(`/albums/`)
-  }
-
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   history.push(`/albums/`)
+  // }
+  
+  console.log('albumOption////////', albumOption)
   const handleSubmit = (e) => {
     e.preventDefault();
     return dispatch(addImageToAlbumThunk(image.id, albumOption)).then(
       setButtonOn(false),
-      // history.push(`/albums/${album.id}`)
+      history.push(`/albums/${albumOption}`)
     );
   };
 
