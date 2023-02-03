@@ -112,12 +112,14 @@ def get_one_album(album_id):
 
 
 #update album
-@album_routes.route("/<int:id>/edit", methods=["PUT"])
+@album_routes.route("/<int:id>", methods=["PUT"])
 @login_required
 def edit_album_details(id):
-
+    # album = Album.query.filter(Album.id == album_id).all()
     album = Album.query.get((id))
 
+    print('Album_idIIIIIIIIIIIIIII', id)
+    print('AlbumAAAAAAAAAAAAAA', album)
     form = AlbumForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -125,14 +127,16 @@ def edit_album_details(id):
     if form.validate_on_submit():
         title = form.data["title"]
         description = form.data['description']
+        url = form.data['url']
         album.title = title
         album.description = description
+        album.url = url
 
-        if(form.data['images'] != ''):
-            images = form.data['images'].split(',')
-            image_details = []
-            [image_details.append(Image.query.get(int(image))) for image in images]
-            [album.images.remove(image) for image in image_details]
+        # if(form.data['images'] != ''):
+        #     images = form.data['images'].split(',')
+        #     image_details = []
+        #     [image_details.append(Image.query.get(int(image))) for image in images]
+        #     [album.images.remove(image) for image in image_details]
 
         db.session.commit()
 

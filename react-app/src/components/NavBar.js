@@ -57,7 +57,7 @@ const NavBar = () => {
 					)}
 					{user === null && (
 						<>
-							<div className="demobtn">
+							<div className="createButton">
 								<DemoButton />
 							</div>
 							<p>
@@ -83,11 +83,11 @@ const NavBar = () => {
 						</>
 					)}
 					{user !== null && (
-						<button onClick={handleUploadClick}>Upload Image</button>
+						<button className='createButton' onClick={handleUploadClick}>Upload Image</button>
 					)}
 
 					{user && (
-						<button onClick={onLogout}>Logout</button>
+						<button className='createButton' onClick={onLogout}>Logout</button>
 						)}
 
 

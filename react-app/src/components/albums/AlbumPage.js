@@ -58,11 +58,10 @@ function UserAlbums() {
 								alt='Album'
 								src={album.url}
 							/>
-							<p className='title'>{album.title}</p>
 							<p>{album.description}</p>
-						</div>
-					))}
-				</div> */}
+							</div>
+							))}
+						</div> */}
 				<h3>My Albums</h3>
 				<div className='display-image-main'>
 					{albums?.map((album, i) => {
@@ -77,6 +76,7 @@ function UserAlbums() {
 												alt={album.id}
 											/>
 										</div>
+							<p className='title'>{album.title}</p>
 									</NavLink>
 								</div>
 								{/* <hr></hr> */}

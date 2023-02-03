@@ -115,7 +115,8 @@
 	/* box-sizing: border-box; */
 	width: 288px;
 	position: relative;
-	margin-top: 10px;
+	margin-top: 5px;
+	/* margin-bottom: 10px; */
 }
 
 .display-image-img{
@@ -257,7 +258,9 @@ padding-top: 100px;
 	margin-top: 250px;
 }
 
-
+.imageTitle{
+	/* padding-top: 2px; */
+}
 /* -------------------- Edit Album Page ------------------------ */
 
 .edit-project-container{

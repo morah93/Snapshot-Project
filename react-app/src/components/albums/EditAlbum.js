@@ -216,33 +216,102 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import { updateAlbumThunk, oneAlbumThunk } from "../../store/album";
 import "../homepage.css";
 // buttonOn is an boolean that will determine what this component renders
 
-const EditAlbumForm = ({ buttonClicked, index }) => {
+const EditAlbumForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  // const [buttonOn, setButtonOn] = useState(buttonClicked);
+  const { albumId } = useParams();
+  const user = useSelector((state) => state.session.user);
   const album = useSelector((state) => state.albums.singleAlbum);
   const [title, setTitle] = useState(album.title);
   const [description, setDescription] = useState(album.description)
+  const [url, setUrl] = useState(album.url)
+  const [user_id, setUser_id] = useState(album.user_id)
+  const [error, setError] = useState([]);
+  let ErrorMessage = [];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const editedAlbum = { ...album };
-    editedAlbum.title = title;
-    return dispatch(updateAlbumThunk(editedAlbum, index))
-      .then(dispatch(oneAlbumThunk(album.id)))
-      .then(history.push(`/albums/${album.id}`))
-      // .then(setButtonOn(false));
-  };
 
-  const renderForm = (e) => {
-    e.preventDefault();
-    // setButtonOn(true);
-  };
+  useEffect(() => {
+		dispatch(oneAlbumThunk(albumId));
+	}, [dispatch, albumId]);
+
+  useEffect(() => {
+		if (album) {
+			setTitle(album.title);
+			setDescription(album.description);
+      setUrl(album.url);
+      // setUser_id(album.user_id)
+		}
+  }, [album]);
+
+  const updateTitle = (e) => {
+		setTitle(e.target.value);
+	};
+	const updateDescription = (e) => {
+		setDescription(e.target.value);
+	};
+	const updateUrl = (e) => {
+		setUrl(e.target.value);
+	};
+
+
+  const onSubmit = async (e) => {
+		e.preventDefault();
+		setError([]);
+		// if (!title || title.length < 1 || title.length > 20) ErrorMessage.push("*Must have a title that is less than 20 characters.");
+		// if (!description || description.length < 1 || description.length > 500) ErrorMessage.push("*Must have a description that is less than 500 characters.");
+		// if (!url) ErrorMessage.push('Image Url cannot be empty.')
+		setError(ErrorMessage);
+
+		if (ErrorMessage?.length) return;
+
+		const formData = new FormData();
+
+
+		await fetch(`/api/albums/${albumId}`, {
+      method: "PUT",
+			body: formData,
+		});
+    console.log('formData------', formData)
+    const newAlbum = {
+			description,
+			title,
+      url,
+      // user_id: album.user_id
+		};
+
+		console.log('newAlbum------', newAlbum)
+		dispatch(updateAlbumThunk(newAlbum, albumId))
+			.then(() => {
+				alert("success");
+				history.push(`/albums/${albumId}`);
+			})
+			.catch(() => {
+				alert("Failed");
+			});
+
+
+	};
+
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const editedAlbum = { ...album };
+  //   editedAlbum.title = title;
+  //   return dispatch(updateAlbumThunk(editedAlbum, index))
+  //     .then(dispatch(oneAlbumThunk(album.id)))
+  //     .then(history.push(`/albums/${album.id}`))
+  //     // .then(setButtonOn(false));
+  // };
+
+  // const renderForm = (e) => {
+  //   e.preventDefault();
+  //   // setButtonOn(true);
+  // };
 
   const cancel = (e) => {
     e.preventDefault();
@@ -259,27 +328,40 @@ const EditAlbumForm = ({ buttonClicked, index }) => {
   return (
     <div className="edit-project-container">
       <h2>Edit details</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
+        <div>
+
+        </div>
+        <label>Title</label>
         <input
-          className="song-title-input"
+          className="album-input"
           type="text"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={updateTitle}
           placeholder="Title"
           required
         />
+        <label>Description</label>
         <input
-          className="song-title-input"
+          className="album-input"
           type="text"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={updateDescription}
           placeholder="Description"
+        />
+        <label>Image Url</label>
+        <input
+          className="album-input"
+          type="text"
+          value={url}
+          onChange={updateUrl}
+          placeholder="Image Url"
         />
         <button onClick={cancel} className="demo-btn" >
           Cancel
         </button>
         <button className="demo-btn" type="submit">
-          Save
+          Save Changes
         </button>
       </form>
       </div>

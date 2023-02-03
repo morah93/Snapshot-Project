@@ -36,9 +36,9 @@ const deleteAlbum = (album) => ({
 	payload: album,
 });
 
-const addImageToAlbum = (album) => ({
+const addImageToAlbum = (singleAlbum) => ({
 	type: ADD_IMAGE_TO_ALBUM,
-	album,
+	singleAlbum,
 });
 
 // THUNKS
@@ -74,7 +74,7 @@ export const getUserAlbumThunk = (userId) => async (dispatch) => {
 };
 
 export const oneAlbumThunk = (album_id) => async (dispatch) => {
-	console.log('id------', album_id)
+	// console.log('id------', album_id)
 	const response = await fetch(`/api/albums/${album_id}`);
 	if (response.ok) {
 		const data = await response.json();
@@ -123,21 +123,25 @@ export const createAlbumThunk = (newAlbum) => async (dispatch) => {
 	}
 };
 
-export const updateAlbumThunk = (payload, albumId) => async (dispatch) => {
+export const updateAlbumThunk = (payload, album_id) => async (dispatch) => {
+	const { title, description, url, user_id } = payload;
+	// console.log('payloadInThunk///////', payload);
+	console.log('album_id///////', album_id);
 	console.log('payloadInThunk///////', payload);
-	console.log('payloadInThunk///////', albumId);
-	const response = await fetch(`/api/albums/${albumId}`, {
+	const response = await fetch(`/api/albums/${album_id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({payload}),
+		body: JSON.stringify({title, description, url, user_id}),
 	});
 	if (response.ok) {
-		const data = await response.json();
-		dispatch(editAlbum(data));
-		return data;
+		const updatedAlbum = await response.json();
+		dispatch(editAlbum(updatedAlbum));
+		console.log('updatedImage-in-thunk', updatedAlbum)
+		return editAlbum;
 	}
+	if(response.status >= 400) throw response
 };
 
 export const removeAlbumThunk = (id) => async (dispatch) => {
@@ -229,9 +233,18 @@ const albumReducer = (state = initialState, action) => {
 			// 	[action.payload.id]: action.payload,
 			// };
 
+		// case DELETE_ALBUM: {
+		// 	newState = { ...state };
+		// 	delete newState.userAlbums[action.payload];
+		// 	return newState;
+		// }
+
 		case DELETE_ALBUM: {
-			newState = { ...state };
-			delete newState.userAlbums[action.payload];
+			const newState = {
+				allAlbums: { ...state.allAlbums },
+				singleAlbum: {},
+			};
+			delete newState.allAlbums[action.albumId];
 			return newState;
 		}
 

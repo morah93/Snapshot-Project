@@ -142,7 +142,7 @@ import { createAlbumThunk } from "../../store/album"
 const CreateAlbum = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const albums = useSelector((state) => state.albums.allAlbums);
+  const albums = useSelector((state) => state.albums.myAlbums);
 	const user = useSelector((state) => state.session.user);
 	const [userAlbumNumber, setUserAlbumNumber] = useState(1);
 	const [title, setTitle] = useState("My Album #");
@@ -152,7 +152,7 @@ const CreateAlbum = () => {
 
 	useEffect(() => {
     let count = 1;
-    Object.values(albums).forEach((album) => {
+    albums?.forEach((album) => {
       if (album.owner_id === user.id) {
         count++;
       }
@@ -173,7 +173,7 @@ const CreateAlbum = () => {
 		return dispatch(createAlbumThunk(newAlbum))
 			.then((album) => {
       // const { id } = newAlbum;
-      history.push(`/albums/`);
+      history.push(`/albums`);
     });
   };
 
