@@ -6,10 +6,10 @@ import { addImageToAlbumThunk } from "../../store/album";
 // import { addSongToPlaylistThunk } from "../store/playlists";
 import '../homepage.css'
 
-const AddImageToAlbumButton = ({ image, buttonClicked }) => {
+const RemoveImageFromAlbumButton = ({ image, buttonClicked }) => {
   const [buttonOn, setButtonOn] = useState(buttonClicked);
-  const [albumOption, setAlbumOption] = useState(null);
-  const [options, setOptions] = useState([]);
+  // const [albumOption, setAlbumOption] = useState(null);
+  // const [options, setOptions] = useState([]);
   const albums = useSelector((state) => state.session.user.albums);
   const history = useHistory()
   const dispatch = useDispatch();
@@ -80,4 +80,4 @@ const AddImageToAlbumButton = ({ image, buttonClicked }) => {
   }
 };
 
-export default AddImageToAlbumButton;
+export default RemoveImageFromAlbumButton;

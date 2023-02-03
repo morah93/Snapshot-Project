@@ -1,43 +1,45 @@
 const LOAD_ALBUMS = "albums/USER_ALBUMS";
 const LOAD_USER_ALBUMS = "albums/USER_ALBUMS";
-// const LOAD_SINGLE_ALBUM = "album/SINGLE_ALBUM";
+const LOAD_SINGLE_ALBUM = "album/SINGLE_ALBUM";
 const CREATE_ALBUM = "album/CREATE_ALBUM";
 const EDIT_ALBUM = "album/EDIT_ALBUM";
 const DELETE_ALBUM = "album/DELETE_ALBUM";
 const ADD_IMAGE_TO_ALBUM = "album/ADD_IMAGE_TO_ALBUM";
 
-
-
 const userAlbums = (albums) => ({
 	type: LOAD_USER_ALBUMS,
-	albums
+	payload: albums,
 });
 
 const allAlbum = (album) => ({
 	type: LOAD_ALBUMS,
-	payload: album
+	payload: album,
+});
+
+const singleAlbum = (album) => ({
+	type: LOAD_SINGLE_ALBUM,
+	payload: album,
 });
 
 const createAlbum = (album) => ({
 	type: CREATE_ALBUM,
-	album,
+	payload: album,
 });
 
 const editAlbum = (album) => ({
 	type: EDIT_ALBUM,
-	album,
+	payload: album,
 });
 
 const deleteAlbum = (album) => ({
 	type: DELETE_ALBUM,
-	album,
+	payload: album,
 });
 
 const addImageToAlbum = (album) => ({
-  type: ADD_IMAGE_TO_ALBUM,
-  album,
+	type: ADD_IMAGE_TO_ALBUM,
+	album,
 });
-
 
 // THUNKS
 // export const getUserAlbumsThunk = (userId) => async (dispatch) => {
@@ -49,17 +51,7 @@ const addImageToAlbum = (album) => ({
 // 	}
 // };
 
-export const getUserAlbumThunk = () => async (dispatch) => {
-  const response = await fetch("/api/albums/current");
-  if (response.ok) {
-    const data = await response.json(); //object
-    const albumsArr = data.Reviews; //array [{}, {}]
-    dispatch(userAlbums(albumsArr));
-    return data;
-  }
-};
-
-export const allAlbumThunk = (id) => async (dispatch) => {
+export const allAlbumThunk = () => async (dispatch) => {
 	const response = await fetch(`/api/albums/`);
 	if (response.ok) {
 		const data = await response.json();
@@ -68,55 +60,78 @@ export const allAlbumThunk = (id) => async (dispatch) => {
 	}
 };
 
-export const createAlbumThunk = (payload) => async (dispatch) => {
-	// const { name, description, images, url, user_id } = payload;
-  console.log('payloadInThunk--------', payload)
-	const response = await fetch("/api/albums/", {
+export const getUserAlbumThunk = (userId) => async (dispatch) => {
+	// console.log('userIdLLLLLLLL', userId)
+	const response = await fetch(`/api/albums/users/${userId}`);
+	if (response.ok) {
+		const data = await response.json(); //object
+		// console.log('dataLLLLLLLL', data)
+		const albumsArr = data.albums; //array [{}, {}]
+		// console.log('albumsArr;;;;;;;;;;;;;', albumsArr)
+		dispatch(userAlbums(albumsArr));
+		return data;
+	}
+};
+
+export const oneAlbumThunk = (album_id) => async (dispatch) => {
+	console.log('id------', album_id)
+	const response = await fetch(`/api/albums/${album_id}`);
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(singleAlbum(data));
+		return data;
+	}
+};
+
+//////CREATE ALBUM THUNK NOT USED
+// export const createAlbumThunk = (payload) => async (dispatch) => {
+// 	// const { name, description, images, url, user_id } = payload;
+//   console.log('payloadInThunk--------', payload)
+// 	const response = await fetch("/api/albums/", {
+// 		method: "POST",
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 		body:  payload,
+// 	});
+
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		await dispatch(createAlbum(data));
+// 		return data;
+// 	}    const data = await response.json();
+//   if(data.errors) {
+//       return data.errors
+//   }
+//  else return ['An error occurred. Please try again.']
+// };
+
+//CREATE ALBUM
+export const createAlbumThunk = (newAlbum) => async (dispatch) => {
+	// console.log("inthunknewalbum///////", newAlbum);
+	const response = await fetch(`/api/albums/`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body:  payload,
+		body: JSON.stringify(newAlbum),
 	});
-
 	if (response.ok) {
-		const data = await response.json();
-		await dispatch(createAlbum(data));
-		return data;
-	}    const data = await response.json();
-  if(data.errors) {
-      return data.errors
-  }
- else return ['An error occurred. Please try again.']
+		const newCreatedAlbum = await response.json();
+		dispatch(createAlbum(newCreatedAlbum));
+		return newCreatedAlbum;
+	}
 };
 
-// export const create = (data) => async (dispatch) => {
-//   const response = await fetch('/api/albums/', {
-//       method: 'POST',
-//       body: data
-//   })
-
-//   if (response.ok) {
-//       const final = await response.json();
-//       await dispatch(createAlbum(final))
-
-//       return final;
-//   } else if (response.status < 500) {
-//       const data = await response.json();
-//       if(data.errors) {
-//           return data.errors
-//       }
-//   } else return ['An error occurred. Please try again.']
-// }
-
-export const updateAlbumThunk = (payload) => async (dispatch) => {
-	const {albumId, name, description, images } = payload;
+export const updateAlbumThunk = (payload, albumId) => async (dispatch) => {
+	console.log('payloadInThunk///////', payload);
+	console.log('payloadInThunk///////', albumId);
 	const response = await fetch(`/api/albums/${albumId}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ name, description, images }),
+		body: JSON.stringify({payload}),
 	});
 	if (response.ok) {
 		const data = await response.json();
@@ -136,56 +151,53 @@ export const removeAlbumThunk = (id) => async (dispatch) => {
 	}
 };
 
-export const addImageToAlbumThunk =
-  (imageId, albumId) => async (dispatch) => {
-    const response = await fetch(
-      `/api/albums/${albumId}/images/${imageId}`,
-      {
-        method: "POST",
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(addImageToAlbum(data));
-      return data;
-    } else {
-      return response;
-    }
-  };
+export const addImageToAlbumThunk = (imageId, albumId) => async (dispatch) => {
+	const response = await fetch(`/api/albums/${albumId}/images/${imageId}`, {
+		method: "POST",
+	});
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(addImageToAlbum(data));
+		return data;
+	} else {
+		return response;
+	}
+};
 
 // REDUCER
 // const initialState = { userAlbums: {}, singleAlbum: {} };
 
-const initialState = {allAlbums: {}, singleAlbum: {}, myAlbums: {}};
+const initialState = { allAlbums: {}, singleAlbum: {}, myAlbums: [] };
 
 const albumReducer = (state = initialState, action) => {
+	let newState = initialState;
 	switch (action.type) {
-		// case LOAD_USER_ALBUMS: {
-		// 	const newState = Object.assign({}, state);
-		// 	newState.userAlbums = {};
-		// 	const albums = action.payload;
-		// 	newState.userAlbums = albums;
-		// 	return newState;
-    // }
-    case LOAD_ALBUMS:
-      return action.payload
+		case LOAD_USER_ALBUMS: {
+			newState = { ...state, myAlbums: {} };
+			const albums = action.payload;
+			// console.log('action.payload', action.payload)
+			newState.myAlbums = albums;
+			return newState;
+		}
 
-    // case LOAD_ALBUMS:
-    //   newState = { ...state };
-    //   const normalizedUserReviews = {};
-    //   action.reviews.forEach(
-    //     (review) => (normalizedUserReviews[review.id] = review)
-    //   );
-    //   newState.user = normalizedUserReviews;
-    //   return newState;
+		// case LOAD_ALBUMS:
+		//   return action.payload
 
-		// case LOAD_SINGLE_ALBUM: {
-		// 	// const newState = { ...state };
-		// 	// newState.singleAlbum = {};
-		// 	// const album = action.payload;
-		// 	// newState.singleAlbum = album;
-		// 	return action.payload;
-    // }
+		case LOAD_ALBUMS:
+			newState = { ...state, allAlbums: {} };
+			action.albums.forEach((album) => {
+				newState.allAlbums[album.id] = album;
+			});
+			return newState;
+
+		case LOAD_SINGLE_ALBUM: {
+			newState = {
+				allAlbums: { ...state.allAlbums },
+				singleAlbum: action.payload,
+			};
+			console.log("action.payload",action.payload)
+			return newState
+		}
 
 		case CREATE_ALBUM: {
 			// if (!state[action.id]) {
@@ -200,41 +212,47 @@ const albumReducer = (state = initialState, action) => {
 			// 	return newState;
 			// }
 			// break;
-      const newState = {...state};
-      newState[action.payload.id] = action.payload;
-      return newState;
+			const newState = { ...state };
+			// console.log("newStatelllllllllllll", newState);
+			// console.log("payloadlllllllllllll", action.payload);
+			newState[action.payload.id] = action.payload;
+			return newState;
 		}
 
 		case EDIT_ALBUM:
-			return {
-				...state,
-				[action.payload.id]: action.payload,
-      };
+			newState = { ...state, singleAlbum: {} }
+			console.log('action.payload', action.payload)
+			action.singleAlbum = action.payload
+			return newState
+			// return {
+			// 	...state,
+			// 	[action.payload.id]: action.payload,
+			// };
 
 		case DELETE_ALBUM: {
-			const newState = { ...state };
+			newState = { ...state };
 			delete newState.userAlbums[action.payload];
 			return newState;
 		}
 
 		case ADD_IMAGE_TO_ALBUM: {
-      const newState = {
-        allAlbums: { ...state.allAlbums },
-        singleAlbum: state.singleAlbum,
-        myAlbums: { ...state.myAlbums },
-      };
-      // updates the playlist in the allPlaylist store
-      newState.allAlbums[action.album.id] = action.album;
-      newState.myAlbums[action.album.id] = action.album;
-      // if there are keys and values in single playlist
-      // we want to overwrite that playlist if it's in the single playlist State
-      if (Object.values(newState.singleAlbum).length) {
-        if (newState.singleAlbum.id === action.album.id) {
-          newState.singleAlbum = action.album;
-        }
-      }
-      return newState;
-    }
+				newState = {
+				allAlbums: { ...state.allAlbums },
+				singleAlbum: state.singleAlbum,
+				myAlbums: { ...state.myAlbums },
+			};
+			// updates the playlist in the allPlaylist store
+			newState.allAlbums[action.album.id] = action.album;
+			newState.myAlbums[action.album.id] = action.album;
+			// if there are keys and values in single playlist
+			// we want to overwrite that playlist if it's in the single playlist State
+			if (Object.values(newState.singleAlbum).length) {
+				if (newState.singleAlbum.id === action.album.id) {
+					newState.singleAlbum = action.album;
+				}
+			}
+			return newState;
+		}
 		default:
 			return state;
 	}

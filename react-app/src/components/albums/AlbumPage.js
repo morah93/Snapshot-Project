@@ -1,92 +1,53 @@
-// import React, { useEffect } from 'react';
-// import { useParams, Link } from 'react-router-dom';
-// import { oneAlbum } from '../../store/album';
-// import { useDispatch, useSelector } from 'react-redux';
-// import './userPage.css'
-
-// function DisplayAlbums() {
-
-//     const { userId, albumId } = useParams();
-//     const dispatch = useDispatch()
-
-//     const userAlbums = useSelector(state => { return state })
-
-//     const currentAlbum = Object.values(userAlbums.albumReducer.currentAlbum)
-
-//     // const albumImages = (currentAlbum[2])
-
-//     useEffect(() => {
-//         dispatch(oneAlbum(albumId))
-//     }, [dispatch, albumId])
-
-//     useEffect(() => {
-//         window.scrollTo(0, 0)
-//     }, [])
-
-//     return (
-//         // <div className='whole-album-showroom-container'>
-//         //     <div className='link-back-to-album-list-div'>
-//         //         <Link to={`/people/${userId}/albums`} className="back-to-album-list-link-div">
-//         //             <div className="icon-for-back-to-explore">
-//         //                 <i className="fa-solid fa-arrow-left"></i>
-//         //             </div>
-//         //             <span className="back-to-album-list-link">Back to album list</span>
-//         //         </Link>
-//         //     </div>
-//         //     <div className='album-banner-showroom'>
-//         //         <div className='album-name-description-div'>
-//         //             <span className='album-name-showroom'>{currentAlbum[3]?.substring(0, 30)}</span>
-//         //             <span className='album-description-showroom'>{currentAlbum[0]?.substring(0, 45)}</span>
-//         //         </div>
-//         //         <img className='album-image-banner' alt={albumImages?.length > 0 ? albumImages[0]?.title : 'Banne Image'} src={albumImages?.length > 0 ? albumImages[0]?.url : null} />
-//         //     </div>
-
-//         //     <div className='all-images-in-album'>
-//         //         {albumImages?.map((im) => (
-//         //             <div key={im.id}>
-//         //                 <Link to={`/people/${im.username}/albums/${albumId}/photos/${im.id}`}><img className='images-album-showroom' src={im.url} alt={im.title} /></Link>
-//         //             </div>
-//         //         ))}
-//         //     </div>
-//         //     <Footer />
-//         // </div>
-//       <></>
-//     )
-// }
-
-// export default DisplayAlbums
-
-import { useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory, useParams, NavLink } from "react-router-dom";
+import { getUserAlbumThunk } from "../../store/album";
+import { loadImagesThunk } from "../../store/image";
 import "../homepage.css";
+import CreateAlbum from "./CreateAlbum";
 
 function UserAlbums() {
+	// const { user_id } = useParams();
+	const dispatch = useDispatch();
 	const user = useSelector((state) => state.session.user);
 	const history = useHistory();
-	// const images = useSelector((state) => state.session.user.images);
-	// const imgArr = Object.values(images);
-	// const randomImages = imgArr.sort(() => 0.5 - Math.random());
-	// const displayImages = randomImages.slice(0);
+	// if (user === null) return <Redirect to={"/images"} />;
+	const albums = useSelector((state) => state.albums?.myAlbums);
+	const images = useSelector((state) => state.images?.allImages);
+	const imgArr = Object.values(images);
+	const randomImages = imgArr.sort(() => 0.5 - Math.random());
+	const displayImages = randomImages.slice(0);
+	// console.log("albums/////////////",albums)
+	// let allAlbums;
+	// if (albums !== undefined) {
+	// 	allAlbums = Object.values(albums)
+	// }
+	// console.log("allAlbums??????????????",allAlbums)
+	useEffect(
+		(e) => {
+			dispatch(getUserAlbumThunk(user.id));
+			dispatch(loadImagesThunk())
+		},
+		[dispatch, user]
+	);
 
-	if (user === null) return <Redirect to={"/images"} />;
-
-	function createButton() {
-		if (user !== null) {
-			return history.push("/albums/new-album")
-		}
-	}
+	// function createButton() {
+	// 	if (user !== null) {
+	// 		return history.push("/albums/new-album")
+	// 	}
+	// }
 	return (
 		<div>
 			<div>
 				<img
 					className='topImg'
-					// src={displayImages[0]}
+					src={displayImages[0]?.url}
 				></img>
 			</div>
-			<div className="underTopImgContainer">
-				<button className="createButton" onClick={createButton}>Create Album</button>
-
-				<div className='card-container'>
+			<div className='underTopImgContainer'>
+				{/* <button className="createButton" onClick={createButton}>Create Album</button> */}
+				<p>{user && <CreateAlbum />}</p>
+				{/* <div className='card-container'>
 					{user.albums.map((album) => (
 						<div
 							className='album-card'
@@ -101,6 +62,27 @@ function UserAlbums() {
 							<p>{album.description}</p>
 						</div>
 					))}
+				</div> */}
+				<h3>My Albums</h3>
+				<div className='display-image-main'>
+					{albums?.map((album, i) => {
+						return (
+							<>
+								<div className={`display-image-outer img${i}`}>
+									<NavLink to={`/albums/${album.id}`}>
+										<div className='display-img-outer'>
+											<img
+												src={album.url}
+												className={`display-image-img img${i}`}
+												alt={album.id}
+											/>
+										</div>
+									</NavLink>
+								</div>
+								{/* <hr></hr> */}
+							</>
+						);
+					})}
 				</div>
 			</div>
 		</div>

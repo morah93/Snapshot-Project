@@ -228,7 +228,7 @@ justify-content: center;
 	margin-right: 50px;
 }
 .card-container{
-padding-top: 50px;
+padding-top: 350px;
 display: flex;
 flex-wrap: wrap;
 gap: 10px;
@@ -236,7 +236,7 @@ justify-content: center;
 }
 
 .album-card{
-/* padding-top: 400px; */
+padding-top: 100px;
 }
 
 .album-image{
@@ -247,5 +247,35 @@ justify-content: center;
 
 .form{
 	padding-top: 350px;
-	
+
+}
+
+
+/* ------------------ single Album Page -------------------- */
+
+.removeImageButton{
+	margin-top: 250px;
+}
+
+
+/* -------------------- Edit Album Page ------------------------ */
+
+.edit-project-container{
+	margin-top: 375px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.edit-project-form{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+.edit-project-components{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+
 }

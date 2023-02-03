@@ -20,7 +20,7 @@ class Album(db.Model):
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     url = db.Column(db.String, nullable=False)
-    images = db.relationship('Image', secondary=image_album, back_populates='albums')
+    # images = db.relationship('Image', secondary=image_album, back_populates='albums')
 
     # Relationship
     images = db.relationship('Image', back_populates='albums', cascade='all, delete')

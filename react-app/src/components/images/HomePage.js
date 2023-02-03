@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
+import { getUserAlbumThunk } from "../../store/album";
 import { loadImagesThunk } from "../../store/image";
 import "../homepage.css";
 
@@ -18,11 +19,11 @@ const HomePage = () => {
 	const displayImages = randomImages.slice(0);
 	useEffect(() => {
 		dispatch(loadImagesThunk()).then(() => setIsLoaded(true));
-
+		// dispatch(getUserAlbumThunk(user.id))
 		// if (user) {
 		//   dispatch(loadMyImagesThunk(user.id));
 		// }
-	}, [dispatch /*user*/]);
+	}, [dispatch, user]);
 
 	// if (!user) {
 	//   return (
@@ -61,7 +62,7 @@ const HomePage = () => {
           <div>
 						<img
 							className='topImg'
-							src={displayImages[0].url}
+							src={displayImages[0]?.url}
 						></img>
 					</div>
 					{/* {user && (

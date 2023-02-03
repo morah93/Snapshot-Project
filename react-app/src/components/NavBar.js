@@ -21,8 +21,8 @@ const NavBar = () => {
 
 	const onLogout = async (e) => {
 		e.preventDefault();
-    await dispatch(logout());
-    history.push('/images')
+		await dispatch(logout());
+		history.push('/login')
   };
 
 

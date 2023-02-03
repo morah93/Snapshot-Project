@@ -187,7 +187,7 @@ const DisplayOneImage = () => {
           	</div> */}
 
 						<div>
-								{user.id && (
+								{user?.id && (
                   <AddImageToAlbumButton buttonClicked={false} image={image} />
                 )}
               </div>

@@ -13,23 +13,51 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 #Create album
-@album_routes.route('', methods=['POST'])
+
+
+@album_routes.route('/', methods=['POST'])
 @login_required
 def new_album():
+
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-  # form.data["user_id"] = user_id
-    print('formInBackend[[[[[[[[[[', form)
+    # form.data["user_id"] = user_id
+    print('form//////////', form.data)
     if form.validate_on_submit():
-        new_album = Album(user_id=current_user.id, title=form.data["title"], description=form.data["description"])
-        db.session.add(new_album)
-        images = form.data['images'].split(',')
-        image_details = []
-        [image_details.append(Image.query.get(int(image))) for image in images]
-        [new_album.images.append(image) for image in image_details]
-        db.session.commit()
-        return new_album.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+      new_album = Album()
+      print('working/?//////////', new_album)
+      form.populate_obj(new_album)
+      print('newAlbum//////////', new_album)
+      new_album.url = form.data['url'] if form.data['url'] else '/static/images/unknown-album-cover.jpeg'
+
+      db.session.add(new_album)
+      db.session.commit()
+      return new_album.to_dict()
+    else:
+      return form.errors
+
+
+
+# @album_routes.route('', methods=['POST'])
+# @login_required
+# def new_album():
+#     form = AlbumForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#   # form.data["user_id"] = user_id
+#     print('formInBackend[[[[[[[[[[', form)
+#     if form.validate_on_submit():
+#         new_album = Album(user_id=current_user.id, title=form.data["title"], description=form.data["description"])
+#         db.session.add(new_album)
+#         images = form.data['images'].split(',')
+#         image_details = []
+#         [image_details.append(Image.query.get(int(image))) for image in images]
+#         [new_album.images.append(image) for image in image_details]
+#         db.session.commit()
+#         return new_album.to_dict()
+#     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+
 #   if form.validate_on_submit():
 #     new_album = Album(
 #         user_id=current_user.id,
@@ -56,10 +84,19 @@ def new_album():
 #     return {album.id: album.to_dict() for album in albums}
 
 ##get all albums
-@album_routes.route('/')
+@album_routes.route('/', methods=['GET'])
 @login_required
-def albums():
-    albums = Album.query.filter(Album.user_id == current_user.id).all()
+def allAlbums():
+    albums = Album.query.all()
+    #print('getallalbums', albums)
+    return {"albums":[album.to_dict() for album in albums]}
+
+
+#User Albums
+@album_routes.route('/users/<int:userId>', methods=["GET"])
+@login_required
+def userAlbums(userId):
+    albums = Album.query.filter(Album.user_id == userId).all()
     #print('getallalbums', albums)
     return {"albums":[album.to_dict() for album in albums]}
 
@@ -68,13 +105,14 @@ def albums():
 @album_routes.route('/<int:album_id>', methods=["GET"])
 def get_one_album(album_id):
     album = Album.query.get(album_id)
+    # print("album_id////////////////",album_id)
     if not album:
         return {"errors":"album not found"}, 404
     return  album.to_dict()
 
 
 #update album
-@album_routes.route("/<int:id>", methods=["PUT"])
+@album_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def edit_album_details(id):
 
@@ -83,12 +121,10 @@ def edit_album_details(id):
     form = AlbumForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('formDataDDDDDDDDD', form.data)
     if form.validate_on_submit():
         title = form.data["title"]
         description = form.data['description']
-
-
         album.title = title
         album.description = description
 

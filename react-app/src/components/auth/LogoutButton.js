@@ -8,7 +8,7 @@ const LogoutButton = () => {
   const history = useHistory()
   const onLogout = async (e) => {
     await dispatch(logout());
-    history.push('/images')
+    // history.push('/')
   };
 
   // if (!user) {
