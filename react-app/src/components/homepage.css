@@ -1,0 +1,292 @@
+.nav-background {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	z-index: 10;
+}
+.nav {
+	top: 0px;
+	/* position: sticky; */
+	height: 75px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	right: 30px;
+	/* background-color: white; */
+	width: 100%;
+}
+
+.demobtn{
+	top: 100px;
+	width: 100px;
+	/* align-items: center; */
+}
+
+/* .images-div{
+//   padding-top: 350px;
+//   /* display: flex;
+//   justify-content: center;
+//   flex-direction: column;
+// }*/
+
+/* .logo-container{
+//   display: flex;
+//   height: 7px;
+//   width: 12px;
+//   gap: 0px;
+// } */
+
+/* .welcomeDiv{
+
+} */
+
+.logo {
+	/* position: sticky; */
+	height: 50px;
+	width: 125px;
+	left: 10px;
+}
+
+.title {
+	height: 30px;
+	width: 50px;
+	top: 100px;
+}
+
+.homepageContainer{
+	display: flex;
+}
+
+.images-div {
+	position: absolute;
+	padding-top: 350px;
+	padding-bottom: 50px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	border: 2px red;
+	justify-content: center;
+	width: 100%;
+}
+
+.topImgDiv{
+	height: 350px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	position: absolute;
+	/* object-fit: cover; */
+}
+
+.topImg{
+	/* height: 350px; */
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	max-height: fit-content;
+}
+
+/* .img-div {
+//   border: 1px red;
+//   box-sizing: border-box;
+//   width: 288px;
+//   /* position: relative;
+// */
+
+.display-img{
+	border-radius: 10px;
+	border: 1px red;
+}
+
+
+/* ----------------- Testing img styling --------------*/
+
+.display-image-main{
+	padding: 1rem 1.5rem 1.5rem;
+	box-sizing: border-box;
+	justify-content: center;
+	display: grid;
+	/* flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap; */
+	grid-template-columns: repeat(3, 300px);
+	grid-template-rows: repeat(3, 100px);
+}
+
+.display-image-outer{
+	/* box-sizing: border-box; */
+	position: relative;
+	display: flex;
+	justify-content: center;
+	/* box-sizing: border-box; */
+	width: 288px;
+	position: relative;
+	margin-top: 5px;
+	/* margin-bottom: 10px; */
+}
+
+.display-image-img{
+	border-radius: 10px;
+	/* border: 1px solid red; */
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	max-height: fit-content;
+}
+
+.img0,
+.img2,
+.img5,
+.img7 {
+	height: 186px;
+}
+
+.img1,
+.img3,
+.img4,
+.img6 {
+	height: 286px;
+}
+
+.img0 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.img1 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 4;
+}
+
+.img2 {
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.img3 {
+	grid-column-start: 4;
+	grid-column-end: 5;
+	grid-row-start: 1;
+	grid-row-end: 4;
+}
+
+.img4 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 6;
+}
+
+.img5 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 6;
+}
+
+.img6 {
+	grid-column-start: 3;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 6;
+}
+
+.img7 {
+	grid-column-start: 4;
+	grid-column-end: 5;
+	grid-row-start: 4;
+	grid-row-end: 6;
+}
+
+/* ----------------- Testing img styling --------------*/
+
+.singleImageContainer {
+	padding-top: 50px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	padding-bottom: 50px;
+}
+
+.background-for-signup-and-login {
+	padding-top: 100px;
+}
+
+
+/* --------------------Album Page --------------------------- */
+.underTopImgContainer{
+padding-top: 350px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.createButton{
+	margin-top: 10px;
+	width: 100px;
+	display: flex;
+	justify-content: center;
+	align-self: flex-end;
+	margin-right: 50px;
+}
+.card-container{
+padding-top: 350px;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+}
+
+.album-card{
+padding-top: 100px;
+}
+
+.album-image{
+	height: 200px;
+	width: 200px;
+}
+
+
+.form{
+	padding-top: 350px;
+
+}
+
+
+/* ------------------ single Album Page -------------------- */
+
+.removeImageButton{
+	margin-top: 250px;
+}
+
+.imageTitle{
+	/* padding-top: 2px; */
+}
+/* -------------------- Edit Album Page ------------------------ */
+
+.edit-project-container{
+	margin-top: 375px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.edit-project-form{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+.edit-project-components{
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+
+}

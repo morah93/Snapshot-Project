@@ -14,6 +14,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    #Relationship
+    images = db.relationship('Image', back_populates='users', cascade="all, delete")
+    albums = db.relationship('Album', back_populates='users', cascade="all, delete")
+
     @property
     def password(self):
         return self.hashed_password
@@ -29,5 +33,7 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'images': [image.to_dict() for image in self.images],
+            'albums': [album.to_dict() for album in self.albums]
         }
