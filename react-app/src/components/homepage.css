@@ -1,24 +1,35 @@
-.nav-background {
-	position: fixed;
+/* .nav-background {
 	top: 0px;
 	left: 0px;
 	width: 100%;
 	height: 50px;
 	z-index: 10;
-}
+} */
 .nav {
-	top: 0px;
+	position: sticky;
+	/* border: 1px red; */
+	top: 0;
 	/* position: sticky; */
-	height: 75px;
+	height: 50px;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	gap: 10px;
-	right: 30px;
-	/* background-color: white; */
+	/* right: 30px; */
+	background-color: white;
 	width: 100%;
+	border-bottom: 1px solid lightgray;
+	box-shadow: 1px gray;
+	/* padding-left: 100px;
+	padding-right: 100px; */
 }
 
-.demobtn{
+.welcomeDiv {
+	color: gray;
+	display: flex;
+	justify-self: center;
+}
+
+.demobtn {
 	top: 100px;
 	width: 100px;
 	/* align-items: center; */
@@ -42,12 +53,34 @@
 
 } */
 
-.logo {
-	/* position: sticky; */
-	height: 50px;
-	width: 125px;
-	left: 10px;
+.authDiv {
+	display: flex;
+	gap: 10px;
+	margin-right: 25px;
+	align-items: center;
 }
+
+.logoDiv {
+	display: flex;
+	/* position: sticky; */
+	margin-left: 100px;
+	cursor: pointer;
+	align-items: center;
+	align-content: center;
+}
+.logo {
+	display: flex;
+	/* position: sticky; */
+	height: 40px;
+	width: 100px;
+	margin-left: 100px;
+	cursor: pointer;
+	align-items: center;
+	align-content: center;
+}
+/* .logo:hover(
+	pulse
+) */
 
 .title {
 	height: 30px;
@@ -55,23 +88,109 @@
 	top: 100px;
 }
 
+/* -------------- profile dropdown ------------ */
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-toggle {
+	/* background-color: white; */
+	border: 1px solid gray;
+	padding: 10px 15px;
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1;
+	display: none;
+	/* background-color: white; */
+	border: 1px solid gray;
+}
+
+.dropdown-item {
+	display: block;
+	padding: 10px 15px;
+	color: black;
+	text-decoration: none;
+}
 
 /* ----------------- Login ------------------- */
+.formPageContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.formContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+.loginForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-self: center; */
+	border: 1px dashed lightgray;
+	margin-top: 25px;
+	width: 400px;
+	gap: 10px;
+	padding-bottom: 50px;
+	border-radius: 10px;
+	padding: 0.5rem;
+	/* height: 10px; */
+}
 
+.loginImg {
+	/* height: 350px; */
+	top: 0;
+	object-fit: cover;
+	border-radius: 10px;
+	width: 100%;
+	/* height: 100%; */
+	/* max-height: fit-content; */
+}
+
+.loginPgText {
+	padding-top: 2.3rem;
+	padding-left: 4rem;
+	padding-right: 4rem;
+	display: block;
+	font-size: 18px;
+	line-height: 26px;
+	font-weight: 400;
+	margin-top: 0;
+	letter-spacing: -0.2px;
+	margin-bottom: 0;
+	color: #1a1a1a;
+	opacity: 0.8;
+	text-align: center;
+}
+
+/* .input{
+	width: 350px;
+} */
 
 /* ----------------- Sign Up ------------------- */
-.signupForm{
+.signupForm {
 	margin-top: 450px;
 }
 
 /* ------------------ HomePage ---------------------- */
-.homepageContainer{
-	display: flex;
+.homepageContainer {
+	/* display: flex; */
+	top: 0;
 }
 
 .images-div {
-	position: absolute;
-	padding-top: 350px;
+	position: static;
+	/* padding-top: 350px; */
 	padding-bottom: 50px;
 	box-sizing: border-box;
 	display: flex;
@@ -79,18 +198,19 @@
 	border: 2px red;
 	justify-content: center;
 	width: 100%;
+	top: 0;
 }
 
-.topImgDiv{
+.topImgDiv {
 	height: 350px;
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	position: absolute;
-	/* object-fit: cover; */
+	/* position: absolute; */
+	object-fit: cover;
 }
 
-.topImg{
+.topImg {
 	/* height: 350px; */
 	object-fit: cover;
 	width: 100%;
@@ -105,27 +225,90 @@
 //   /* position: relative;
 // */
 
-.display-img{
+.display-img {
 	border-radius: 10px;
 	border: 1px red;
 }
 
-
 /* ----------------- Testing img styling --------------*/
+/* .image-mosaic {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 3fr));
+  grid-auto-rows: 240px;
+	object-fit: cover;
+}
 
-.display-image-main{
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  font-size: 3rem;
+  color: #fff;
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  transition: all 500ms;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+	object-fit: cover;
+} */
+
+/* Container */
+
+.img-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+	grid-column-start: 2;
+}
+
+.img-item {
+	background-color: blue;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+/* ----------------------------------------------- */
+
+.display-image-main {
 	padding: 1rem 1.5rem 1.5rem;
 	box-sizing: border-box;
-	justify-content: center;
+	/* justify-content: center; */
 	display: grid;
 	/* flex-direction: row;
   gap: 10px;
   flex-wrap: wrap; */
-	grid-template-columns: repeat(3, 300px);
-	grid-template-rows: repeat(3, 100px);
+	/* grid-template-columns: repeat(3, 300px); */
+	/* grid-template-rows: repeat(3, 100px); */
+	/* display: grid; */
+	grid-template-columns: 1fr 5fr 1fr;
+	grid-gap: 10px;
+	/* grid-column: 2 / 3; */
 }
 
-.display-image-outer{
+.middle-column {
+	background-color: blue;
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+	display: flex;
+	justify-content: center;
+	/* align-self: center;Specifying starting and ending columns for the grid item */
+}
+
+.display-image-outer {
 	/* box-sizing: border-box; */
 	position: relative;
 	display: flex;
@@ -137,7 +320,7 @@
 	/* margin-bottom: 10px; */
 }
 
-.display-image-img{
+.display-image-img {
 	border-radius: 10px;
 	/* border: 1px solid red; */
 	width: 100%;
@@ -232,73 +415,89 @@
 	padding-top: 100px;
 }
 
-
 /* --------------------Album Page --------------------------- */
-.underTopImgContainer{
-padding-top: 350px;
-display: flex;
-flex-direction: column;
-justify-content: center;
+.underTopImgContainer {
+	/* padding-top: 300px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-.createButton{
+
+.albumPageButtonsDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.myAlbumButton {
 	margin-top: 10px;
 	width: 100px;
 	display: flex;
 	justify-content: center;
-	align-self: flex-end;
-	margin-right: 50px;
+	align-self: center;
+	cursor: pointer;
+	/* margin-right: 50px; */
 }
-.card-container{
-padding-top: 350px;
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-justify-content: center;
-}
-
-.album-card{
-padding-top: 100px;
+.createButton {
+	width: 100px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	cursor: pointer;
+	/* margin-right: 50px; */
 }
 
-.album-image{
+.myAlbums {
+	display: flex;
+	justify-content: center;
+}
+
+.card-container {
+	padding-top: 350px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: center;
+}
+
+.album-card {
+	padding-top: 100px;
+}
+
+.album-image {
 	height: 200px;
 	width: 200px;
 }
 
-
-.form{
+.form {
 	padding-top: 350px;
-
 }
-
 
 /* ------------------ single Album Page -------------------- */
 
-.removeImageButton{
+.removeImageButton {
 	margin-top: 250px;
 }
 
-.imageTitle{
+.imageTitle {
 	/* padding-top: 2px; */
 }
 /* -------------------- Edit Album Page ------------------------ */
 
-.edit-project-container{
+.edit-project-container {
 	margin-top: 375px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 }
 
-.edit-project-form{
+.edit-project-form {
 	display: flex;
 	justify-content: center;
 	gap: 15px;
 }
 
-.edit-project-components{
+.edit-project-components {
 	display: flex;
 	justify-content: center;
 	gap: 15px;
-
 }

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { Redirect, useParams, useHistory, NavLink } from "react-router-dom";
 import { loadImagesThunk } from "../../store/image";
-import { oneAlbumThunk, removeAlbumThunk, updateAlbumThunk} from "../../store/album";
+import {
+	oneAlbumThunk,
+	removeAlbumThunk,
+	updateAlbumThunk,
+} from "../../store/album";
 import "../homepage.css";
 
 function SingleAlbum() {
@@ -28,7 +32,7 @@ function SingleAlbum() {
 	useEffect(() => {
 		dispatch(loadImagesThunk());
 		dispatch(oneAlbumThunk(albumId));
-		dispatch(updateAlbumThunk(albumId))
+		dispatch(updateAlbumThunk(albumId));
 	}, [dispatch, albumId]);
 
 	const editAlbum = (albumId) => {
@@ -44,16 +48,18 @@ function SingleAlbum() {
 	if (!album) return <Redirect to={"/albums"} />;
 	// if (!images) return null
 	return (
-		<div>
-			<div>
+		<div className='homepageContainer'>
+			<div className='topImgDiv'>
 				<img
 					className='topImg'
-					src={displayImages[0]?.url}
+					src={
+						"https://images.unsplash.com/photo-1483425571841-9662f86c7154?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2932&q=80"
+					}
 				></img>
 			</div>
-			<div className='card-container'>
-				<h2>My Album Images</h2>
-				<h3>Album Title: {album.title}</h3>
+			<h2 className='myAlbums'>My Album Images</h2>
+			<h3 className='myAlbums'>{album.title}</h3>
+			<div className='albumPageButtonsDiv'>
 				<button
 					className='createButton'
 					onClick={editAlbum}
@@ -66,20 +72,21 @@ function SingleAlbum() {
 				>
 					Delete Album
 				</button>
-				<div className='display-image-main'>
+			</div>
+			<div className='display-image-main'>
+				{/* <div className='display-image-main'> */}
+				<div className='img-container'>
 					{album.images?.map((image, i) => (
-						<div className={`display-image-outer img${i}`}>
-							<div
-								className='display-img-outer'
-								onClick={() => history.push(`/images/${image.id}`)}
-							>
+						<div>
+							{/* <NavLink onClick={() => history.push(`/images/${image.id}`)}> */}
+							<NavLink to={(`/images/${image.id}`)}>
 								<img
-									className={`display-image-img img${i}`}
+									className={`img-item`}
 									alt='Album'
 									src={image.url}
 								/>
-								<p className='imageTitle'>{image.title}</p>
-							</div>
+								<p className='title'>{image.title}</p>
+							</NavLink>
 						</div>
 					))}
 				</div>

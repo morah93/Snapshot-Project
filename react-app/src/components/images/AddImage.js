@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { addImageThunk } from "../../store/image";
+import "../homepage.css";
 
 const UploadImage = () => {
 	const history = useHistory(); // so that we can redirect after the image upload is successful
@@ -13,7 +14,7 @@ const UploadImage = () => {
 	const [description, setDescription] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
-	const [disable, setDisable] = useState(true)
+	const [disable, setDisable] = useState(true);
 	const user = useSelector((state) => state.session.user);
 
 	useEffect(() => {
@@ -27,15 +28,15 @@ const UploadImage = () => {
 				errors.push(
 					"File Type Not Supported. Please upload a png, jpg, or jpeg"
 				);
-				setTitle(image.name.split('.')[0]);
+				setTitle(image.name.split(".")[0]);
 				//   setTitle(image.name.split('.')[0])
 			}
 			// else setTitle("")
-			if (!image) errors.push('Please upload image to continue')
-	      if (errors.length > 0) setDisable(true)
-	      if (errors.length === 0) setDisable(false)
-	      setErrors(errors)
-			}
+			if (!image) errors.push("Please upload image to continue");
+			if (errors.length > 0) setDisable(true);
+			if (errors.length === 0) setDisable(false);
+			setErrors(errors);
+		}
 		if (!image) errors.push("Please upload an image");
 		setValidationErrors(errors);
 	}, [image, disable]);
@@ -49,7 +50,7 @@ const UploadImage = () => {
 		formData.append("title", title);
 		formData.append("description", description);
 
-		console.log(formData, 'formdata----------')
+		console.log(formData, "formdata----------");
 		// if (!title || title.length < 1 || title.length > 20) errors.push("*Must have a title that is less than 20 characters.");
 		// if (!description || description.length < 1 || description.length > 500) errors.push("*Must have a description that is less than 500 characters.");
 		if (!image) errors.push("*Must upload an image file");
@@ -65,12 +66,11 @@ const UploadImage = () => {
 			// some sort of loading message is a good idea
 			setImageLoading(true);
 
-			let res = await dispatch(addImageThunk(formData))
+			let res = await dispatch(addImageThunk(formData));
 			if (res) {
 				setImageLoading(false);
-				history.push("/images");
+				history.push("/");
 			}
-
 		}
 	};
 
@@ -79,14 +79,20 @@ const UploadImage = () => {
 		setImage(file);
 	};
 
-
 	return (
-
-		<div
-			className='uploadPage'
-			style={{ paddingTop: 350 }}
-		>
-			<form onSubmit={handleSubmit}>
+		<div className='formPageContainer'>
+			<img
+				className='loginImg'
+				src={
+					"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
+				}
+				style={{height:350}}
+			></img>
+			<h3 style={{ color: "black" }}>Please add an Image</h3>
+			<form
+				className='loginForm'
+				onSubmit={handleSubmit}
+			>
 				<div className='errors-for-sign-up'>
 					<div>
 						{errors.map((error, ind) => (

@@ -26,27 +26,41 @@ function UserAlbums() {
 	useEffect(
 		(e) => {
 			dispatch(getUserAlbumThunk(user.id));
-			dispatch(loadImagesThunk())
+			dispatch(loadImagesThunk());
 		},
 		[dispatch, user]
 	);
 
+	const home = (e) => {
+		e.preventDefault();
+		history.push("/");
+	};
 	// function createButton() {
 	// 	if (user !== null) {
 	// 		return history.push("/albums/new-album")
 	// 	}
 	// }
 	return (
-		<div>
-			<div>
+		<div className='homepageContainer'>
+			<div className='topImgDiv'>
 				<img
 					className='topImg'
-					src={displayImages[0]?.url}
+					src={
+						"https://images.pexels.com/photos/1154504/pexels-photo-1154504.jpeg"
+					}
 				></img>
 			</div>
 			<div className='underTopImgContainer'>
-				{/* <button className="createButton" onClick={createButton}>Create Album</button> */}
-				<p>{user && <CreateAlbum />}</p>
+				<div className='albumPageButtonsDiv'>
+					<p>{user && <CreateAlbum />}</p>
+					<button
+						className='createButton'
+						onClick={home}
+					>
+						Home
+					</button>
+				</div>
+
 				{/* <div className='card-container'>
 					{user.albums.map((album) => (
 						<div
@@ -62,27 +76,29 @@ function UserAlbums() {
 							</div>
 							))}
 						</div> */}
-				<h3>My Albums</h3>
+				<h3 className='myAlbums'>My Albums</h3>
 				<div className='display-image-main'>
-					{albums?.map((album, i) => {
-						return (
-							<>
-								<div className={`display-image-outer img${i}`}>
-									<NavLink to={`/albums/${album.id}`}>
-										<div className='display-img-outer'>
-											<img
-												src={album.url}
-												className={`display-image-img img${i}`}
-												alt={album.id}
-											/>
-										</div>
-							<p className='title'>{album.title}</p>
-									</NavLink>
-								</div>
-								{/* <hr></hr> */}
-							</>
-						);
-					})}
+					<div className='img-container'>
+						{albums?.map((album, i) => {
+							return (
+								<>
+									<div>
+										<NavLink to={`/albums/${album.id}`}>
+											<div>
+												<img
+													src={album.url}
+													className={`img-item`}
+													alt={album.id}
+												/>
+											</div>
+											<p className='title'>{album.title}</p>
+										</NavLink>
+									</div>
+									{/* <hr></hr> */}
+								</>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</div>
