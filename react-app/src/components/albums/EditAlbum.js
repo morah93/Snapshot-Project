@@ -326,13 +326,21 @@ const EditAlbumForm = () => {
   //   );
   // } else {
   return (
-    <div className="edit-project-container">
+    <div className="formPageContainer">
+      <img
+					className='loginImg'
+					src={
+						"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
+					}
+          style={{height:350}}
+				></img>
       <h2>Edit details</h2>
-      <form onSubmit={onSubmit}>
+      <form className='loginForm' onSubmit={onSubmit}>
         <div>
 
         </div>
-        <label>Title</label>
+        <div>
+        <label >Title</label>
         <input
           className="album-input"
           type="text"
@@ -340,8 +348,10 @@ const EditAlbumForm = () => {
           onChange={updateTitle}
           placeholder="Title"
           required
-        />
-        <label>Description</label>
+          />
+        </div>
+        <label >Description</label>
+        <div>
         <input
           className="album-input"
           type="text"
@@ -349,6 +359,8 @@ const EditAlbumForm = () => {
           onChange={updateDescription}
           placeholder="Description"
         />
+        </div>
+        <div>
         <label>Image Url</label>
         <input
           className="album-input"
@@ -357,11 +369,12 @@ const EditAlbumForm = () => {
           onChange={updateUrl}
           placeholder="Image Url"
         />
-        <button onClick={cancel} className="demo-btn" >
-          Cancel
-        </button>
-        <button className="demo-btn" type="submit">
+        </div>
+        <button className='createButton' type="submit">
           Save Changes
+        </button>
+        <button className='createButton' onClick={cancel} >
+          Cancel
         </button>
       </form>
       </div>

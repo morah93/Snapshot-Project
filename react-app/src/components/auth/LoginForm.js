@@ -11,10 +11,11 @@ const LoginForm = () => {
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
 	const onLogin = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
-		history.push("/");
+		// history.push("/");
 		if (data) {
 			setErrors(data);
 		}
@@ -28,22 +29,12 @@ const LoginForm = () => {
 		setPassword(e.target.value);
 	};
 
-	// if (user) {
-	//   return <Redirect to='/' />;
-	// }
+	if (user) {
+	  return <Redirect to='/' />;
+	}
 
 	return (
 		<div className='formPageContainer'>
-			{/* <div className='topImgDiv'>
-				<img
-					className='topImg'
-					src={
-						"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
-					}
-				></img>
-			</div> */}
-			{/* <div className='formContainer'> */}
-			{/* <div className='form'> */}
 			<h1 style={{ color: "black" }}>Please Log In</h1>
 			<form
 				className='loginForm'

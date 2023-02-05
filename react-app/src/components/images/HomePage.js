@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { getUserAlbumThunk } from "../../store/album";
 import { loadImagesThunk } from "../../store/image";
+import CreateAlbum from "../albums/CreateAlbum";
 import "../homepage.css";
 
 const HomePage = () => {
@@ -13,13 +14,14 @@ const HomePage = () => {
 	// const album = user.albums.map((album) => album)
 	// console.log('user----------------', user)
 	const images = useSelector((state) => state.images?.allImages);
+	const myAlbums = useSelector((state) => state.albums?.myAlbums);
 	// console.log('allImages----------------', images)
 	const imgArr = Object.values(images);
 	const randomImages = imgArr.sort(() => 0.5 - Math.random());
 	const displayImages = randomImages.slice(0);
 	useEffect(() => {
 		dispatch(loadImagesThunk()).then(() => setIsLoaded(true));
-		// dispatch(getUserAlbumThunk(user.id))
+		dispatch(getUserAlbumThunk(user?.id))
 		// if (user) {
 		//   dispatch(loadMyImagesThunk(user.id));
 		// }
@@ -65,14 +67,17 @@ const HomePage = () => {
 							src={'https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg'}
 						></img>
 					</div>
-					{user && (
+					{user && myAlbums?.length? (
 						<button
 							className='myAlbumButton'
 							onClick={myAlbum}
 						>
 							My Albums
 						</button>
-					)}
+				) : (
+					<p className="createButton">{user && <CreateAlbum />}</p>
+				)
+				}
 
 					<div className='display-image-main'>
 						<div className='img-container'>
