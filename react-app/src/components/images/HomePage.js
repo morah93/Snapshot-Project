@@ -7,7 +7,7 @@ import "../homepage.css";
 
 const HomePage = () => {
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const user = useSelector((state) => state.session.user);
 	// const album = user.albums.map((album) => album)
@@ -40,99 +40,90 @@ const HomePage = () => {
 	// }
 	function myAlbum() {
 		if (user !== null) {
-			return history.push("/albums")
+			return history.push("/albums");
 		}
 	}
 
 	return (
 		isLoaded && (
-			<div className="homepageContainer">
-				{/* <div></div> */}
-				{/* {Object.values(images).length > 0 &&
-      <div className="images-div">
-      {Object.values(images).map((image) => (
-        <ImageCards
-        image = {image}
-        />
-        ))}
-        </div>
-      } */}
+			// <div className='homepageContainer'>
+
+				/* {Object.values(images).length > 0 &&
+				<div className="images-div">
+				{Object.values(images).map((image) => (
+					<ImageCards
+					image = {image}
+					/>
+					))}
+					</div>
+				} */
 				<div className='images-div'>
 					{/* <div>Home Page</div> */}
-          <div className="topImgDiv">
+					<div className='topImgDiv'>
 						<img
 							className='topImg'
-							src={displayImages[0]?.url}
+							src={'https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg'}
 						></img>
 					</div>
-					{/* {user && (
-              <button onClick={history.push('/albums')}>My Albums</button>
-          )} */}
-					<button className="createButton" onClick={myAlbum}>My Albums</button>
+					{user && (
+						<button
+							className='myAlbumButton'
+							onClick={myAlbum}
+						>
+							My Albums
+						</button>
+					)}
 
 					<div className='display-image-main'>
-						{displayImages?.map((image, i) => {
-              return (
-                <>
+						<div className='img-container'>
+							{displayImages?.map((image, i) => {
+								return (
+									<>
+										<div>
+											<NavLink to={`/images/${image.id}`}>
+												<div>
+													<img
+														src={image.url}
+														className='img-item'
+														alt={image.id}
+													/>
+												</div>
+												{/* <div
+												className={`display-image-img img${i}`}
+												class="card"
+												style={{ backgroundImage: image.url }}
+												alt={image.id}
+											></div> */}
+												{/* <div className="display-product-price">
+                  ${parseFloat(product.price).toFixed(2)}
+                  </div> */}
+											</NavLink>
+										</div>
+										{/* <hr></hr> */}
+									</>
+								);
+							})}
+						</div>
+					</div>
+
+							{/* {displayImages?.map((image, i) => {
+							return (
 								<div className={`display-image-outer img${i}`}>
 									<NavLink to={`/images/${image.id}`}>
-										<div className='display-img-outer'>
+										<div className="img-div">
 											<img
 												src={image.url}
-												className={`display-image-img img${i}`}
+												style={{width:400, height:300}}
+												className={`display-img${i}`}
 												alt={image.id}
 											/>
 										</div>
-										{/* <div className="display-product-price">
-                  ${parseFloat(product.price).toFixed(2)}
-                  </div> */}
 									</NavLink>
-                </div>
-                {/* <hr></hr> */}
-                </>
+								</div>
 							);
-						})}
-					</div>
-
-					{/* {displayImages?.map((image, i) => {
-          return (
-            <div className={`display-image-outer img${i}`}>
-              <NavLink to={`/images/${image.id}`}>
-                <div className="img-div">
-                  <img
-                    src={image.url}
-                    style={{width:400, height:300}}
-                    className={`display-img${i}`}
-                    alt={image.id}
-                  />
-                </div>
-              </NavLink>
-            </div>
-          );
-        })} */}
+						})} */}
 				</div>
-
-				{/* <div className="display-product-main">
-        {displayProducts?.map((product, i) => {
-          return (
-            <div className={`display-product-outer img${i}`}>
-              <NavLink to={`/products/${product.id}`}>
-                <div className="display-img-outer">
-                  <img
-                    src={product.previewImage}
-                    className={`display-product-img img${i}`}
-                    alt={product.id}
-                  />
-                </div>
-                <div className="display-product-price">
-                  ${parseFloat(product.price).toFixed(2)}
-                </div>
-              </NavLink>
-            </div>
-          );
-        })}
-      </div> */}
-			</div>
+			// </div>
 		)
 	);
 };

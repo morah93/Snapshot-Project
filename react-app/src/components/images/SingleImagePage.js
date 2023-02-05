@@ -99,7 +99,7 @@ const DisplayOneImage = () => {
 
 	const deleteImage = (e) => {
 		e.preventDefault();
-		return dispatch(deleteImageThunk(image.id)).then(history.push("/images"));
+		return dispatch(deleteImageThunk(image.id)).then(history.push("/"));
 	};
 
 	// const editButton = async (e, imageId) => {
