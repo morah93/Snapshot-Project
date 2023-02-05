@@ -138,6 +138,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createAlbumThunk } from "../../store/album"
+import '../homepage.css'
 
 const CreateAlbum = () => {
   const dispatch = useDispatch();
@@ -179,13 +180,13 @@ const CreateAlbum = () => {
 
   return (
 		<>
-			<div className="createButton div">
+			{/* <div className="createButton div"> */}
       {user && (
-        <button id="create-album" onClick={submit} style={{cursor:'pointer'}}>
+        <button className="createButton" onClick={submit} >
           Create Album
         </button>
       )}
-			</div>
+			{/* </div> */}
     </>
   );
 };

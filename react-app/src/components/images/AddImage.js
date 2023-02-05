@@ -50,7 +50,7 @@ const UploadImage = () => {
 		formData.append("title", title);
 		formData.append("description", description);
 
-		console.log(formData, "formdata----------");
+		// console.log(formData, "formdata----------");
 		// if (!title || title.length < 1 || title.length > 20) errors.push("*Must have a title that is less than 20 characters.");
 		// if (!description || description.length < 1 || description.length > 500) errors.push("*Must have a description that is less than 500 characters.");
 		if (!image) errors.push("*Must upload an image file");

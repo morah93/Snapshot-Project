@@ -10,7 +10,8 @@ const AddImageToAlbumButton = ({ image, buttonClicked }) => {
   const [buttonOn, setButtonOn] = useState(buttonClicked);
   const [albumOption, setAlbumOption] = useState(null);
   const [options, setOptions] = useState([]);
-  const albums = useSelector((state) => state.session.user.albums);
+  // const albums = useSelector((state) => state.session.user.albums);
+  const albums = useSelector((state) => state.albums?.myAlbums);
   const history = useHistory()
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,8 +39,8 @@ const AddImageToAlbumButton = ({ image, buttonClicked }) => {
   //   e.preventDefault();
   //   history.push(`/albums/`)
   // }
-  
-  console.log('albumOption////////', albumOption)
+
+  // console.log('albumOption////////', albumOption)
   const handleSubmit = (e) => {
     e.preventDefault();
     return dispatch(addImageToAlbumThunk(image.id, albumOption)).then(

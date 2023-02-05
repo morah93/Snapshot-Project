@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import AddImageToAlbumButton from '../albums/addImageToAlbumButton'
+import AddImageToAlbumButton from "../albums/addImageToAlbumButton";
 import {
 	loadOneImageThunk,
 	deleteImageThunk,
 	loadImagesThunk,
 	editImageThunk,
 } from "../../store/image";
+import { getUserAlbumThunk } from "../../store/album";
+import CreateAlbum from "../albums/CreateAlbum";
 // import SingleImageCards from "./SingleImageCard";
 
 const DisplayOneImage = () => {
@@ -20,6 +22,7 @@ const DisplayOneImage = () => {
 	const [url, setUrl] = useState("");
 	const user = useSelector((state) => state.session.user);
 	console.log("user----------------", user);
+	const myAlbums = useSelector((state) => state.albums?.myAlbums);
 	const images = useSelector((state) => state.images?.allImages);
 	const image = useSelector((state) => state.images?.allImages)[imageId];
 	// console.log(image, "image--------");
@@ -32,6 +35,7 @@ const DisplayOneImage = () => {
 		// dispatch()
 		dispatch(loadImagesThunk());
 		dispatch(loadOneImageThunk(imageId));
+		dispatch(getUserAlbumThunk(user?.id));
 	}, [dispatch, imageId]);
 
 	useEffect(() => {
@@ -170,8 +174,6 @@ const DisplayOneImage = () => {
 							</div>
 						)}
 
-
-
 						{/* <div className="add-image-to-album">
             	<select
               	className="image-input-option"
@@ -187,10 +189,14 @@ const DisplayOneImage = () => {
           	</div> */}
 
 						<div>
-								{user?.id && (
-                  <AddImageToAlbumButton buttonClicked={false} image={image} />
-                )}
-              </div>
+							{user && myAlbums?.length ? (
+								<AddImageToAlbumButton
+									image={image}
+								/>
+							) : (
+								<p className='createButton'>{user && <CreateAlbum />}</p>
+							)}
+						</div>
 					</div>
 					{user && image && user.id === image.user_id && (
 						<button
