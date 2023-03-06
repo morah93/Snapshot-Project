@@ -1,8 +1,6 @@
-
-
 const LOAD_IMAGES = "images/LOAD_IMAGES";
+const LOAD_MY_IMAGES = "images/LOAD_MY_IMAGES";
 const LOAD_ONE_IMAGE = "images/LOAD_ONE_IMAGE";
-// const LOAD_MY_IMAGES = "images/LOAD_MY_IMAGES";
 const ADD_IMAGE = "images/ADD_IMAGE";
 const EDIT_IMAGE = "images/EDIT_IMAGES";
 const DELETE_IMAGE = "images/DELETE_IMAGE";
@@ -17,10 +15,10 @@ const loadOneImage = (singleImage) => ({
 	type: LOAD_ONE_IMAGE,
 	singleImage,
 });
-// const loadMyImages = (data) => ({
-// 	type: LOAD_MY_IMAGES,
-// 	data,
-// });
+const loadMyImages = (images) => ({
+	type: LOAD_MY_IMAGES,
+	payload: images
+});
 const addImage = (newImage) => ({
 	type: ADD_IMAGE,
 	newImage,
@@ -56,14 +54,15 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 	}
 };
 
-// export const loadMyImagesThunk = (id) => async (dispatch) => {
-// 	const response = await fetch(`/api/images/user/${id}`);
-// 	if (response.ok) {
-// 		const data = await response.json();
-// 		dispatch(loadMyImages(data));
-// 		return data;
-// 	}
-// };
+export const loadMyImagesThunk = (userId) => async (dispatch) => {
+	const response = await fetch(`/api/images/user/${userId}`);
+	if (response.ok) {
+		const data = await response.json();
+		const imgArr = data.images;
+		dispatch(loadMyImages(imgArr));
+		return data;
+	}
+};
 
 export const addImageThunk = (newImage) => async (dispatch) => {
 	// console.log('newImage////////', JSON.stringify(newImage))
@@ -110,7 +109,7 @@ export const deleteImageThunk = (imageId) => async (dispatch) => {
 };
 
 //STATE
-const initialState = { allImages: {}, singleImage: {}, /*myImages: {}*/ };
+const initialState = { allImages: {}, singleImage: {}, myImages: {} };
 
 // REDUCER
 
@@ -129,6 +128,23 @@ const imageReducer = (state = initialState, action) => {
 			});
 			return newState;
 		}
+		case LOAD_MY_IMAGES: {
+			newState = {
+				...state,
+				myImages: {},
+			};
+			const images = action.payload
+			newState.myImages = images;
+			return newState;
+		}
+
+		// case LOAD_USER_ALBUMS: {
+		// 	newState = { ...state, myAlbums: {} };
+		// 	const albums = action.payload;
+		// 	// console.log('action.payload', action.payload)
+		// 	newState.myAlbums = albums;
+		// 	return newState;
+		// }
 
 		case LOAD_ONE_IMAGE: {
 

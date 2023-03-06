@@ -30,6 +30,10 @@ const NavBar = () => {
 		e.preventDefault();
 		history.push("/upload-image");
 	};
+	const handleAccountClick = (e) => {
+		e.preventDefault();
+		history.push(`/users/${user.id}`);
+	};
 
 	useEffect(() => {
 		dispatch(loadImagesThunk());
@@ -117,6 +121,14 @@ const NavBar = () => {
 					)}
 					{user && (
 					<p>Welcome: { user.username }</p>
+					)}
+					{user !== null && (
+						<button
+							className='createButton'
+							onClick={handleAccountClick}
+						>
+							My Account
+						</button>
 					)}
 					{user !== null && (
 						<button

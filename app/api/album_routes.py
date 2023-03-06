@@ -78,10 +78,10 @@ def new_album():
 
 
 #Get all user albums
-# @album_routes.route("/user/<int:id>", methods=["GET"])
-# def get_users_albums(id):
-#     albums = Album.query.filter_by(user_id=id).all()
-#     return {album.id: album.to_dict() for album in albums}
+@album_routes.route("/user/<int:id>", methods=["GET"])
+def get_users_albums(id):
+    albums = Album.query.filter_by(user_id=id).all()
+    return {album.id: album.to_dict() for album in albums}
 
 ##get all albums
 @album_routes.route('/', methods=['GET'])
@@ -118,12 +118,12 @@ def edit_album_details(id):
     # album = Album.query.filter(Album.id == album_id).all()
     album = Album.query.get((id))
 
-    print('Album_idIIIIIIIIIIIIIII', id)
-    print('AlbumAAAAAAAAAAAAAA', album)
+    # print('Album_idIIIIIIIIIIIIIII', id)
+    # print('AlbumAAAAAAAAAAAAAA', album)
     form = AlbumForm()
 
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('formDataDDDDDDDDD', form.data)
+    # print('formDataDDDDDDDDD', form.data)
     if form.validate_on_submit():
         title = form.data["title"]
         description = form.data['description']
