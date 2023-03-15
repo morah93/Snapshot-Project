@@ -2,68 +2,68 @@ from app.models import db, Image, Album, environment, SCHEMA
 
 def seed_albums():
   test1 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/6348820/pexels-photo-6348820.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Person on Top of a Hill.', description="Person on a hill", album_id=1
+    user_id=1,  url="https://images.pexels.com/photos/6348820/pexels-photo-6348820.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Person on Top of a Hill.', description="Person on a hill", album_id=1, tags=['hill', 'person']
   )
   test2 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/5243591/pexels-photo-5243591.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Stars', description="The stars in our sky", album_id=1
+    user_id=1,  url="https://images.pexels.com/photos/5243591/pexels-photo-5243591.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Stars', description="The stars in our sky", album_id=1, tags=['stars', 'sky']
   )
   test3 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/1693095/pexels-photo-1693095.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Northern Lights', description='Multi colored lights in the sky', album_id=1
+    user_id=1,  url="https://images.pexels.com/photos/1693095/pexels-photo-1693095.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Northern Lights', description='Multi colored lights in the sky', album_id=1, tags=['sky', 'lights']
   )
   test4 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/9184517/pexels-photo-9184517.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Lightening in the sky', description='White Flashes of Lightning in the Sky', album_id=1
+    user_id=1,  url="https://images.pexels.com/photos/9184517/pexels-photo-9184517.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Lightening in the sky', description='White Flashes of Lightning in the Sky', album_id=1, tags=['sky', 'flashes']
   )
 
   test5 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/40784/drops-of-water-water-nature-liquid-40784.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Drop of water.', description="Ripples", album_id=2
+    user_id=2,  url="https://images.pexels.com/photos/40784/drops-of-water-water-nature-liquid-40784.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Drop of water.', description="Ripples", album_id=2, tags=['water', 'ripples']
   )
   test6 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Underwater', description="Bubbles under water", album_id=2
+    user_id=2,  url="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Underwater', description="Bubbles under water", album_id=2, tags=['bubbles', 'water']
   )
   test7 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/1028600/pexels-photo-1028600.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Water drops', description='Water on glass', album_id=2
+    user_id=2,  url="https://images.pexels.com/photos/1028600/pexels-photo-1028600.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Water drops', description='Water on glass', album_id=2, tags=['glass', 'water']
   )
   test8 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Reflection', description='Reflection on water', album_id=2
+    user_id=2,  url="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Reflection', description='Reflection on water', album_id=2, tags=['water', 'reflection']
   )
 
   test9 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", title='Single Tree.', description="Tree in the center", album_id=3
+    user_id=3,  url="https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", title='Single Tree.', description="Tree in the center", album_id=3, tags=['tree', 'center']
   )
   test10 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Bridge between trees', description="Rope bridge", album_id=3
+    user_id=3,  url="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Bridge between trees', description="Rope bridge", album_id=3, tags=['bridge', 'rope']
   )
   test11 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Trees next to water', description='Riverside trees', album_id=3
+    user_id=3,  url="https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Trees next to water', description='Riverside trees', album_id=3, tags=['trees', 'river']
   )
   test12 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Fall tree colors', description='Red leaves on trees', album_id=3
+    user_id=3,  url="https://images.pexels.com/photos/1547813/pexels-photo-1547813.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Fall tree colors', description='Red leaves on trees', album_id=3, tags=['leaves', 'trees']
   )
 
   test13 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1600", title='City  view.', description="City structures", album_id=4
+    user_id=1,  url="https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1600", title='City  view.', description="City structures", album_id=4, tags=['city', 'buildings']
   )
   test14 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/1538177/pexels-photo-1538177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", title='Kuala Lumpur', description="City at night", album_id=4
+    user_id=1,  url="https://images.pexels.com/photos/1538177/pexels-photo-1538177.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", title='Kuala Lumpur', description="City at night", album_id=4, tags=['city', 'night']
   )
   test15 = Image(
-    user_id=1,  url="https://images.pexels.com/photos/6150459/pexels-photo-6150459.jpeg?auto=compress&cs=tinysrgb&w=1600", title='12', description='Twirling light', album_id=4
+    user_id=1,  url="https://images.pexels.com/photos/6150459/pexels-photo-6150459.jpeg?auto=compress&cs=tinysrgb&w=1600", title='12', description='Twirling light', album_id=4, tags=['light', 'city']
   )
   test16 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/4039921/pexels-photo-4039921.jpeg", title='FDR', description='FDR Drive', album_id=5
+    user_id=2,  url="https://images.pexels.com/photos/4039921/pexels-photo-4039921.jpeg", title='FDR', description='FDR Drive', album_id=5, tags=['bridge', 'city']
   )
 
   test17 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/561463/pexels-photo-561463.jpeg?auto=compress&cs=tinysrgb&w=1600", title='sunset on water.', description="Sunset on waves", album_id=5
+    user_id=2,  url="https://images.pexels.com/photos/561463/pexels-photo-561463.jpeg?auto=compress&cs=tinysrgb&w=1600", title='sunset on water.', description="Sunset on waves", album_id=5, tags=['sunset', 'waves']
   )
   test18 = Image(
-    user_id=2,  url="https://images.pexels.com/photos/954929/pexels-photo-954929.jpeg?auto=compress&cs=tinysrgb&w=1600", title='waterfall sunset', description="Sunset on a waterfall", album_id=5
+    user_id=2,  url="https://images.pexels.com/photos/954929/pexels-photo-954929.jpeg?auto=compress&cs=tinysrgb&w=1600", title='waterfall sunset', description="Sunset on a waterfall", album_id=5, tags=['sunset', 'waterfall']
   )
   test19 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/3426870/pexels-photo-3426870.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Sunset Maldives', description='Sunset with palm trees', album_id=6
+    user_id=3,  url="https://images.pexels.com/photos/3426870/pexels-photo-3426870.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Sunset Maldives', description='Sunset with palm trees', album_id=6, tags=['sunset', 'palm trees']
   )
   test20 = Image(
-    user_id=3,  url="https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Beach sunset', description='Sunset at on the beach', album_id=6
+    user_id=3,  url="https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg?auto=compress&cs=tinysrgb&w=1600", title='Beach sunset', description='Sunset at on the beach', album_id=6, tags=['sunset', 'beach']
   )
 
   # db.session.add(test1)

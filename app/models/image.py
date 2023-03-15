@@ -15,7 +15,7 @@ class Image(db.Model):
   url = db.Column(db.String, nullable=False)
   description = db.Column(db.String)
   album_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('albums.id')))
-  # tags = db.Column(db.String)
+  tags = db.Column(db.String)
 
 
   #Relationship
@@ -30,6 +30,6 @@ class Image(db.Model):
       'title': self.title,
       'url': self.url,
       'description': self.description,
-      'album_id': self.album_id
-      # 'tags': self.tags,
+      'album_id': self.album_id,
+      'tags': self.tags,
     }
