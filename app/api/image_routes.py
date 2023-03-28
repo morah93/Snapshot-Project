@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 def upload_image():
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
-    print('**************In backend', request.files)
+    # print('**************In backend', request.files)
     if(request.files):
         image = request.files["image"]
     else:
@@ -60,8 +60,8 @@ def upload_image():
             title=form.data['title'],
             description=form.data['description'],
         )
-        
-    print('newImage------------Backend', new_image)
+
+    # print('newImage------------Backend', new_image)
     db.session.add(new_image)
     db.session.commit()
     return new_image.to_dict()
@@ -91,7 +91,7 @@ def load_one_image(id):
 @image_routes.route('/<int:id>', methods=["PUT"])
 # @login_required
 def edit_image(id):
-    print('printing in backend edit route')
+    # print('printing in backend edit route')
 
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']

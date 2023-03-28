@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 import { getUserAlbumThunk } from "../store/album";
 import { loadMyImagesThunk } from "../store/image";
+import "./homepage.css";
 
 function UserPage() {
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
 	const { userId } = useParams();
   const albums = useSelector((state) => state.albums?.myAlbums);
-  console.log('Albumsssss', albums)
+  // console.log('Albumsssss', albums)
   const images = useSelector((state) => state.images?.myImages);
-  const myImages = Object.values(images)
-  console.log('MYImagesiiiiiiii', myImages)
+  const myImages = Object?.values(images)
+  // console.log('MYImagesiiiiiiii', myImages)
   useEffect(
 		(e) => {
-			dispatch(getUserAlbumThunk(user.id));
-			dispatch(loadMyImagesThunk(user.id));
+			dispatch(getUserAlbumThunk(user?.id));
+			dispatch(loadMyImagesThunk(user?.id));
 		},
 		[dispatch, user]
 	);
@@ -39,12 +40,21 @@ function UserPage() {
 	return (
 		<>
 			<div>
-				<div>
+				{/* <div>
 					<p>
 						<strong>Username:</strong> {user.username}
 					</p>
 					<p>
 						<strong>Email:</strong> {user.email}
+					</p>
+				</div> */}
+
+				<div className="userInfo">
+					<img className="profileLogo" src="https://images.pexels.com/lib/avatars/grey.png?w=130&h=130&fit=crop&dpr=1"></img>
+				<p>
+						<h1>
+						{user.username}
+					</h1>
 					</p>
 				</div>
 				{/* ---------------------Album Div-------------------------- */}
@@ -80,7 +90,7 @@ function UserPage() {
 							return (
 								<>
 									<div>
-										<NavLink to={`/albums/${image.id}`}>
+										<NavLink to={`/images/${image.id}`}>
 											<div>
 												<img
 													src={image.url}

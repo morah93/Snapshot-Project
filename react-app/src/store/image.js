@@ -15,9 +15,9 @@ const loadOneImage = (singleImage) => ({
 	type: LOAD_ONE_IMAGE,
 	singleImage,
 });
-const loadMyImages = (images) => ({
+const loadMyImages = (user_id) => ({
 	type: LOAD_MY_IMAGES,
-	payload: images
+	user_id
 });
 const addImage = (newImage) => ({
 	type: ADD_IMAGE,
@@ -54,8 +54,9 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 	}
 };
 
-export const loadMyImagesThunk = (userId) => async (dispatch) => {
-	const response = await fetch(`/api/images/user/${userId}`);
+export const loadMyImagesThunk = (user_id) => async (dispatch) => {
+	const response = await fetch(`/api/images/user/${user_id}`);
+	console.log("PayloadPPPPPPP",user_id)
 	if (response.ok) {
 		const data = await response.json();
 		const imgArr = data.images;
@@ -133,7 +134,7 @@ const imageReducer = (state = initialState, action) => {
 				...state,
 				myImages: {},
 			};
-			const images = action.payload
+			const images = action.user_id
 			newState.myImages = images;
 			return newState;
 		}

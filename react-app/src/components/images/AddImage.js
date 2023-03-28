@@ -69,7 +69,7 @@ const UploadImage = () => {
 			let res = await dispatch(addImageThunk(formData));
 			if (res) {
 				setImageLoading(false);
-				history.push("/");
+				history.push(`/users/${user.id}`);
 			}
 		}
 	};

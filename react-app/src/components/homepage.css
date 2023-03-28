@@ -188,6 +188,12 @@
 	top: 0;
 }
 
+.homepageButtons{
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+}
+
 .images-div {
 	position: static;
 	/* padding-top: 350px; */
@@ -415,7 +421,17 @@
 	padding-top: 100px;
 }
 
-/* --------------------Album Page --------------------------- */
+/* --------------------  Image Page --------------------------- */
+
+.imagePageButtonsDiv{
+	display: flex;
+	margin-top: 10px;
+	gap: 5px;
+	justify-content: center;
+}
+
+
+/* --------------------  Album Page --------------------------- */
 .underTopImgContainer {
 	/* padding-top: 300px; */
 	display: flex;
@@ -444,6 +460,10 @@
 	align-self: center;
 	cursor: pointer;
 	/* margin-right: 50px; */
+}
+
+.createButton:hover{
+	background-color: lightgray;
 }
 
 .myAlbums {
@@ -478,9 +498,9 @@
 	margin-top: 250px;
 }
 
-.imageTitle {
-	/* padding-top: 2px; */
-}
+/* .imageTitle {
+
+} */
 /* -------------------- Edit Album Page ------------------------ */
 
 .edit-project-container {
@@ -500,4 +520,27 @@
 	display: flex;
 	justify-content: center;
 	gap: 15px;
+}
+
+/* -------------------- User Page ------------------------ */
+
+/* .userInfo{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+} */
+.userInfo{
+	display: flex;
+	margin-top: 50px;
+	flex-direction: column;
+	max-width: 800px;
+	align-items: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.profileLogo{
+	width: 130px;
+	height: 130px;
 }

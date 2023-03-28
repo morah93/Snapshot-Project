@@ -137,58 +137,63 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createAlbumThunk } from "../../store/album"
-import '../homepage.css'
+import { createAlbumThunk } from "../../store/album";
+import "../homepage.css";
 
 const CreateAlbum = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const albums = useSelector((state) => state.albums.myAlbums);
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const albums = useSelector((state) => state.albums.myAlbums);
 	const user = useSelector((state) => state.session.user);
 	const [userAlbumNumber, setUserAlbumNumber] = useState(1);
 	const [title, setTitle] = useState("My Album");
 	// const [images, setImages] = useState([])
-  const [description, setDescription] = useState("Please add description");
-  const [url, setUrl] = useState("https://images.pexels.com/photos/48207/sunset-sky-sun-cloud-48207.jpeg");
+	const [description, setDescription] = useState("Please add description");
+	const [url, setUrl] = useState(
+		"https://images.pexels.com/photos/48207/sunset-sky-sun-cloud-48207.jpeg"
+	);
 
 	useEffect(() => {
-    let count = 1;
-    albums?.forEach((album) => {
-      if (album.owner_id === user.id) {
-        count++;
-      }
-    });
-    setUserAlbumNumber(count);
-  }, [albums, user]);
+		let count = 1;
+		albums?.forEach((album) => {
+			if (album.owner_id === user.id) {
+				count++;
+			}
+		});
+		setUserAlbumNumber(count);
+	}, [albums, user]);
 
-  const submit = async (e) => {
-    e.preventDefault();
-    const newAlbum = {
-      title: `${title} ${userAlbumNumber}`,
-      url: url,
-      description: description,
-			user_id: user.id
+	const submit = async (e) => {
+		e.preventDefault();
+		const newAlbum = {
+			title: `${title} ${userAlbumNumber}`,
+			url: url,
+			description: description,
+			user_id: user.id,
 		};
 
-		console.log('newAlbum[[[[[[[[[[[[[', newAlbum)
-		return dispatch(createAlbumThunk(newAlbum))
-			// .then((album) => {
-      // // const { id } = newAlbum;
-      // history.push(`/albums`);
-      // });
-  };
+		// console.log('newAlbum[[[[[[[[[[[[[', newAlbum)
+		history.push(`/users/${user.id}`);
+		return dispatch(createAlbumThunk(newAlbum));
+		// .then((album) => {
+		// // const { id } = newAlbum;
+		// });
+	};
 
-  return (
+	return (
 		<>
-			{/* <div className="createButton div"> */}
-      {user && (
-        <button className="createButton" onClick={submit} >
-          Create Album
-        </button>
-      )}
-			{/* </div> */}
-    </>
-  );
+			<div className="homepageButtons">
+			{user && (
+				<button
+					className='createButton'
+					onClick={submit}
+				>
+					Create Album
+				</button>
+			)}
+			</div>
+		</>
+	);
 };
 
 export default CreateAlbum;

@@ -276,7 +276,7 @@ const EditAlbumForm = () => {
       method: "PUT",
 			body: formData,
 		});
-    console.log('formData------', formData)
+    // console.log('formData------', formData)
     const newAlbum = {
 			description,
 			title,
@@ -284,7 +284,7 @@ const EditAlbumForm = () => {
       // user_id: album.user_id
 		};
 
-		console.log('newAlbum------', newAlbum)
+		// console.log('newAlbum------', newAlbum)
 		dispatch(updateAlbumThunk(newAlbum, albumId))
 			.then(() => {
 				alert("success");
@@ -316,6 +316,7 @@ const EditAlbumForm = () => {
   const cancel = (e) => {
     e.preventDefault();
     // setButtonOn(false);
+    history.push(`/users/${user.id}`)
   };
 
   // if (!buttonOn) {
