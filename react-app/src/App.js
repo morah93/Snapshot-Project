@@ -16,6 +16,7 @@ import SingleAlbum from "./components/albums/SingleAlbumDetails";
 // import CreateAlbum from "./components/albums/CreateAlbum";
 import EditAlbumForm from "./components/albums/EditAlbum";
 import UserImages from "./components/images/ImagePage";
+import Search from "./components/search/search";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -85,6 +86,13 @@ function App() {
 					exact={true}
 				>
 					<UserImages />
+				</ProtectedRoute>
+
+				<ProtectedRoute
+					path='/search'
+					exact={true}
+				>
+					<Search />
 				</ProtectedRoute>
 
 				{/* <ProtectedRoute path={"/albums"}>

@@ -20,7 +20,7 @@ const Search = () => {
   const allImages = Object.values(manyImages);
   // console.log('allImages---------------',allImages)
   const myAlbums = useSelector((state) => state.albums?.myAlbums);
-  console.log('myAlbums*****************',myAlbums)
+  // console.log('myAlbums*****************',myAlbums)
 	const [searchInput, setSearchInput] = useState("");
 	const [searchShow, setSearchShow] = useState(false);
 	// const [showAlbums, setShowAlbums] = useState(false);
