@@ -34,12 +34,23 @@ const deleteImage = (imageId) => ({
 
 // THUNKS
 
+// export const loadImagesThunk = () => async (dispatch) => {
+// 	const response = await fetch("/api/images/");
+
+// 	if (response.ok) {
+// 		const data = await response.json();
+// 		console.log("data------", data);
+// 		dispatch(loadImages(data.images));
+// 		// return data;
+// 	}
+// };
+
 export const loadImagesThunk = () => async (dispatch) => {
 	const response = await fetch("/api/images/");
 
 	if (response.ok) {
 		const data = await response.json();
-		// console.log("data------", data);
+		console.log("data------", data);
 		dispatch(loadImages(data.images));
 		// return data;
 	}

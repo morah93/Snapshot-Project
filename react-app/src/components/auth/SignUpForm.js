@@ -46,12 +46,12 @@ const SignUpForm = () => {
 	}
 
 	return (
-
 		<div className='formPageContainer'>
 			<h1 style={{ color: "black" }}>Please Signup</h1>
 			<form
-				className='loginForm'
-				onSubmit={onSignUp}>
+				className='signupForm'
+				onSubmit={onSignUp}
+			>
 				<div>
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
@@ -63,50 +63,61 @@ const SignUpForm = () => {
 						"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
 					}
 				></img>
-				<div className="loginPgText">
-					<p>Please signup to share your photos and creativity with the world</p>
+				<div className='loginPgText'>
+					<p>
+						Please signup to share your photos and creativity with the world
+					</p>
 				</div>
 				<div>
-					<label>User Name</label>
-					<input
-						type='text'
-						name='username'
-						onChange={updateUsername}
-						value={username}
-						required
-					></input>
+					{/* <label>User Name</label> */}
+					<div className='inputD'>
+						<input
+							id="text"
+							type='text'
+							name='username'
+							onChange={updateUsername}
+							value={username}
+							placeholder='Username'
+							required
+						></input>
+					</div>
+					<div className='inputD'>
+						{/* <label>Email</label> */}
+						<input
+							id="text"
+							type='text'
+							name='email'
+							onChange={updateEmail}
+							value={email}
+							placeholder='Email'
+							required
+						></input>
+					</div>
+					<div className="inputD">
+						<input
+							id="text"
+							type='password'
+							name='password'
+							onChange={updatePassword}
+							value={password}
+							placeholder='Password'
+							required
+						></input>
+					</div>
+					<div className="inputD">
+						{/* <label>Repeat Password</label> */}
+						<input
+							id="text"
+							type='password'
+							name='repeat_password'
+							onChange={updateRepeatPassword}
+							value={repeatPassword}
+							placeholder='Repeat Password'
+							required
+						></input>
+					</div>
 				</div>
-				<div>
-					<label>Email</label>
-					<input
-						type='text'
-						name='email'
-						onChange={updateEmail}
-						value={email}
-						required
-					></input>
-				</div>
-				<div>
-					<label>Password</label>
-					<input
-						type='password'
-						name='password'
-						onChange={updatePassword}
-						value={password}
-						required
-					></input>
-				</div>
-				<div>
-					<label>Repeat Password</label>
-					<input
-						type='password'
-						name='repeat_password'
-						onChange={updateRepeatPassword}
-						value={repeatPassword}
-						required
-					></input>
-				</div>
-				<button type='submit'>Sign Up</button>
+				<button className="submit" type='submit'>Sign Up</button>
 			</form>
 		</div>
 	);

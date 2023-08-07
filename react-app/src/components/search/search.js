@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserAlbumThunk } from "../../store/album";
-import * as imageThunks from "../../store/image";
+// import { getUserAlbumThunk } from "../../store/album";
+import { loadImagesThunk } from "../../store/image";
 import "./search.css";
 import "../homepage.css";
 
 const Search = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [albums, setAlbums] = useState([]);
+	// const [albums, setAlbums] = useState([]);
 	const [images, setImages] = useState([]);
 	// const [tags, setTags] = useState([]);
 	// const [users, setUsers] = useState([]);
-  const user = useSelector((state) => state.session.user);
-  const userId = user.id
-  const manyImages = useSelector((state) => state.images?.allImages);
-  // console.log('manyImages/////////////',manyImages)
-  const allImages = Object.values(manyImages);
-  // console.log('allImages---------------',allImages)
-  const myAlbums = useSelector((state) => state.albums?.myAlbums);
-  // console.log('myAlbums*****************',myAlbums)
+	const user = useSelector((state) => state.session.user);
+	// const userId = user.id
+	// const manyImages = useSelector((state) => state.images?.allImages);
+	// const allImages = Object.values(manyImages);
+	// console.log('allImages---------------',allImages)
+	// const myAlbums = useSelector((state) => state.albums?.myAlbums);
+	// console.log('myAlbums*****************',myAlbums)
 	const [searchInput, setSearchInput] = useState("");
 	const [searchShow, setSearchShow] = useState(false);
 	// const [showAlbums, setShowAlbums] = useState(false);
 
 	useEffect(() => {
 		(async () => {
-			const images = await dispatch(imageThunks.loadImagesThunk());
+			const imagesFetch = await fetch('/api/images/');
+			const allImagesFetched = await imagesFetch.json();
+			const images = allImagesFetched.images
 			setImages(images);
-			const userAlbums = await dispatch(getUserAlbumThunk());
-			setAlbums(userAlbums);
+			// setAlbums(userAlbums);
 		})();
 		// (async () => {
 		//   const allAlbumReturns = await fetch("/api/albums/");
 		//   console.log("albums", allAlbumReturns);
 		//   const allAlbums = await allAlbumReturns.json();
 		//   setAlbums(allAlbums.albums);
-		// })();
-		// (async () => {
-		//   const allImagesReturns = await fetch("/api/images/");
-		//   console.log("images", allImagesReturns);
-		//   const allImages = await allImagesReturns.json();
-		//   setImages(allImages.images);
 		// })();
 		// (async () => {
 		//   const allUsersReturns = await fetch("/api/users");
@@ -53,7 +47,7 @@ const Search = () => {
 		dispatch,
 		fetch,
 		setImages,
-		setAlbums,
+		// setAlbums,
 		// setTags,
 		// setUsers,
 		searchShow,
@@ -71,16 +65,16 @@ const Search = () => {
 		}
 	};
 
-	const albumClick = (e, album) => {
+	// const albumClick = (e, album) => {
+	// 	e.preventDefault();
+	// 	history.push(`/albums/${album.id}`);
+	// 	setSearchShow(false);
+	// };
+	const imageClick = (e, images) => {
+		// console.log('image/////////', image)
+		// console.log('image.id/////////', image.id)
 		e.preventDefault();
-		history.push(`/albums/${album.id}`);
-		setSearchShow(false);
-	};
-  const imageClick = (e, image) => {
-    console.log('image/////////', image)
-    // console.log('image.id/////////', image.id)
-		e.preventDefault();
-		history.push(`/images/${image.id}`);
+		history.push(`/images/${images.image.id}`);
 		setSearchShow(false);
 	};
 
@@ -113,7 +107,7 @@ const Search = () => {
 						width: "400px",
 						position: "sticky",
 						top: "2px",
-						border: "none",
+						// border: "none",
 					}}
 				></input>
 				<i
@@ -127,9 +121,9 @@ const Search = () => {
 
 			{/* <div className='album-container'> */}
 			<div className='display-image-main'>
-				<h1 hidden={searchShow ? false : true}> Albums </h1>
+				{/* <h1 hidden={searchShow ? false : true}> Albums </h1> */}
 				{/* <div className='search-results-container'> */}
-				<div className='img-container'>
+				{/* <div className='img-container'>
 					{myAlbums
 						.filter((album) => {
 							if (searchInput === "") {
@@ -159,13 +153,15 @@ const Search = () => {
 									</div>
 								)
 						)}
-				</div>
+				</div> */}
 
 				{/*---------------- Images div -----------------*/}
-
-				<h1 hidden={searchShow ? false : true}> Images </h1>
+				{/* <div className="searchImgDiv"> */}
+				<div className='imageName'>
+					<h1 hidden={searchShow ? false : true}> Images </h1>
+				</div>
 				<div className='search-results-container'>
-					{allImages
+					{images
 						.filter((image) => {
 							if (searchInput === "") {
 								return image;
@@ -180,24 +176,25 @@ const Search = () => {
 								searchShow === true && (
 									<div
 										// onClick={(e) => history.push(`/images/${image.id}`)}
-										onClick={imageClick}
-										className='playlist-cards'
+										onClick={(e) => history.push(`/images/${image.id}`)}
+										className='image-cards'
 										key={index}
 										setSearchShow={false}
 									>
 										<img
-											className='playlist-search-image'
+											className='search-image'
 											src={image.url}
 										/>
 										<p>{image.title}</p>
-										<span style={{ marginLeft: "15px", paddingBottom: "20px" }}>
+										<div className='search-discription'>
 											{/* By {playlist.user.username} */}
 											{image.description}
-										</span>
+										</div>
 									</div>
 								)
 						)}
 				</div>
+				{/* </div> */}
 
 				{/*---------------- Tags div -----------------*/}
 

@@ -1,3 +1,5 @@
+
+/* -------------------- Nav Bar ------------------ */
 /* .nav-background {
 	top: 0px;
 	left: 0px;
@@ -29,10 +31,74 @@
 	justify-self: center;
 }
 
-.demobtn {
-	top: 100px;
+#welcome{
+	/* margin-top: 25px; */
+
+}
+
+.demo-btn {
+	/* top: 100px; */
+	height: 26px;
 	width: 100px;
+	border-radius: 5px;
+	border: 1px solid lightgray;
+	background-color: white;
+	/* color: gray; */
 	/* align-items: center; */
+}
+
+.demo-btn:hover{
+	background-color: #445f9f;
+	cursor: pointer;
+	color: white;
+}
+
+.searchDiv{
+	display: flex;
+	justify-content: center;
+	width: 300px;
+}
+
+.searchLink{
+	width: 100px;
+	height: 25px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #1a1a1a;
+	/* align-self: center; */
+	margin-top: 12px;
+	margin-left: 250px;
+}
+
+.searchLink:hover{
+	cursor: pointer;
+	background-color: #445f9f;
+	color: white;
+}
+.navLink{
+	width: 75px;
+	height: 25px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #1a1a1a;
+	/* align-self: center; */
+	/* margin-bottom: 15px; */
+}
+
+.navLink:hover{
+	cursor: pointer;
+	background-color: #445f9f;
+	color: white;
+}
+
+.active{
+color: gray;
 }
 
 /* .images-div{
@@ -56,14 +122,15 @@
 .authDiv {
 	display: flex;
 	gap: 10px;
-	margin-right: 25px;
-	align-items: center;
+	margin-right: 10px;
+	/* align-items: center; */
+
 }
 
 .logoDiv {
 	display: flex;
 	/* position: sticky; */
-	margin-left: 100px;
+	/* margin-left: 50px; */
 	cursor: pointer;
 	align-items: center;
 	align-content: center;
@@ -178,8 +245,47 @@
 } */
 
 /* ----------------- Sign Up ------------------- */
-.signupForm {
-	margin-top: 450px;
+.signupForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-self: center; */
+	border: 1px dashed lightgray;
+	margin-top: 25px;
+	width: 400px;
+	gap: 10px;
+	padding-bottom: 50px;
+	border-radius: 10px;
+	padding: 0.5rem;
+	/* height: 10px; */
+}
+
+.inputD{
+display: flex;
+justify-content: center;
+padding-bottom: 10px;
+}
+
+#text{
+	border: 1px solid lightgray;
+	width: 200px;
+	border-radius: 5px;
+}
+
+.submit{
+	display: flex;
+	align-self: center;
+	width: 100px;
+	justify-content: center;
+	border-radius: 5px;
+	border: 1px solid lightgray;
+	margin-bottom: 15px;
+}
+
+.submit:hover{
+	cursor: pointer;
+	background-color: #445f9f;
+	color: whitesmoke;
 }
 
 /* ------------------ HomePage ---------------------- */
@@ -455,15 +561,21 @@
 }
 .createButton {
 	width: 100px;
+	height: 25px;
 	display: flex;
 	justify-content: center;
-	align-self: center;
-	cursor: pointer;
+	align-items: center;
+	border-radius: 7px;
+	margin-top: 10px;
+	border: 0px;
+	background-color: lightgray;
+
 	/* margin-right: 50px; */
 }
 
 .createButton:hover{
-	background-color: lightgray;
+	background-color: #475d9d;
+	cursor: pointer;
 }
 
 .myAlbums {

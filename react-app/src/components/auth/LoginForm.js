@@ -54,9 +54,10 @@ const LoginForm = () => {
 				<div className="loginPgText">
 					<p>Please login to share your photos and creativity with the world</p>
 				</div>
-				<div className='createButton'>
-					<label htmlFor='email'>Email</label>
+				<div className='inputD'>
+					{/* <label htmlFor='email'>Email</label> */}
 					<input
+						id="text"
 						name='email'
 						type='text'
 						placeholder='Email'
@@ -65,9 +66,10 @@ const LoginForm = () => {
 						required
 					/>
 				</div>
-				<div className='createButton'>
-					<label htmlFor='password'>Password</label>
+				<div className='inputD'>
+					{/* <label htmlFor='password'>Password</label> */}
 					<input
+						id="text"
 						name='password'
 						type='password'
 						placeholder='Password'
@@ -77,7 +79,7 @@ const LoginForm = () => {
 					/>
 				</div>
 				<button
-					className='createButton'
+					className='submit'
 					type='submit'
 				>
 					Login

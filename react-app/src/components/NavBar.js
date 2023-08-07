@@ -54,6 +54,27 @@ const NavBar = () => {
 					/>
 				</div>
 
+				{/* <div className="searchButtonDiv">
+					<button className="searchButton">
+						Search
+				<i class="fa-sharp fa-light fa-magnifying-glass"></i>
+					</button>
+				</div> */}
+				<div className="searchDiv">
+				<NavLink
+					to='/search'
+					exact={true}
+					// activeClassName='active'
+					className='searchLink'
+				>
+					<i
+						class='fa-solid fa-magnifying-glass'
+						style={{ color: "black" }}
+					></i>
+					Search
+				</NavLink>
+				</div>
+
 				{/* <div class='dropdown'>
 					<button class='dropdown-toggle'>Profile</button>
 					<div class='dropdown-menu'>
@@ -99,9 +120,9 @@ const NavBar = () => {
 								<NavLink
 									to='/sign-up'
 									exact={true}
-									activeClassName='active'
-									className='sign-up-btn'
-									style={{ color: "black" }}
+									// activeClassName='active'
+									className='navLink'
+									// style={{ color: "black" }}
 								>
 									Sign Up
 								</NavLink>
@@ -110,18 +131,16 @@ const NavBar = () => {
 								<NavLink
 									to='/login'
 									exact={true}
-									activeClassName='active'
-									className='login-btn'
-									style={{ color: "black" }}
+									// activeClassName='active'
+									className='navLink'
+									// style={{ color: "black" }}
 								>
 									Log in
 								</NavLink>
 							</p>
 						</>
 					)}
-					{user && (
-					<p>Welcome: { user.username }</p>
-					)}
+					{user && <p id="welcome">Welcome: {user.username}</p>}
 					{user !== null && (
 						<button
 							className='createButton'

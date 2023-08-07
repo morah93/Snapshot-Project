@@ -17,9 +17,9 @@ const DemoButton = () => {
 			onClick={demoLogin}
 			className='demo-btn'
 			id='demo-button'
-			style={{ color: "black", cursor: "pointer" }}
+			// style={{ color: "black", cursor: "pointer", background: "gray" }}
 		>
-			Demo Button
+			Demo User
 		</button>
 	);
 };
