@@ -1,0 +1,58 @@
+.footer{
+  display: flex;
+  position: fixed;
+  border-top: 1px solid lightgray;
+  /* border: 1px solid; */
+  /* bottom: 1px; */
+  /* height: 50px; */
+  width: auto;
+  background-color: white;
+  bottom: .1px;
+  left: .1px;
+  right: .1px;
+  /* margin-top: 5%; */
+  /* height: 15px; */
+  /* align-content: ; */
+
+}
+.info{
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  margin: 5px;
+  padding: 5px;
+  /* border: 1px solid; */
+  font-size: 14px;
+}
+.siteInfo{
+display: flex;
+position: relative;
+align-items: center;
+/* align-content: space-between; */
+right: -57%;
+
+}
+
+#language{
+  margin-right: 5%;
+  margin-left: 5%;
+
+}
+#globeIcon{
+margin-right: 3%;
+}
+#dollarIcon{
+  margin-right: 3%;
+}
+#fbIcon{
+  margin-left: 3%;
+  margin-right: 3%;
+}
+#twtIcon{
+  margin-left: 3%;
+  margin-right: 3%;
+}
+#igIcon{
+  margin-left: 3%;
+  margin-right: 5%;
+}

@@ -61,20 +61,16 @@ export const allAlbumThunk = () => async (dispatch) => {
 };
 
 export const getUserAlbumThunk = (userId) => async (dispatch) => {
-	// console.log('userIdLLLLLLLL', userId)
 	const response = await fetch(`/api/albums/users/${userId}`);
 	if (response.ok) {
 		const data = await response.json(); //object
-		// console.log('dataLLLLLLLL', data)
 		const albumsArr = data.albums; //array [{}, {}]
-		// console.log('albumsArr;;;;;;;;;;;;;', albumsArr)
 		dispatch(userAlbums(albumsArr));
 		return data;
 	}
 };
 
 export const oneAlbumThunk = (album_id) => async (dispatch) => {
-	// console.log('id------', album_id)
 	const response = await fetch(`/api/albums/${album_id}`);
 	if (response.ok) {
 		const data = await response.json();
@@ -108,7 +104,7 @@ export const oneAlbumThunk = (album_id) => async (dispatch) => {
 
 //CREATE ALBUM
 export const createAlbumThunk = (newAlbum) => async (dispatch) => {
-	console.log("inThunkNewAlbum///////", newAlbum);
+	// console.log("inThunkNewAlbum///////", newAlbum);
 	const response = await fetch(`/api/albums/`, {
 		method: "POST",
 		headers: {
@@ -126,8 +122,8 @@ export const createAlbumThunk = (newAlbum) => async (dispatch) => {
 export const updateAlbumThunk = (payload, album_id) => async (dispatch) => {
 	const { title, description, url, user_id } = payload;
 	// console.log('payloadInThunk///////', payload);
-	console.log('album_id///////', album_id);
-	console.log('payloadInThunk///////', payload);
+	// console.log('album_id///////', album_id);
+	// console.log('payloadInThunk///////', payload);
 	const response = await fetch(`/api/albums/${album_id}`, {
 		method: "PUT",
 		headers: {
@@ -138,7 +134,7 @@ export const updateAlbumThunk = (payload, album_id) => async (dispatch) => {
 	if (response.ok) {
 		const updatedAlbum = await response.json();
 		dispatch(editAlbum(updatedAlbum));
-		console.log('updatedImage-in-thunk', updatedAlbum)
+		// console.log('updatedImage-in-thunk', updatedAlbum)
 		return editAlbum;
 	}
 	if(response.status >= 400) throw response
@@ -199,7 +195,7 @@ const albumReducer = (state = initialState, action) => {
 				allAlbums: { ...state.allAlbums },
 				singleAlbum: action.payload,
 			};
-			console.log("action.payload",action.payload)
+			// console.log("action.payload",action.payload)
 			return newState
 		}
 
@@ -217,8 +213,8 @@ const albumReducer = (state = initialState, action) => {
 			// }
 			// break;
 			const newState = { ...state, myAlbums: [...state.myAlbums] };
-			console.log("newStatelllllllllllll", newState);
-			console.log("payloadlllllllllllll", action.payload);
+			// console.log("newStatelllllllllllll", newState);
+			// console.log("payloadlllllllllllll", action.payload);
 
 			newState.myAlbums.push(action.payload);
 			// newState.myAlbums.push([action.payload.id] = action.payload);
@@ -229,7 +225,7 @@ const albumReducer = (state = initialState, action) => {
 			//FIX THIS MESSSSS
 			//Not dynamically refreshing
 			newState = { ...state, singleAlbum: {} }
-			console.log('action.payload', action.payload)
+			// console.log('action.payload', action.payload)
 			action.singleAlbum = action.payload
 			return newState
 			// return {
@@ -261,7 +257,7 @@ const albumReducer = (state = initialState, action) => {
 			// updates the playlist in the allPlaylist store
 			newState.allAlbums[action.singleAlbum.id] = action.singleAlbum;
 			newState.myAlbums[action.singleAlbum.id] = action.singleAlbum;
-			console.log('action.album.id', action.singleAlbum.id)
+			// console.log('action.album.id', action.singleAlbum.id)
 			// if there are keys and values in single playlist
 			// we want to overwrite that playlist if it's in the single playlist State
 			if (Object.values(newState.singleAlbum).length) {

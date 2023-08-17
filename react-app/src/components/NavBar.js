@@ -43,8 +43,8 @@ const NavBar = () => {
 		<>
 			{/* <div className='nav-background'> */}
 			{/* <div className='title'>
-							<img src={title} className='title'/>
-						</div> */}
+              <img src={title} className='title'/>
+            </div> */}
 			<div className='nav'>
 				<div className='logoDiv'>
 					<img
@@ -54,40 +54,61 @@ const NavBar = () => {
 					/>
 				</div>
 
-				{/* <div class='dropdown'>
-					<button class='dropdown-toggle'>Profile</button>
-					<div class='dropdown-menu'>
-						<p>
-							<NavLink
-								to='/sign-up'
-								exact={true}
-								activeClassName='active'
-								className='sign-up-btn'
-							>
-								Sign Up
-							</NavLink>
-						</p>
-						<p>
-							<NavLink
-								to='/login'
-								exact={true}
-								activeClassName='active'
-								className='login-btn'
-							>
-								Log in
-							</NavLink>
-						</p>
-					</div>
+				{/* <div className="searchButtonDiv">
+          <button className="searchButton">
+            Search
+        <i class="fa-sharp fa-light fa-magnifying-glass"></i>
+          </button>
+        </div> */}
+				{/* <div className='searchDiv'>
+					<NavLink
+						to='/search'
+						exact={true}
+						// activeClassName='active'
+						className='searchLink'
+					>
+						<i
+							class='fa-solid fa-magnifying-glass'
+							style={{ color: "black" }}
+						></i>
+						Search
+					</NavLink>
 				</div> */}
 
+				{/* <div class='dropdown'>
+          <button class='dropdown-toggle'>Profile</button>
+          <div class='dropdown-menu'>
+            <p>
+              <NavLink
+                to='/sign-up'
+                exact={true}
+                activeClassName='active'
+                className='sign-up-btn'
+              >
+                Sign Up
+              </NavLink>
+            </p>
+            <p>
+              <NavLink
+                to='/login'
+                exact={true}
+                activeClassName='active'
+                className='login-btn'
+              >
+                Log in
+              </NavLink>
+            </p>
+          </div>
+        </div> */}
+
 				{/* {user  (
-					// <div className='welcomeDiv'>
-					// 	<strong>Welcome: {user.username}</strong>
-					// </div>
-					<div className='navBar-link-profile'>
-						<ProfileButton user={user} />
-					</div>
-				)} */}
+          // <div className='welcomeDiv'>
+          //  <strong>Welcome: {user.username}</strong>
+          // </div>
+          <div className='navBar-link-profile'>
+            <ProfileButton user={user} />
+          </div>
+        )} */}
 				<div className='authDiv'>
 					{user === null && (
 						<>
@@ -99,9 +120,9 @@ const NavBar = () => {
 								<NavLink
 									to='/sign-up'
 									exact={true}
-									activeClassName='active'
-									className='sign-up-btn'
-									style={{ color: "black" }}
+									// activeClassName='active'
+									className='navLink'
+									style={{ textDecoration: "none" }}
 								>
 									Sign Up
 								</NavLink>
@@ -110,18 +131,18 @@ const NavBar = () => {
 								<NavLink
 									to='/login'
 									exact={true}
-									activeClassName='active'
-									className='login-btn'
-									style={{ color: "black" }}
+									// activeClassName='active'
+									className='navLink'
+									style={{ textDecoration: "none" }}
 								>
 									Log in
 								</NavLink>
 							</p>
 						</>
 					)}
-					{user && (
-					<p>Welcome: { user.username }</p>
-					)}
+					<div className='welcomeDiv'>
+						{user && <p id='welcome'>Welcome: {user.username}</p>}
+					</div>
 					{user !== null && (
 						<button
 							className='createButton'

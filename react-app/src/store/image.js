@@ -56,7 +56,7 @@ export const loadOneImageThunk = (imageId) => async (dispatch) => {
 
 export const loadMyImagesThunk = (user_id) => async (dispatch) => {
 	const response = await fetch(`/api/images/user/${user_id}`);
-	console.log("PayloadPPPPPPP",user_id)
+	// console.log("PayloadPPPPPPP",user_id)
 	if (response.ok) {
 		const data = await response.json();
 		const imgArr = data.images;
@@ -73,7 +73,7 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const addedImage = await response.json();
-		console.log('addedImage////////', addedImage)
+		// console.log('addedImage////////', addedImage)
 		dispatch(addImage(addedImage));
 		return addedImage;
 	}
@@ -81,7 +81,7 @@ export const addImageThunk = (newImage) => async (dispatch) => {
 
 export const editImageThunk = (payload, imageId) => async (dispatch) => {
 	const { title, description, url } = payload;
-	console.log('payload in thunk-------', payload)
+	// console.log('payload in thunk-------', payload)
 	const response = await fetch(`/api/images/${imageId}`, {
 		method: "PUT",
 		headers: {
@@ -93,7 +93,7 @@ export const editImageThunk = (payload, imageId) => async (dispatch) => {
 	if (response.ok) {
 		const updatedImage = await response.json();
 		dispatch(editImage(updatedImage));
-		console.log('updatedImage-in-thunk', updatedImage)
+		// console.log('updatedImage-in-thunk', updatedImage)
 		return editImage;
 	}
 	if(response.status >= 400) throw response

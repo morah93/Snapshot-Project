@@ -16,6 +16,7 @@ import SingleAlbum from "./components/albums/SingleAlbumDetails";
 // import CreateAlbum from "./components/albums/CreateAlbum";
 import EditAlbumForm from "./components/albums/EditAlbum";
 import UserImages from "./components/images/ImagePage";
+import Footer from "./components/footer/footer"
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -33,100 +34,103 @@ function App() {
 	}
 
 	return (
-		<BrowserRouter>
-			<NavBar />
-			<Switch>
+		<div>
+			<BrowserRouter>
+				<NavBar />
+				<Switch>
 
-				<Route
-					path='/'
-					exact={true}
-				>
-					<HomePage />
-				</Route>
+					<Route
+						path='/'
+						exact={true}
+					>
+						<HomePage />
+					</Route>
 
-				<Route
-					path='/login'
-					exact={true}
-				>
-					<LoginForm />
-				</Route>
+					<Route
+						path='/login'
+						exact={true}
+					>
+						<LoginForm />
+					</Route>
 
-				<Route
-					path='/sign-up'
-					exact={true}
-				>
-					<SignUpForm />
-				</Route>
+					<Route
+						path='/sign-up'
+						exact={true}
+					>
+						<SignUpForm />
+					</Route>
 
-				<ProtectedRoute
-					path='/users'
-					exact={true}
-				>
-					<UsersList />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/users'
+						exact={true}
+					>
+						<UsersList />
+					</ProtectedRoute>
 
-				<ProtectedRoute
-					path='/users/:userId'
-					exact={true}
-				>
-					<UserPage />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/users/:userId'
+						exact={true}
+					>
+						<UserPage />
+					</ProtectedRoute>
 
 
-				<ProtectedRoute
-					path='/albums'
-					exact={true}
-				>
-					<UserAlbums />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/albums'
+						exact={true}
+					>
+						<UserAlbums />
+					</ProtectedRoute>
 
-				<ProtectedRoute
-					path='/images'
-					exact={true}
-				>
-					<UserImages />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/images'
+						exact={true}
+					>
+						<UserImages />
+					</ProtectedRoute>
 
-				{/* <ProtectedRoute path={"/albums"}>
-					<CreateAlbum />
-				</ProtectedRoute> */}
+					{/* <ProtectedRoute path={"/albums"}>
+						<CreateAlbum />
+					</ProtectedRoute> */}
 
-				<ProtectedRoute
-					path='/albums/:albumId'
-					exact={true}
-				>
-					<SingleAlbum />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/albums/:albumId'
+						exact={true}
+					>
+						<SingleAlbum />
+					</ProtectedRoute>
 
-				<Route
-					path='/albums/:albumId/edit'
-					exact={true}
-				>
-					<EditAlbumForm />
-				</Route>
+					<Route
+						path='/albums/:albumId/edit'
+						exact={true}
+					>
+						<EditAlbumForm />
+					</Route>
 
-				<ProtectedRoute
-					path='/upload-image'
-					exact={true}
-				>
-					<UploadImage />
-				</ProtectedRoute>
+					<ProtectedRoute
+						path='/upload-image'
+						exact={true}
+					>
+						<UploadImage />
+					</ProtectedRoute>
 
-				<Route
-					path='/images/:imageId'
-					exact={true}
-				>
-					<DisplayOneImage />
-				</Route>
+					<Route
+						path='/images/:imageId'
+						exact={true}
+					>
+						<DisplayOneImage />
+					</Route>
 
-				{/* <Route
-					path='/images/:imageId'
-					exact={true}
-				>
-					<EditImageDetails />
-				</Route> */}
-			</Switch>
-		</BrowserRouter>
+					{/* <Route
+						path='/images/:imageId'
+						exact={true}
+					>
+						<EditImageDetails />
+					</Route> */}
+				</Switch>
+			</BrowserRouter>
+			<Footer />
+		</div>
 	);
 }
 

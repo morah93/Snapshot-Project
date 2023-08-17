@@ -92,7 +92,7 @@ const HomePage = () => {
 							My Albums
 						</button>
 					) : (
-						<p className='createButton'>{user && <CreateAlbum />}</p>
+						<p className='createButto'>{user && <CreateAlbum />}</p>
 					)}
 					{user && myImages?.length ? (
 						<button
@@ -102,7 +102,7 @@ const HomePage = () => {
 							My Images
 						</button>
 					) : (
-						<p className='createButton'>
+						<p className='createButto'>
 							{user && <button onClick={addImageButton}>Add Image</button>}
 						</p>
 					)}

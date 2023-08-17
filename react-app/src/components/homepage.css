@@ -1,38 +1,106 @@
+
+/* -------------------- Nav Bar ------------------ */
 /* .nav-background {
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 50px;
-	z-index: 10;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 10;
 } */
 .nav {
-	position: sticky;
-	/* border: 1px red; */
-	top: 0;
-	/* position: sticky; */
-	height: 50px;
-	display: flex;
-	justify-content: space-between;
-	gap: 10px;
-	/* right: 30px; */
-	background-color: white;
-	width: 100%;
-	border-bottom: 1px solid lightgray;
-	box-shadow: 1px gray;
-	/* padding-left: 100px;
-	padding-right: 100px; */
+  position: sticky;
+  /* border: 1px red; */
+  top: 0;
+  /* position: sticky; */
+  height: 55px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  /* right: 30px; */
+  background-color: white;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 1px gray;
+  /* padding-left: 100px;
+  padding-right: 100px; */
 }
 
 .welcomeDiv {
-	color: gray;
-	display: flex;
-	justify-self: center;
+  color: #445f9f;
+  display: flex;
+  /* justify-self: center; */
+	align-self: center;
+	/* align-content: center; */
 }
 
-.demobtn {
-	top: 100px;
-	width: 100px;
+#welcome{
 	/* align-items: center; */
+  /* margin-top: 25px; */
+
+}
+
+.demo-btn {
+  /* top: 100px; */
+  height: 26px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  /* color: gray; */
+}
+
+.demo-btn:hover{
+  background-color: #445f9f;
+  cursor: pointer;
+  color: white;
+}
+
+.searchDiv{
+  display: flex;
+  justify-content: center;
+  width: 300px;
+}
+
+.searchLink{
+  width: 100px;
+  height: 25px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1a;
+  /* align-self: center; */
+  margin-top: 12px;
+  margin-left: 250px;
+}
+
+.searchLink:hover{
+  cursor: pointer;
+  background-color: #445f9f;
+  color: white;
+}
+.navLink{
+  width: 75px;
+  height: 25px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1a;
+  /* align-self: center; */
+  /* margin-bottom: 15px; */
+}
+
+.navLink:hover{
+  cursor: pointer;
+  background-color: #445f9f;
+  color: white;
+}
+
+.active{
+color: gray;
 }
 
 /* .images-div{
@@ -54,174 +122,217 @@
 } */
 
 .authDiv {
-	display: flex;
-	gap: 10px;
-	margin-right: 25px;
-	align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-right: 10px;
+  /* align-items: center; */
+
 }
 
 .logoDiv {
-	display: flex;
-	/* position: sticky; */
-	margin-left: 100px;
-	cursor: pointer;
-	align-items: center;
-	align-content: center;
+  display: flex;
+  /* position: sticky; */
+  /* margin-left: 50px; */
+  cursor: pointer;
+  align-items: center;
+  align-content: center;
 }
 .logo {
-	display: flex;
-	/* position: sticky; */
-	height: 40px;
-	width: 100px;
-	margin-left: 100px;
-	cursor: pointer;
-	align-items: center;
-	align-content: center;
+  display: flex;
+  /* position: sticky; */
+  height: 40px;
+  width: 100px;
+  margin-left: 100px;
+  cursor: pointer;
+  align-items: center;
+  align-content: center;
 }
 /* .logo:hover(
-	pulse
+  pulse
 ) */
 
 .title {
-	height: 30px;
-	width: 50px;
-	top: 100px;
+  height: 30px;
+  width: 50px;
+  top: 100px;
 }
 
 /* -------------- profile dropdown ------------ */
 
 .dropdown {
-	position: relative;
-	display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-toggle {
-	/* background-color: white; */
-	border: 1px solid gray;
-	padding: 10px 15px;
+  /* background-color: white; */
+  border: 1px solid gray;
+  padding: 10px 15px;
 }
 
 .dropdown-menu {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	z-index: 1;
-	display: none;
-	/* background-color: white; */
-	border: 1px solid gray;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  /* background-color: white; */
+  border: 1px solid gray;
 }
 
 .dropdown-item {
-	display: block;
-	padding: 10px 15px;
-	color: black;
-	text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  color: black;
+  text-decoration: none;
 }
 
 /* ----------------- Login ------------------- */
 .formPageContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .formContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 .loginForm {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* align-self: center; */
-	border: 1px dashed lightgray;
-	margin-top: 25px;
-	width: 400px;
-	gap: 10px;
-	padding-bottom: 50px;
-	border-radius: 10px;
-	padding: 0.5rem;
-	/* height: 10px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-self: center; */
+  border: 1px dashed lightgray;
+  margin-top: 25px;
+  width: 400px;
+  gap: 10px;
+  padding-bottom: 50px;
+  border-radius: 10px;
+  padding: 0.5rem;
+  /* height: 10px; */
 }
 
 .loginImg {
-	/* height: 350px; */
-	top: 0;
-	object-fit: cover;
-	border-radius: 10px;
-	width: 100%;
-	/* height: 100%; */
-	/* max-height: fit-content; */
+  /* height: 350px; */
+  top: 0;
+  object-fit: cover;
+  border-radius: 10px;
+  width: 100%;
+  /* height: 100%; */
+  /* max-height: fit-content; */
 }
 
 .loginPgText {
-	padding-top: 2.3rem;
-	padding-left: 4rem;
-	padding-right: 4rem;
-	display: block;
-	font-size: 18px;
-	line-height: 26px;
-	font-weight: 400;
-	margin-top: 0;
-	letter-spacing: -0.2px;
-	margin-bottom: 0;
-	color: #1a1a1a;
-	opacity: 0.8;
-	text-align: center;
+  padding-top: 2.3rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: block;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+  margin-top: 0;
+  letter-spacing: -0.2px;
+  margin-bottom: 0;
+  color: #1a1a1a;
+  opacity: 0.8;
+  text-align: center;
 }
 
 /* .input{
-	width: 350px;
+  width: 350px;
 } */
 
 /* ----------------- Sign Up ------------------- */
-.signupForm {
-	margin-top: 450px;
+.signupForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-self: center; */
+  border: 1px dashed lightgray;
+  margin-top: 25px;
+  width: 400px;
+  gap: 10px;
+  padding-bottom: 50px;
+  border-radius: 10px;
+  padding: 0.5rem;
+  /* height: 10px; */
+}
+
+.inputD{
+display: flex;
+justify-content: center;
+padding-bottom: 10px;
+}
+
+#text{
+	height: 25px;
+  border: 1px solid lightgray;
+  width: 200px;
+  border-radius: 5px;
+}
+
+.submit{
+	height: 25px;
+  display: flex;
+  align-self: center;
+	align-items: center;
+  width: 100px;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  margin-bottom: 15px;
+}
+
+.submit:hover{
+  cursor: pointer;
+  background-color: #445f9f;
+  color: whitesmoke;
 }
 
 /* ------------------ HomePage ---------------------- */
 .homepageContainer {
-	/* display: flex; */
-	top: 0;
+  /* display: flex; */
+  top: 0;
 }
 
 .homepageButtons{
-	display: flex;
-	gap: 5px;
-	justify-content: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
 }
 
 .images-div {
-	position: static;
-	/* padding-top: 350px; */
-	padding-bottom: 50px;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	border: 2px red;
-	justify-content: center;
-	width: 100%;
-	top: 0;
+  position: static;
+  /* padding-top: 350px; */
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 2px red;
+  justify-content: center;
+  width: 100%;
+  top: 0;
 }
 
 .topImgDiv {
-	height: 350px;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	/* position: absolute; */
-	object-fit: cover;
+  height: 350px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  /* position: absolute; */
+  object-fit: cover;
 }
 
 .topImg {
-	/* height: 350px; */
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-	max-height: fit-content;
+  /* height: 350px; */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-height: fit-content;
 }
 
 /* .img-div {
@@ -232,8 +343,8 @@
 // */
 
 .display-img {
-	border-radius: 10px;
-	border: 1px red;
+  border-radius: 10px;
+  border: 1px red;
 }
 
 /* ----------------- Testing img styling --------------*/
@@ -242,7 +353,7 @@
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 3fr));
   grid-auto-rows: 240px;
-	object-fit: cover;
+  object-fit: cover;
 }
 
 .card {
@@ -264,238 +375,265 @@
   background-repeat: no-repeat;
   padding: 0;
   margin: 0;
-	object-fit: cover;
+  object-fit: cover;
 } */
 
 /* Container */
 
 .img-container {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 10px;
-	grid-column-start: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-column-start: 2;
 }
 
 .img-item {
-	background-color: blue;
-	width: 100%;
-	height: 300px;
-	object-fit: cover;
-	display: flex;
-	justify-content: center;
-	align-self: center;
+  background-color: blue;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 
 /* ----------------------------------------------- */
 
 .display-image-main {
-	padding: 1rem 1.5rem 1.5rem;
-	box-sizing: border-box;
-	/* justify-content: center; */
-	display: grid;
-	/* flex-direction: row;
+  padding: 1rem 1.5rem 1.5rem;
+  box-sizing: border-box;
+  /* justify-content: center; */
+  display: grid;
+  /* flex-direction: row;
   gap: 10px;
   flex-wrap: wrap; */
-	/* grid-template-columns: repeat(3, 300px); */
-	/* grid-template-rows: repeat(3, 100px); */
-	/* display: grid; */
-	grid-template-columns: 1fr 5fr 1fr;
-	grid-gap: 10px;
-	/* grid-column: 2 / 3; */
+  /* grid-template-columns: repeat(3, 300px); */
+  /* grid-template-rows: repeat(3, 100px); */
+  /* display: grid; */
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: 10px;
+  /* grid-column: 2 / 3; */
 }
 
 .middle-column {
-	background-color: blue;
-	width: 100%;
-	height: 300px;
-	object-fit: cover;
-	display: flex;
-	justify-content: center;
-	/* align-self: center;Specifying starting and ending columns for the grid item */
+  background-color: blue;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  /* align-self: center;Specifying starting and ending columns for the grid item */
 }
 
 .display-image-outer {
-	/* box-sizing: border-box; */
-	position: relative;
-	display: flex;
-	justify-content: center;
-	/* box-sizing: border-box; */
-	width: 288px;
-	position: relative;
-	margin-top: 5px;
-	/* margin-bottom: 10px; */
+  /* box-sizing: border-box; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* box-sizing: border-box; */
+  width: 288px;
+  position: relative;
+  margin-top: 5px;
+  /* margin-bottom: 10px; */
 }
 
 .display-image-img {
-	border-radius: 10px;
-	/* border: 1px solid red; */
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	max-height: fit-content;
+  border-radius: 10px;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: fit-content;
 }
 
 .img0,
 .img2,
 .img5,
 .img7 {
-	height: 186px;
-	object-fit: cover;
+  height: 186px;
+  object-fit: cover;
 }
 
 .img1,
 .img3,
 .img4,
 .img6 {
-	height: 286px;
-	object-fit: cover;
+  height: 286px;
+  object-fit: cover;
 }
 
 .img0 {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 1;
-	grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 
 .img1 {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 1;
-	grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 4;
 }
 
 .img2 {
-	grid-column-start: 3;
-	grid-column-end: 4;
-	grid-row-start: 1;
-	grid-row-end: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 
 .img3 {
-	grid-column-start: 4;
-	grid-column-end: 5;
-	grid-row-start: 1;
-	grid-row-end: 4;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 4;
 }
 
 .img4 {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 3;
-	grid-row-end: 6;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 6;
 }
 
 .img5 {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 4;
-	grid-row-end: 6;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 6;
 }
 
 .img6 {
-	grid-column-start: 3;
-	grid-column-end: 4;
-	grid-row-start: 3;
-	grid-row-end: 6;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 6;
 }
 
 .img7 {
-	grid-column-start: 4;
-	grid-column-end: 5;
-	grid-row-start: 4;
-	grid-row-end: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 6;
 }
 
 /* ----------------- Testing img styling --------------*/
 
 .singleImageContainer {
-	padding-top: 50px;
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	padding-bottom: 50px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 50px;
 }
 
 .background-for-signup-and-login {
-	padding-top: 100px;
+  padding-top: 100px;
 }
 
 /* --------------------  Image Page --------------------------- */
 
 .imagePageButtonsDiv{
-	display: flex;
-	margin-top: 10px;
-	gap: 5px;
-	justify-content: center;
+  display: flex;
+  margin-top: 10px;
+  gap: 5px;
+  justify-content: center;
 }
 
 
 /* --------------------  Album Page --------------------------- */
 .underTopImgContainer {
-	/* padding-top: 300px; */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  /* padding-top: 300px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .albumPageButtonsDiv {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .myAlbumButton {
-	margin-top: 10px;
-	width: 100px;
-	display: flex;
-	justify-content: center;
-	align-self: center;
-	cursor: pointer;
-	/* margin-right: 50px; */
+  margin-top: 10px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+  /* margin-right: 50px; */
 }
+.createButto {
+  /* width: 100px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  margin-top: 10px;
+  border: 0px;
+  background-color: lightgray; */
+
+  /* margin-right: 50px; */
+}
+
+.createButto:hover{
+	/* background-color: #475d9d;
+  cursor: pointer; */
+}
+
 .createButton {
-	width: 100px;
 	display: flex;
+	/* top: 100px; */
+	margin-top: 15px;
 	justify-content: center;
-	align-self: center;
-	cursor: pointer;
-	/* margin-right: 50px; */
+	align-items: center;
+  height: 25px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  /* color: gray; */
+  /* align-items: center; */
 }
 
 .createButton:hover{
-	background-color: lightgray;
+  background-color: #445f9f;
+  cursor: pointer;
+  color: white;
 }
 
 .myAlbums {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .card-container {
-	padding-top: 350px;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	justify-content: center;
+  padding-top: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
 .album-card {
-	padding-top: 100px;
+  padding-top: 100px;
 }
 
 .album-image {
-	height: 200px;
-	width: 200px;
+  height: 200px;
+  width: 200px;
 }
 
 .form {
-	padding-top: 350px;
+  padding-top: 350px;
 }
 
 /* ------------------ single Album Page -------------------- */
 
 .removeImageButton {
-	margin-top: 250px;
+  margin-top: 250px;
 }
 
 /* .imageTitle {
@@ -504,43 +642,79 @@
 /* -------------------- Edit Album Page ------------------------ */
 
 .edit-project-container {
-	margin-top: 375px;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
+  margin-top: 375px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .edit-project-form {
-	display: flex;
-	justify-content: center;
-	gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .edit-project-components {
-	display: flex;
-	justify-content: center;
-	gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 /* -------------------- User Page ------------------------ */
 
 /* .userInfo{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 } */
 .userInfo{
-	display: flex;
-	margin-top: 50px;
-	flex-direction: column;
-	max-width: 800px;
-	align-items: center;
-	margin-right: auto;
-	margin-left: auto;
+  display: flex;
+  margin-top: 50px;
+  flex-direction: column;
+  max-width: 800px;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .profileLogo{
-	width: 130px;
-	height: 130px;
+  width: 130px;
+  height: 130px;
+}
+
+.albumTitle{
+	/* display: flex; */
+	/* width: 100%; */
+	display: flex;
+	justify-content: center;
+}
+
+.title{
+	border: 1px solid lightgray;
+	height: 25px;
+	width: 250px;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	text-decoration: none;
+}
+
+.navLink{
+  width: 75px;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1a;
+  align-self: center;
+  /* margin-bottom: 15px; */
+}
+
+.title:hover{
+  cursor: pointer;
+  background-color: #445f9f;
+  color: white;
 }
