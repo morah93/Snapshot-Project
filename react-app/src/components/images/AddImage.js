@@ -86,11 +86,10 @@ const UploadImage = () => {
 				src={
 					"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
 				}
-				style={{height:350}}
+				style={{ height: 350 }}
 			></img>
-			<h3 style={{ color: "black" }}>Please add an Image</h3>
 			<form
-				className='loginForm'
+				className='addImgForm'
 				onSubmit={handleSubmit}
 			>
 				<div className='errors-for-sign-up'>
@@ -101,44 +100,40 @@ const UploadImage = () => {
 					</div>
 				</div>
 
-				<div className='sign-up-form-inputs'>
-					<label>Title</label>
+				<div className='addImgFormInputs'>
+					<h3 style={{ color: "black" }}>Please add an Image</h3>
 					<input
-						className='title-input'
-						placeholder='Required'
+						className='addImgInput'
+						placeholder='Title'
 						type='text'
 						onChange={(e) => setTitle(e.target.value)}
 						value={title}
 					/>
-				</div>
-				<div className='sign-up-form-inputs'>
-					<label>Description</label>
+
 					<input
-						className='description-inputs'
-						placeholder='Required'
+						className='addImgInput'
+						placeholder='Description'
 						type='text'
 						onChange={(e) => setDescription(e.target.value)}
 						value={description}
 					/>
-				</div>
-				<div className=''>
 					<input
 						className='choose-file-button'
 						type='file'
 						accept='image/*'
 						onChange={updateImage}
 					/>
-				</div>
-
-				<div className='submit-button-div'>
 					<button
 						disabled={disable}
-						className='submit-button'
+						className='submit'
 						type='submit'
 					>
 						Upload
 					</button>
 					{imageLoading && <p>Loading...</p>}
+				</div>
+
+				<div className='submit-button-div'>
 				</div>
 			</form>
 		</div>

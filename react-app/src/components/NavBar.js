@@ -162,7 +162,7 @@ const NavBar = () => {
 
 					{user && (
 						<button
-							className='createButton'
+							className='logoutButton'
 							onClick={onLogout}
 						>
 							Logout

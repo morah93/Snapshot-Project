@@ -10,6 +10,7 @@ import {
 } from "../../store/image";
 import { getUserAlbumThunk } from "../../store/album";
 import CreateAlbum from "../albums/CreateAlbum";
+import "../homepage.css";
 // import SingleImageCards from "./SingleImageCard";
 
 const DisplayOneImage = () => {
@@ -121,60 +122,69 @@ const DisplayOneImage = () => {
 		<>
 			<div className='singleImageContainer'>
 				<div>
-					<div className=''>
-						<div className='display-img-outer'>
-							<img
-								src={image?.url}
-								style={{ width: 700, height: 700 }}
-								// className={`display- img${i}`}
-								alt={image?.id}
-							/>
-						</div>
-						<div>{image?.title}</div>
-						<div>{image?.description}</div>
-						{user && image && user.id === image.user_id && (
-							<div className='update-image-form'>
-								<div className='confirm-delete-message'>
-									<span>
-										What would you like to edit about this images details?
-									</span>
+					<div className='display-img-outer'>
+						<img
+							src={image?.url}
+							style={{ width: 500, height: 500 }}
+							// className={`display- img${i}`}
+							alt={image?.id}
+						/>
+					</div>
+					<div className='imgInfo'>
+						<p>Title: {image?.title}</p>
+						<p>Description: {image?.description}</p>
+					</div>
+					{user && image && user.id === image.user_id && (
+						<div className='update-image-form'>
+							<form
+								onSubmit={onSubmit}
+								className='imgPgEdit'
+							>
+								<p>What would you like to edit about the images details?</p>
+								<div className='single-image-inputs-labels'>
+									<input
+										className='imgPgInput'
+										placeholder='Title'
+										type='text'
+										onChange={updateTitle}
+										value={title}
+									/>
+
+									<input
+										className='imgPgInput'
+										placeholder='Description'
+										type='text'
+										onChange={updateDescription}
+										value={description}
+									/>
 								</div>
-								<form onSubmit={onSubmit}>
-									<div className='all-sign-up-form-inputs-labels'>
-										<label>Title</label>
-										<input
-											className='sign-up-form-inputs-only'
-											placeholder='Please enter title'
-											type='text'
-											onChange={updateTitle}
-											value={title}
-										/>
-									</div>
-
-									<div className='all-sign-up-form-inputs-labels'>
-										<label>Description</label>
-										<input
-											className='sign-up-form-inputs-only'
-											placeholder='Please enter description'
-											type='text'
-											onChange={updateDescription}
-											value={description}
-										/>
-									</div>
-									<div className='delete-cancel-button-div'>
+								<div className='delete-cancel-edit-button-div'>
+									<button
+										className='saveChangesButton'
+										type='submit'
+									>
+										Save Changes
+									</button>
+									{user && myAlbums?.length ? (
+										<AddImageToAlbumButton image={image} />
+									) : (
+										<p className='createButton'>{user && <CreateAlbum />}</p>
+									)}
+									{user && image && user.id === image.user_id && (
 										<button
-											className='sign-up-submit-button'
-											type='submit'
+											className='redButton'
+											onClick={deleteImage}
 										>
-											Save Changes
+											Delete Image
 										</button>
-										{/* <button className='sign-up-submit-button' onClick={event => cancelButton(event, id)}>Cancel</button> */}
-									</div>
-								</form>
-							</div>
-						)}
+									)}
+									{/* <button className='sign-up-submit-button' onClick={event => cancelButton(event, id)}>Cancel</button> */}
+								</div>
+							</form>
+						</div>
+					)}
 
-						{/* <div className="add-image-to-album">
+					{/* <div className="add-image-to-album">
             	<select
               	className="image-input-option"
               	value={photo}
@@ -188,24 +198,16 @@ const DisplayOneImage = () => {
             	</select>
           	</div> */}
 
-						<div>
-							{user && myAlbums?.length ? (
-								<AddImageToAlbumButton
-									image={image}
-								/>
-							) : (
-								<p className='createButton'>{user && <CreateAlbum />}</p>
-							)}
-						</div>
-					</div>
-					{user && image && user.id === image.user_id && (
-						<button
-							className='delete-btn'
-							onClick={deleteImage}
-						>
-							Delete Image
-						</button>
-					)}
+					{/* <div>
+						{user && image && user.id === image.user_id && (
+							<button
+								className='delete-btn'
+								onClick={deleteImage}
+							>
+								Delete Image
+							</button>
+						)}
+					</div> */}
 				</div>
 			</div>
 		</>

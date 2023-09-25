@@ -42,7 +42,7 @@
 .demo-btn {
   /* top: 100px; */
   height: 26px;
-  width: 100px;
+  width: 150px;
   border-radius: 5px;
   border: 1px solid lightgray;
   background-color: white;
@@ -51,6 +51,27 @@
 
 .demo-btn:hover{
   background-color: #445f9f;
+  cursor: pointer;
+  color: white;
+}
+
+.logoutButton {
+	display: flex;
+	/* top: 100px; */
+	margin-top: 15px;
+	justify-content: center;
+	align-items: center;
+  height: 25px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  /* color: gray; */
+  /* align-items: center; */
+}
+
+.logoutButton:hover{
+  background-color: red;
   cursor: pointer;
   color: white;
 }
@@ -247,18 +268,27 @@ color: gray;
 } */
 
 /* ----------------- Sign Up ------------------- */
+.signupPageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
 .signupForm{
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-self: center; */
   border: 1px dashed lightgray;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   width: 400px;
   gap: 10px;
   padding-bottom: 50px;
   border-radius: 10px;
   padding: 0.5rem;
+  margin-bottom: 25px;
   /* height: 10px; */
 }
 
@@ -276,15 +306,16 @@ padding-bottom: 10px;
 }
 
 .submit{
-	height: 25px;
+	height: 29px;
   display: flex;
   align-self: center;
 	align-items: center;
-  width: 100px;
+  width: 206px;
   justify-content: center;
   border-radius: 5px;
   border: 1px solid lightgray;
   margin-bottom: 15px;
+  background-color: white;
 }
 
 .submit:hover{
@@ -301,8 +332,9 @@ padding-bottom: 10px;
 
 .homepageButtons{
   display: flex;
-  gap: 5px;
+  gap: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .images-div {
@@ -541,6 +573,127 @@ padding-bottom: 10px;
   justify-content: center;
 }
 
+.imgInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imgPgEdit{
+  border: 1px dashed lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+
+}
+
+.single-image-inputs-labels{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.imgPgInput{
+  height: 25px;
+  border: 1px solid lightgray;
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.delete-cancel-edit-button-div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.saveChangesButton {
+	display: flex;
+	/* top: 100px; */
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+  height: 25px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  /* color: gray; */
+  /* align-items: center; */
+}
+
+.saveChangesButton:hover{
+  background-color: #445f9f;
+  cursor: pointer;
+  color: white;
+}
+
+.redButton {
+	display: flex;
+	/* top: 100px; */
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+  height: 25px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  /* color: gray; */
+  /* align-items: center; */
+}
+
+.redButton:hover{
+  background-color: red;
+  cursor: pointer;
+  color: white;
+}
+
+/* --------------------  Add Image Page --------------------------- */
+
+.addImgForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-self: center; */
+  border: 1px dashed lightgray;
+  margin-top: 25px;
+  width: 400px;
+  gap: 10px;
+  padding-bottom: 50px;
+  border-radius: 10px;
+  padding: 0.5rem;
+  /* height: 10px; */
+}
+
+.addImgFormInputs{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addImgInput{
+  height: 25px;
+  border: 1px solid lightgray;
+  width: 200px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.choose-file-button{
+  width: 200px;
+  height: 29px;
+  background-color: white;
+}
+
+.submitImgFile{
+  
+}
 
 /* --------------------  Album Page --------------------------- */
 .underTopImgContainer {
@@ -563,24 +716,6 @@ padding-bottom: 10px;
   align-self: center;
   cursor: pointer;
   /* margin-right: 50px; */
-}
-.createButto {
-  /* width: 100px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 7px;
-  margin-top: 10px;
-  border: 0px;
-  background-color: lightgray; */
-
-  /* margin-right: 50px; */
-}
-
-.createButto:hover{
-	/* background-color: #475d9d;
-  cursor: pointer; */
 }
 
 .createButton {

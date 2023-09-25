@@ -215,40 +215,39 @@
 // export default EditAlbumForm;
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector} from "react-redux";
-import {useHistory, useParams} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { updateAlbumThunk, oneAlbumThunk } from "../../store/album";
 import "../homepage.css";
 // buttonOn is an boolean that will determine what this component renders
 
 const EditAlbumForm = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { albumId } = useParams();
-  const user = useSelector((state) => state.session.user);
-  const album = useSelector((state) => state.albums.singleAlbum);
-  const [title, setTitle] = useState(album.title);
-  const [description, setDescription] = useState(album.description)
-  const [url, setUrl] = useState(album.url)
-  const [user_id, setUser_id] = useState(album.user_id)
-  const [error, setError] = useState([]);
-  let ErrorMessage = [];
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const { albumId } = useParams();
+	const user = useSelector((state) => state.session.user);
+	const album = useSelector((state) => state.albums.singleAlbum);
+	const [title, setTitle] = useState(album.title);
+	const [description, setDescription] = useState(album.description);
+	const [url, setUrl] = useState(album.url);
+	const [user_id, setUser_id] = useState(album.user_id);
+	const [error, setError] = useState([]);
+	let ErrorMessage = [];
 
-
-  useEffect(() => {
+	useEffect(() => {
 		dispatch(oneAlbumThunk(albumId));
 	}, [dispatch, albumId]);
 
-  useEffect(() => {
+	useEffect(() => {
 		if (album) {
 			setTitle(album.title);
 			setDescription(album.description);
-      setUrl(album.url);
-      // setUser_id(album.user_id)
+			setUrl(album.url);
+			// setUser_id(album.user_id)
 		}
-  }, [album]);
+	}, [album]);
 
-  const updateTitle = (e) => {
+	const updateTitle = (e) => {
 		setTitle(e.target.value);
 	};
 	const updateDescription = (e) => {
@@ -258,8 +257,7 @@ const EditAlbumForm = () => {
 		setUrl(e.target.value);
 	};
 
-
-  const onSubmit = async (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
 		setError([]);
 		// if (!title || title.length < 1 || title.length > 20) ErrorMessage.push("*Must have a title that is less than 20 characters.");
@@ -271,17 +269,16 @@ const EditAlbumForm = () => {
 
 		const formData = new FormData();
 
-
 		await fetch(`/api/albums/${albumId}`, {
-      method: "PUT",
+			method: "PUT",
 			body: formData,
 		});
-    // console.log('formData------', formData)
-    const newAlbum = {
+		// console.log('formData------', formData)
+		const newAlbum = {
 			description,
 			title,
-      url,
-      // user_id: album.user_id
+			url,
+			// user_id: album.user_id
 		};
 
 		// console.log('newAlbum------', newAlbum)
@@ -293,94 +290,98 @@ const EditAlbumForm = () => {
 			.catch(() => {
 				alert("Failed");
 			});
-
-
 	};
 
+	// const handleSubmit = (e) => {
+	//   e.preventDefault();
+	//   const editedAlbum = { ...album };
+	//   editedAlbum.title = title;
+	//   return dispatch(updateAlbumThunk(editedAlbum, index))
+	//     .then(dispatch(oneAlbumThunk(album.id)))
+	//     .then(history.push(`/albums/${album.id}`))
+	//     // .then(setButtonOn(false));
+	// };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const editedAlbum = { ...album };
-  //   editedAlbum.title = title;
-  //   return dispatch(updateAlbumThunk(editedAlbum, index))
-  //     .then(dispatch(oneAlbumThunk(album.id)))
-  //     .then(history.push(`/albums/${album.id}`))
-  //     // .then(setButtonOn(false));
-  // };
+	// const renderForm = (e) => {
+	//   e.preventDefault();
+	//   // setButtonOn(true);
+	// };
 
-  // const renderForm = (e) => {
-  //   e.preventDefault();
-  //   // setButtonOn(true);
-  // };
+	const cancel = (e) => {
+		e.preventDefault();
+		// setButtonOn(false);
+		history.push(`/users/${user.id}`);
+	};
 
-  const cancel = (e) => {
-    e.preventDefault();
-    // setButtonOn(false);
-    history.push(`/users/${user.id}`)
-  };
-
-  // if (!buttonOn) {
-  //   return (
-  //     <button onClick={renderForm} className="demo-btn" >
-  //       Edit Album Details
-  //     </button>
-  //   );
-  // } else {
-  return (
-    <div className="formPageContainer">
-      <img
-					className='loginImg'
-					src={
-						"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
-					}
-          style={{height:350}}
-				></img>
-      <h2>Edit details</h2>
-      <form className='loginForm' onSubmit={onSubmit}>
-        <div>
-
-        </div>
-        <div>
-        <label >Title</label>
-        <input
-          className="album-input"
-          type="text"
-          value={title}
-          onChange={updateTitle}
-          placeholder="Title"
-          required
-          />
-        </div>
-        <label >Description</label>
-        <div>
-        <input
-          className="album-input"
-          type="text"
-          value={description}
-          onChange={updateDescription}
-          placeholder="Description"
-        />
-        </div>
-        <div>
-        <label>Image Url</label>
-        <input
-          className="album-input"
-          type="text"
-          value={url}
-          onChange={updateUrl}
-          placeholder="Image Url"
-        />
-        </div>
-        <button className='createButton' type="submit">
-          Save Changes
-        </button>
-        <button className='createButton' onClick={cancel} >
-          Cancel
-        </button>
-      </form>
-      </div>
-    );
-  // }
+	// if (!buttonOn) {
+	//   return (
+	//     <button onClick={renderForm} className="demo-btn" >
+	//       Edit Album Details
+	//     </button>
+	//   );
+	// } else {
+	return (
+		<div className='formPageContainer'>
+			<img
+				className='loginImg'
+				src={
+					"https://images.pexels.com/photos/1144176/pexels-photo-1144176.jpeg"
+				}
+				style={{ height: 350 }}
+			></img>
+			<form
+				className='loginForm'
+				onSubmit={onSubmit}
+			>
+				<div></div>
+				<div>
+					<h2>Edit details</h2>
+					{/* <label >Title</label> */}
+					<input
+						className='album-input'
+						type='text'
+						value={title}
+						onChange={updateTitle}
+						placeholder='Title'
+						required
+					/>
+				</div>
+				{/* <label >Description</label> */}
+				<div>
+					<input
+						className='album-input'
+						type='text'
+						value={description}
+						onChange={updateDescription}
+						placeholder='Description'
+					/>
+				</div>
+				<div>
+					{/* <label>Image Url</label> */}
+					<input
+						className='album-input'
+						type='text'
+						value={url}
+						onChange={updateUrl}
+						placeholder='Image Url'
+					/>
+				</div>
+				<button
+					className='createButton'
+					type='submit'
+				>
+					Save Changes
+				</button>
+				<button
+					className='createButton'
+					onClick={cancel}
+				>
+					Cancel
+				</button>
+			</form>
+		</div>
+	);
+	// }
 };
 
 export default EditAlbumForm;

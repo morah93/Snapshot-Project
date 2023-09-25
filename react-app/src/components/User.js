@@ -12,7 +12,7 @@ function UserPage() {
 	const albums = useSelector((state) => state.albums?.myAlbums);
 	// console.log('Albumsssss', albums)
 	const images = useSelector((state) => state.images?.myImages);
-	const myImages = Object?.values(images);
+	const myImages = images?Object.values(images):[]
 	// console.log('MYImagesiiiiiiii', myImages)
 	useEffect(
 		(e) => {

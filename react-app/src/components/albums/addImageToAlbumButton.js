@@ -63,7 +63,7 @@ const AddImageToAlbumButton = ({ image, buttonClicked }) => {
   }
   if (!buttonOn) {
     return (
-      <button onClick={renderForm}  className="demo-btn" style={{color:'black'}}>
+      <button onClick={renderForm}  className="saveChangesButton" /*style={{color:'black'}}*/>
         Add Image to Album
       </button>
     );

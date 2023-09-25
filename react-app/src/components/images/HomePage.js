@@ -102,9 +102,9 @@ const HomePage = () => {
 							My Images
 						</button>
 					) : (
-						<p className='createButto'>
-							{user && <button onClick={addImageButton}>Add Image</button>}
-						</p>
+
+							<button className="createButton" onClick={addImageButton}>Add Image</button>
+
 					)}
 				</div>
 
