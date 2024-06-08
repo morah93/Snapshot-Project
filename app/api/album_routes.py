@@ -22,12 +22,12 @@ def new_album():
     form = AlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # form.data["user_id"] = user_id
-    print('form//////////', form.data)
+    # print('form//////////', form.data)
     if form.validate_on_submit():
       new_album = Album()
-      print('working/?//////////', new_album)
+    #   print('working/?//////////', new_album)
       form.populate_obj(new_album)
-      print('newAlbum//////////', new_album)
+    #   print('newAlbum//////////', new_album)
       new_album.url = form.data['url'] if form.data['url'] else '/static/images/unknown-album-cover.jpeg'
 
       db.session.add(new_album)
