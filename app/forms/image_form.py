@@ -8,6 +8,6 @@ from app.models import Image
 
 class ImageForm(FlaskForm):
   title = StringField('Title', validators=[])
-  description = StringField('Description')
+  description = StringField('Description'
   # url = StringField('url')
   # submit = SubmitField('Submit')
